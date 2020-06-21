@@ -1,0 +1,41 @@
+<div class=" row justify-content-center mt-5" [formGroup]="arrenderoForm">
+  <div class=" col-sm-5">
+    <div class=" input-group pb-3" [ngClass]="{'input-group-focus': focus === true, 'has-danger': (focusTouched &&
+                registerF.dni.errors) ||(registerF.dni.value != '' && registerF.dni.errors), 
+                'has-success': !registerF.dni.errors}">
+      <div class=" input-group-prepend">
+        <div class=" input-group-text">
+          <i class="tim-icons icon-badge"></i>
+        </div>
+      </div>
+      <input class=" form-control" name="dni" autocomplete="off" placeholder="DNI 8 dígitos..." type="number"
+        formControlName="dni" (focus)="focus = true; focusTouched = true" (blur)="focus = false" />
+      <label class="error" *ngIf="(focusTouched && registerF.dni.errors) ||
+              (registerF.dni.value != '' && registerF.dni.errors)">Este campo es requerido.</label>
+    </div>
+    <div class="input-group pb-3" [ngClass]="{'input-group-focus': focus1 === true, 'has-danger': (focus1Touched && 
+              registerF.fecha_nac.errors) || (registerF.fecha_nac.value != '' && registerF.fecha_nac.errors),
+            'has-success': !registerF.fecha_nac.errors}">
+      <div class=" input-group-prepend">
+        <div class="input-group-text">
+          <i class="mdi mdi-calendar"> </i>
+        </div>
+      </div>
+      <input class="form-control" name="fechaNac" placeholder="Fecha Nacimiento..." required=""
+        formControlName="fecha_nac" autocomplete="nope" bsDatepicker type="text" data-datepicker-color="danger"
+        [bsConfig]="{ isAnimated: true, containerClass: 'theme-red' }" (focus)="focus1 = true; focus1Touched = true"
+        (blur)="focus1 = false" />
+      <label class="error" *ngIf="(focus1Touched && registerF.fecha_nac.errors) ||
+              (registerF.fecha_nac.value != '' && registerF.fecha_nac.errors)">Este campo es requerido.</label>
+    </div>
+
+    <div class=" form-check text-left">
+      <label class=" form-check-label">
+        <input class=" form-check-input" type="checkbox" />
+
+        <span class=" form-check-sign"> </span> I agree to the
+        <a href="javascript:void(0)"> terms and conditions </a> .
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { NavbarAuthComponent } from './navbar-auth/navbar-auth.component';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { InicioRoutes } from './inicio.routes';
+import { InicioComponent } from './inicio.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ContenidoComponent } from './contenido/contenido.component';
+import { RegistrarseClientComponent } from './registrarse-client/registrarse-client.component';
+import { RegistrarseLordlandComponent } from './registrarse-lordland/registrarse-lordland.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { CardRegistroClientComponent } from './registrarse-client/card-registro-client/card-registro-client.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CommonModule } from '@angular/common';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+
+@NgModule({
+  declarations: [
+    InicioComponent,
+    NavbarAuthComponent,
+    LoginComponent,
+    ContenidoComponent,
+    RegistrarseClientComponent,
+    RegistrarseLordlandComponent,
+    CardRegistroClientComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
+    BsDatepickerModule.forRoot(),
+    RouterModule.forChild(InicioRoutes),
+    CollapseModule.forRoot(),
+    PerfectScrollbarModule
+  ],
+  providers:[
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
+  bootstrap:[
+    InicioComponent
+  ]
+})
+export class InicioModule{ }
