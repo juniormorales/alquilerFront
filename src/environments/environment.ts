@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
+  urlLocalHost: 'http://localhost:2000',
   urlBack: 'http://localhost:2000/',
+  urlOauth: 'http://localhost:2000/oauth/token',
   urlApiRest: 'http://localhost:2000/api/',
   msg_servicio_no_disponible: 'Servicio no disponible, intentelo más tarde nuevamente.'
 

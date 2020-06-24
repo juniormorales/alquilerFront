@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NavbarAuthComponent } from './navbar-auth/navbar-auth.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { InicioRoutes } from './inicio.routes';
+import { InicioRoutingModule } from './inicio.routes';
 import { InicioComponent } from './inicio.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ContenidoComponent } from './contenido/contenido.component';
@@ -16,6 +16,9 @@ import { CardRegistroClientComponent } from './registrarse-client/card-registro-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CommonModule } from '@angular/common';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -36,21 +39,23 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     BsDatepickerModule.forRoot(),
-    RouterModule.forChild(InicioRoutes),
+    InicioRoutingModule,
     CollapseModule.forRoot(),
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    CarouselModule,
+    NgxSpinnerModule,
   ],
-  providers:[
+  providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     }
   ],
-  schemas:[
+  schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  bootstrap:[
+  bootstrap: [
     InicioComponent
   ]
 })
-export class InicioModule{ }
+export class InicioModule { }

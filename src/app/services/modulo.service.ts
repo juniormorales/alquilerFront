@@ -17,6 +17,7 @@ export class ModuloService {
 
   public listarModulos(perfil) {
     return this.http.post(this.url + 'modulo/listarPorPerfil', perfil).pipe(
+      
       catchError((err: HttpErrorResponse)=> this.errorHandler(err))
     );
   }

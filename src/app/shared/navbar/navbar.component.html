@@ -67,7 +67,7 @@
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" dropdownToggle href="#"
             (click)="$event.preventDefault()">
             <div class=" photo">
-              <img alt="Profile Photo" src="assets/img/mike.jpg" />
+              <img alt="Profile Photo" src="assets/img/default-avatar.png" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p class=" d-lg-none">Log out</p>
@@ -85,7 +85,7 @@
             </li>
             <li class=" dropdown-divider"></li>
             <li class=" nav-link">
-              <a class=" nav-item dropdown-item" href="javascript:void(0)">
+              <a class=" nav-item dropdown-item" (click)="logout()" href="javascript:void(0)">
                 Log out
               </a>
             </li>

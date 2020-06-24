@@ -2,9 +2,11 @@ import { Component, OnInit, HostListener } from "@angular/core";
 import { Router } from "@angular/router";
 import PerfectScrollbar from "perfect-scrollbar";
 import { ToastrService } from "ngx-toastr";
+
 var misc: any = {
   sidebar_mini_active: true
 };
+
 @Component({
   selector: 'app-administracion',
   templateUrl: './administracion.component.html',

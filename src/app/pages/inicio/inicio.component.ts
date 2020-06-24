@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ContenidoComponent } from './contenido/contenido.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  eventsSubject: Subject<boolean> = new Subject<boolean>();  constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onActivate(event){
+    if(event instanceof ContenidoComponent){
+      this.eventsSubject.next(false);    
+    }else{
+      this.eventsSubject.next(true);
+    }
   }
 
 }

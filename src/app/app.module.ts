@@ -14,7 +14,12 @@ import { AppRoutingModule } from './app-routing.module';
 //Componentes principales
 import { Not404Component } from './pages/not404/not404.component';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GlobalInterceptor } from 'src/utils/interceptor';
+
+//Token
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -31,8 +36,23 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return sessionStorage.getItem("token");
+        },
+        whitelistedDomains: [environment.urlLocalHost],
+        blacklistedRoutes: [environment.urlOauth]
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalInterceptor,  
+      multi: true,      
+    },
+  ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
   ],

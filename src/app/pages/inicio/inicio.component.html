@@ -1,5 +1,8 @@
 <div class="wrapper wrapper-full-page">
-    <app-auth-navbar></app-auth-navbar>
-    <router-outlet></router-outlet>
+    <ngx-spinner bdColor="rgba(0, 0, 0, 1)">
+        <img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />
+    </ngx-spinner>
+    <app-auth-navbar [events]="eventsSubject.asObservable()"></app-auth-navbar>
+    <router-outlet (activate)='onActivate($event)'></router-outlet>
  </div> 
   

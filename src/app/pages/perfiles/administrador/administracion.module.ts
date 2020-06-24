@@ -1,10 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AdministracionComponent } from './administracion.component';
 import { RouterModule } from '@angular/router';
-import { AdministracionRoute } from './administracion.routes';
+import { AdministracionRoutingModule } from './administracion.routes';
 import { DashboardAdminComponent } from './modulos/dashboard/dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -14,7 +15,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     DashboardAdminComponent
   ],
   imports: [
-    RouterModule.forChild(AdministracionRoute),
+    CommonModule,
+    AdministracionRoutingModule,
     CollapseModule.forRoot(),
     SharedModule,
   ],
@@ -25,4 +27,4 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     AdministracionComponent
   ]
 })
-export class AdministracionModule{ }
+export class AdministracionModule { }
