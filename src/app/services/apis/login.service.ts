@@ -34,6 +34,7 @@ export class LoginService {
 		params.set('password', usuario.password);
 		return this.http.post(url, params.toString(), { headers: httpHeaders }).pipe(
 			map((token: any) => {
+					
 				sessionStorage.setItem('sesion', token.access_token);
 				this.spinner.hide();
 				return token;
@@ -49,13 +50,23 @@ export class LoginService {
 		const token = this.helper.decodeToken(sessionStorage.getItem('sesion'));
 		switch(token.nombre_perfil){
 			case "ADMINISTRADOR" : this.router.navigateByUrl('/administracion/dashboard') ;break;
-			case 'ARRENDERO': this.router.navigateByUrl('/arrendero/condicion-pago') ;break;
+			case 'ARRENDERO': this.router.navigateByUrl('/arrendero/dashboard') ;break;
 			case 'ARRENDATARIO': this.router.navigateByUrl('/arrendatario/buscar') ;break;
 		}
 	}
 
 	public logOut(){
 		sessionStorage.clear();
+		const body = document.getElementsByTagName("body")[0];
+		if (body.classList.contains("white-content")) {
+			body.classList.remove("white-content");
+		}
 		this.router.navigateByUrl('/inicio');
+	}
+
+	public verificaToken(): Observable<any> {
+		const token = sessionStorage.getItem('sesion');
+		let url = environment.urlBack + 'oauth/check_token?token=' + token;
+		return this.http.get(url);
 	}
 }

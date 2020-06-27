@@ -8,31 +8,37 @@ import { HttpClientModule } from "@angular/common/http";
 import { CollapseModule } from "ngx-bootstrap/collapse";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ModalModule } from "ngx-bootstrap/modal";
+import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 
 //Componentes
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
+import { ConfigureComponent } from './configure/configure.component';
 
 @NgModule({
   declarations: [
     SidebarComponent,
     NavbarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ConfigureComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
     RouterModule,
+    JwBootstrapSwitchNg2Module,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    
   ],
   exports: [
     SidebarComponent,
     NavbarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ConfigureComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

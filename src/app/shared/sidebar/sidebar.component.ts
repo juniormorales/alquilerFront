@@ -265,7 +265,7 @@ export class SidebarComponent implements OnInit {
   private listarModulosPorPerfil(){
     this.moduloService.listarModulos({"idPerfil":this.token.id_perfil}).subscribe((resp:any)=>{
       this.menuItems = resp.aaData;
-      
+      console.log(this.menuItems)
     })
   }
 }

@@ -6,13 +6,17 @@ import { DashboardAdminComponent } from './modulos/dashboard/dashboard.component
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CommonModule } from '@angular/common';
+import { GestionCuentasComponent } from './modulos/gestion-cuentas/gestion-cuentas.component';
+import { SolicitudesPendientesComponent } from './modulos/solicitudes-pendientes/solicitudes-pendientes.component';
 
 
 
 @NgModule({
   declarations: [
     AdministracionComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
+    GestionCuentasComponent,
+    SolicitudesPendientesComponent
   ],
   imports: [
     CommonModule,
