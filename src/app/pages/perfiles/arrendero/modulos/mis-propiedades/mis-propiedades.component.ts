@@ -52,7 +52,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -67,7 +67,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -82,7 +82,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -97,7 +97,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -112,7 +112,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -127,7 +127,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -142,7 +142,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -157,7 +157,7 @@ export class MisPropiedadesComponent implements OnInit {
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
-        descripcionDaños: 'No hay registro de daños',
+        descripcionDanios: 'No hay registro de daños',
         nroHabitaciones: 5,
         cantidadPisos: 2,
         tamano: 200,
@@ -206,6 +206,10 @@ export class MisPropiedadesComponent implements OnInit {
   }
 
   eliminarPropiedad(propiedad) {
+
+  }
+
+  subirImagen(propiedad){
 
   }
 

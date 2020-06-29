@@ -11,19 +11,28 @@ import { MisBoletasComponent } from './modulos/mis-boletas/mis-boletas.component
 import { PagosPorVencerComponent } from './modulos/pagos-por-vencer/pagos-por-vencer.component';
 import { DeudasPendientesComponent } from './modulos/deudas-pendientes/deudas-pendientes.component';
 import { RecordPagosComponent } from './modulos/record-pagos/record-pagos.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
 @NgModule({
   declarations: [
     ArrendatarioComponent, 
-    PresentacionPropiedadesComponent, SolAceptadasComponent, SolHechasComponent, MisBoletasComponent, PagosPorVencerComponent, DeudasPendientesComponent, RecordPagosComponent
+    PresentacionPropiedadesComponent, 
+    SolAceptadasComponent, 
+    SolHechasComponent, 
+    MisBoletasComponent, 
+    PagosPorVencerComponent, 
+    DeudasPendientesComponent, 
+    RecordPagosComponent
   ],
   imports: [
     CommonModule,
     ArrendatarioRoutingModule,
     SharedModule,
-    CollapseModule.forRoot()
+    NgxSpinnerModule,
+    CollapseModule.forRoot(),
+    
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

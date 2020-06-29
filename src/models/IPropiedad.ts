@@ -6,7 +6,7 @@ export interface IPropiedad {
     alias?:string;
     fechaRegistro?: Date;
     descripcionGeneral?: string;
-    descripcionDaños?: string;
+    descripcionDanios?: string;
     nroHabitaciones?: number;
     cantidadPisos?: number;
     tamano?: number;
