@@ -1,6 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -20,6 +19,11 @@ import { GlobalInterceptor } from 'src/utils/interceptor';
 //Token
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+
+//ZONA HORARIA
+import { registerLocaleData } from '@angular/common';
+import localesPE from '@angular/common/locales/es-PE'
+registerLocaleData(localesPE,'es-Pe');
 
 
 
@@ -52,6 +56,7 @@ import { environment } from 'src/environments/environment';
       useClass: GlobalInterceptor,  
       multi: true,      
     },
+    { provide:LOCALE_ID,useValue:'es-Pe' }
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

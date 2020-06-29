@@ -9,6 +9,7 @@ import { ModalService } from 'src/app/services/common/modal.service';
   ]
 })
 export class CondicionPagoComponent implements OnInit {
+  
 
   //Variables NgxTable
   entries: number = 5;
@@ -183,7 +184,7 @@ export class CondicionPagoComponent implements OnInit {
 
   //Modal
   private openModal(obj) {
-    this.modalService.modalNuevoCondicionPago(obj).subscribe(resp => {}, err => {}, () => {
+    this.modalService.modalUICondicionPago(obj).subscribe(resp => {}, err => {}, () => {
       this.listarCondicionPago();
     });
   }
