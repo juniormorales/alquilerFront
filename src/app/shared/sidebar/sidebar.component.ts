@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModuloService } from 'src/app/services/modulo.service';
+import { ModuloService } from 'src/app/services/apis/modulo.service';
 import { RouteInfo } from 'src/models/IRouteInfo';
 import { JwtHelperService } from '@auth0/angular-jwt';
 

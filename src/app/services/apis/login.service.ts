@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
 	providedIn: 'root'
@@ -34,28 +35,25 @@ export class LoginService {
 		params.set('password', usuario.password);
 		return this.http.post(url, params.toString(), { headers: httpHeaders }).pipe(
 			map((token: any) => {
-					
+
 				sessionStorage.setItem('sesion', token.access_token);
 				this.spinner.hide();
 				return token;
 			}),
-			catchError((err: HttpErrorResponse) => {
-				this.spinner.hide();
-				return Observable.throw(err);
-			})
+			catchError((err: HttpErrorResponse) => this.errorHanlder(err))
 		);
 	}
 
-	public redirigirModulo(){
+	public redirigirModulo() {
 		const token = this.helper.decodeToken(sessionStorage.getItem('sesion'));
-		switch(token.nombre_perfil){
-			case "ADMINISTRADOR" : this.router.navigateByUrl('/administracion/dashboard') ;break;
-			case 'ARRENDERO': this.router.navigateByUrl('/arrendero/dashboard') ;break;
-			case 'ARRENDATARIO': this.router.navigateByUrl('/arrendatario/buscar') ;break;
+		switch (token.nombre_perfil) {
+			case "ADMINISTRADOR": this.router.navigateByUrl('/administracion/dashboard'); break;
+			case 'ARRENDERO': this.router.navigateByUrl('/arrendero/dashboard'); break;
+			case 'ARRENDATARIO': this.router.navigateByUrl('/arrendatario/buscar'); break;
 		}
 	}
 
-	public logOut(){
+	public logOut() {
 		sessionStorage.clear();
 		const body = document.getElementsByTagName("body")[0];
 		if (body.classList.contains("white-content")) {
@@ -68,5 +66,15 @@ export class LoginService {
 		const token = sessionStorage.getItem('sesion');
 		let url = environment.urlBack + 'oauth/check_token?token=' + token;
 		return this.http.get(url);
+	}
+
+	private errorHanlder(err: HttpErrorResponse) {
+		this.spinner.hide();
+		if(err.status==0){
+			Swal.fire('ERROR',environment.msg_servicio_no_disponible,'error');
+		}else{
+			Swal.fire('ERROR', err.error.error_description,'error');
+		}
+		return Observable.throw(err);
 	}
 }

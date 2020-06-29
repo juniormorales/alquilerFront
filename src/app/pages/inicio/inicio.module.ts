@@ -12,12 +12,13 @@ import { RegistrarseLordlandComponent } from './registrarse-lordland/registrarse
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { CardRegistroClientComponent } from './registrarse-client/card-registro-client/card-registro-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CardRegistroGeneralComponent } from './card-registro-general/card-registro-general.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -32,11 +33,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ContenidoComponent,
     RegistrarseClientComponent,
     RegistrarseLordlandComponent,
-    CardRegistroClientComponent,
+    CardRegistroGeneralComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
+    AngularMultiSelectModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     BsDatepickerModule.forRoot(),
     InicioRoutingModule,

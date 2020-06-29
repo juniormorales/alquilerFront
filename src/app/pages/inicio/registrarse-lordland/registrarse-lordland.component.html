@@ -1,66 +1,143 @@
 <div class="full-page register-page">
-    <div class=" content">
-      <div class=" container">
-        <div class=" row">
-          <div class=" col-md-5 ml-auto">
-            <perfect-scrollbar style="max-width: 800px; max-height: 400px;" [config]="config">
-              <div class=" info-area info-horizontal  mt-5">
-                <div class=" icon icon-warning">
-                  <i class="mdi mdi-home-modern"> </i>
+  <div class=" content">
+    <div class=" container">
+      <div class=" row">
+        <div class=" col-lg-5 ml-auto">
+          <perfect-scrollbar style="max-width: 800px; max-height: 1000px;" [config]="config">
+            <div class=" info-area info-horizontal  mt-5">
+              <div class=" icon icon-warning">
+                <i class="mdi mdi-home-modern"> </i>
+              </div>
+              <div class=" description">
+                <h3 class=" info-title">Registra tus viviendas para alquiler</h3>
+                <p class=" description">
+                  Podrás registrar tus viviendas donde
+                  ofreces el servicio de alquiler, para que los distintos clientes puedan visualizarlo
+                  y contactarse con usted sin barreras!
+                </p>
+              </div>
+            </div>
+            <div class=" info-area info-horizontal p-2">
+              <div class=" icon icon-primary">
+                <i class=" tim-icons icon-settings-gear-63"> </i>
+              </div>
+              <div class=" description">
+                <h3 class=" info-title">Modulo propio de gestion de inquilinos</h3>
+                <p class=" description">
+                  Podras registrar y gestionar eficientemente tus habitaciones, eliminando
+                  la tarea de control presencial, el sistema te brindara informacion de cada
+                  inquilino, asi como su estado de deudas y dias restantes de renta.
+                </p>
+              </div>
+            </div>
+            <div class=" info-area info-horizontal p-2">
+              <div class=" icon icon-info">
+                <i class=" mdi mdi-file-document"> </i>
+              </div>
+              <div class=" description">
+                <h3 class=" info-title">Facilidad de generar documentos para formalizacion</h3>
+                <p class=" description">
+                  Podrás generar facilmente los documentos necesarios para formalizar tu negocio
+                  de alquileres ante la notaria mas cercana a tu localidad.
+                </p>
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+        <div class=" col-lg-7 mr-auto mt-5 mt-lg-0">
+          <div class=" card card-register card-white">
+            <div class=" card-header">
+              <img alt="Card image" class="card-img" src="assets/img/card-info.png" />
+
+              <h3 class="card-title text-dark pl-2">Registro</h3>
+            </div>
+            <div class=" card-body">
+              <app-card-registro-general [events]="eventsSubject.asObservable()" (enviarForm)="guardarForm($event)">
+              </app-card-registro-general>
+              <div class="row justify-content-center" [formGroup]="arrenderoForm">
+                <div class="row col-11 justify-content-center">
+                  <div class=" col-lg-7">
+                    <div class=" input-group" [ngClass]="{'input-group-focus': focus === true, 'has-danger': (focusTouched &&
+                    registerF.direccion.errors) ||(registerF.direccion.value != '' && registerF.direccion.errors), 
+                    'has-success': !registerF.direccion.errors}">
+                      <div class=" input-group-prepend">
+                        <div class=" input-group-text">
+                          <i class="tim-icons icon-badge"></i>
+                        </div>
+                      </div>
+                      <input class=" form-control" name="dir" autocomplete="off" placeholder="Direccion Domiciliaria"
+                        type="text" formControlName="direccion" (focus)="focus = true; focusTouched = true"
+                        (blur)="focus = false" />
+                      <div class="w-100 pt-2"></div>
+                      <label class="text-danger pl-2" *ngIf="(focusTouched && registerF.direccion.errors) ||
+                  (registerF.direccion.value != '' && registerF.direccion.errors)">*Este campo es requerido.</label>
+                    </div>
+                  </div>
+                  <div class=" col-lg-5">
+                    <div class=" input-group" [ngClass]="{'input-group-focus': focus1 === true, 'has-danger': (focus1Touched &&
+                      registerF.nroPartidaRegistral.errors) ||(registerF.nroPartidaRegistral.value != '' && registerF.nroPartidaRegistral.errors), 
+                      'has-success': !registerF.nroPartidaRegistral.errors}">
+                      <div class=" input-group-prepend">
+                        <div class=" input-group-text">
+                          <i class="tim-icons icon-badge"></i>
+                        </div>
+                      </div>
+                      <input class=" form-control" name="nro" autocomplete="off" placeholder="N° Partida Registral"
+                        type="number" formControlName="nroPartidaRegistral"
+                        (focus)="focus1 = true; focus1Touched = true" (blur)="focus1 = false" />
+                      <div class="w-100 pt-2"></div>
+                      <label class="text-danger pl-2" *ngIf="(focus1Touched && registerF.nroPartidaRegistral.errors) ||
+                    (registerF.nroPartidaRegistral.value != '' && registerF.nroPartidaRegistral.errors)">*Este campo es
+                        requerido.</label>
+                    </div>
+                  </div>
                 </div>
-                <div class=" description">
-                  <h3 class=" info-title">Registra tus viviendas para alquiler</h3>
-                  <p class=" description">
-                    Podrás registrar tus viviendas donde 
-                    ofreces el servicio de alquiler, para que los distintos clientes puedan visualizarlo 
-                    y contactarse con usted sin barreras!
-                  </p>
+                <div class="row col-11 justify-content-center">
+                  <div class=" col-lg-4">
+                    <label>Departamento</label>
+                    <div class="form-group pb-3">
+                      <angular2-multiselect name="departamento" [data]="dataDep" formControlName="departamento"
+                        [settings]="settingsGeneral" (onSelect)="onDepartamentoSelect($event)">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class=" col-lg-4">
+                    <label>Provincia</label>
+                    <div class="form-group pb-3">
+                      <angular2-multiselect name="provincia"  [data]="dataProv" formControlName="provincia"
+                        [settings]="settingsGeneral" (onSelect)="onProvinciaSelect($event)">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class=" col-lg-4">
+                    <label>Distrito</label>
+                    <div class="form-group pb-3">
+                      <angular2-multiselect name="distrito" [data]="dataDist" formControlName="distrito"
+                        [settings]="settingsGeneral">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class=" info-area info-horizontal p-2">
-                <div class=" icon icon-primary">
-                  <i class=" tim-icons icon-settings-gear-63"> </i>
-                </div>
-                <div class=" description">
-                  <h3 class=" info-title">Modulo propio de gestion de inquilinos</h3>
-                  <p class=" description">
-                    Podras registrar y gestionar eficientemente tus habitaciones, eliminando  
-                    la tarea de control presencial, el sistema te brindara informacion de cada 
-                    inquilino, asi como su estado de deudas y dias restantes de renta.
-                  </p>
-                </div>
+              <div class=" form-check text-left">
+                <label class=" form-check-label">
+                  <input class=" form-check-input" type="checkbox" [(ngModel)]="aceptoTerminos"
+                    (ngModelChange)="terminosAceptados($event)" />
+
+                  <span class=" form-check-sign"> </span> I agree to the
+                  <a href="javascript:void(0)"> terms and conditions </a> .
+                </label>
               </div>
-              <div class=" info-area info-horizontal p-2">
-                <div class=" icon icon-info">
-                  <i class=" mdi mdi-file-document"> </i>
-                </div>
-                <div class=" description">
-                  <h3 class=" info-title">Facilidad de generar documentos para formalizacion</h3>
-                  <p class=" description">
-                    Podrás generar facilmente los documentos necesarios para formalizar tu negocio 
-                    de alquileres ante la notaria mas cercana a tu localidad.
-                  </p>
-                </div>
-              </div>
-            </perfect-scrollbar>
-          </div>
-          <div class=" col-md-7 mr-auto">
-            <div class=" card card-register card-white">
-              <div class=" card-header">
-                <img alt="Card image" class=" card-img" src="assets/img/card-primary.png" />
-  
-                <h3 class="card-title pl-4">Registro</h3>
-              </div>
-              <div class=" card-body">
-              </div>
-              <div class=" card-footer">
-                <a class=" btn btn-primary btn-round btn-lg" href="javascript:void(0)">
-                  Enviar
-                </a>
-              </div>
+            </div>
+            <div class=" card-footer">
+              <button class=" btn btn-info btn-round btn-lg" (click)="registrarArrendero()"
+                [disabled]="!aceptoTerminos">
+                Registrarse
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
