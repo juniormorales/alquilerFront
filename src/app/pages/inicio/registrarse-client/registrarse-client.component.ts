@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IArrendatario } from 'src/models/IArrendatario';
+import { ArrendatarioService } from 'src/app/services/apis/arrendatario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrarse',
@@ -13,15 +18,82 @@ export class RegistrarseClientComponent implements OnInit {
     'scrollYMarginOffset':5
   }]
 
-  constructor() {}
+  eventsSubject: Subject<void> = new Subject<void>();
+  generalForm: FormGroup;
+  arrendatarioForm: FormGroup;
+
+  focus;
+  focusTouched;
+
+
+  aceptoTerminos: boolean = false;
+
+  constructor(
+    private builder: FormBuilder,
+    private arrendatarioService: ArrendatarioService,
+  ) {}
 
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("register-page");
+    this.construirFormulario();
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("register-page");
   }
+
+  construirFormulario(){
+    this.arrendatarioForm = this.builder.group({
+      direccion: ['',Validators.required]
+    });
+  }
+
+  get registerF(){
+    return this.arrendatarioForm.controls;
+  }
+
+  registrarArrendatario(){
+    if(this.generalForm.valid && this.arrendatarioForm.valid){
+      var arrendatario = this.construirObjeto();
+      this.arrendatarioService.registrarArrendatario(arrendatario).subscribe((resp:any)=>{
+        Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+      })
+    }else{
+      Swal.fire('¡INFO!','Complete los campos obligatorios para continuar','info');
+    }
+  }
+
+  private construirObjeto(){
+    var arrendatario : IArrendatario = {
+      direccionTemporal: this.arrendatarioForm.get('direccion').value,
+      usuario: {
+        username: this.generalForm.get('username').value,
+        password: this.generalForm.get('pass').value,
+        nombres: this.generalForm.get('nombre').value,
+        apellidos: this.generalForm.get('apellido').value,
+        nroCel: this.generalForm.get('nro_cel').value,
+        telefono: this.generalForm.get('telefono').value,
+        email: this.generalForm.get('email').value,
+        dni: this.generalForm.get('dni').value,
+        fechaNacimiento: this.generalForm.get('fecha_nac').value,
+        estado: true,
+        tipoUsuario: 'ARRENDATARIO',
+        perfil:{
+          idPerfil:3
+        }
+      }
+    }
+    return arrendatario;
+  }
+
+  guardarForm(event){
+    this.generalForm = event;
+  }
+
+  terminosAceptados(cambio) {
+    this.eventsSubject.next();
+  }
+
 
 }

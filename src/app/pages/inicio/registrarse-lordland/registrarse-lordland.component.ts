@@ -26,7 +26,8 @@ export class RegistrarseLordlandComponent implements OnInit {
   focus3Touched = false;
   focus4Touched;
   config = [{
-    'wheelSpeed': 2
+    'wheelSpeed': 2,
+    'scrollYMarginOffset':5
   }]
 
   eventsSubject: Subject<void> = new Subject<void>();
@@ -89,10 +90,14 @@ export class RegistrarseLordlandComponent implements OnInit {
   }
 
   registrarArrendero() {
-    var arrendero = this.construirObjeto();
-    this.arrenderoService.registrarArrendero(arrendero).subscribe((resp:any)=>{
-      Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
-    })
+    if(this.generalForm.valid && this.arrenderoForm.valid){
+      var arrendero = this.construirObjeto();
+      this.arrenderoService.registrarArrendero(arrendero).subscribe((resp:any)=>{
+        Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+      })
+    }else{
+      Swal.fire('¡INFO!','Complete los campos obligatorios para continuar','info');
+    }
   }
 
   private construirObjeto(): IArrendero{
