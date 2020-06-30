@@ -2,7 +2,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-
 export const environment = {
   production: false,
   urlLocalHost: 'http://localhost:2000',
@@ -13,6 +12,19 @@ export const environment = {
   msg_servicio_no_disponible: 'Servicio no disponible, intentelo más tarde nuevamente.'
 
 };
+
+/*
+/////////////////// KATRIEL - HEROKU /////////////////////////
+export const environment = {
+  production: false,
+  urlLocalHost: 'https://alquiler-back.herokuapp.com',
+  urlBack: 'https://alquiler-back.herokuapp.com/',
+  urlOauth:  'https://alquiler-back.herokuapp.com/oauth/token',
+  urlApiRest: 'https://alquiler-back.herokuapp.com/api/',
+  urlPublicRest: 'https://alquiler-back.herokuapp.com/public/',
+  msg_servicio_no_disponible: 'Servicio no disponible, intentelo más tarde nuevamente.'
+
+};*/
 
 /*
  * For easier debugging in development mode, you can import the following file
