@@ -14,6 +14,19 @@ export const environment = {
 };
 
 /*
+/////////////////// KATRIEL - HEROKU /////////////////////////
+export const environment = {
+  production: false,
+  urlLocalHost: 'https://alquiler-back.herokuapp.com',
+  urlBack: 'https://alquiler-back.herokuapp.com/',
+  urlOauth:  'https://alquiler-back.herokuapp.com/oauth/token',
+  urlApiRest: 'https://alquiler-back.herokuapp.com/api/',
+  urlPublicRest: 'https://alquiler-back.herokuapp.com/public/',
+  msg_servicio_no_disponible: 'Servicio no disponible, intentelo más tarde nuevamente.'
+
+};*/
+
+/*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *
