@@ -76,8 +76,6 @@ export class IUCondicionPagoComponent implements OnInit {
 
   //Eventos de boton
   public crud() {
-    console.log(this.armarObjeto());
-    /*
     if(this.condicionForm.valid){
       var condicion = this.armarObjeto();
       if(this.accion!=null){
@@ -94,6 +92,6 @@ export class IUCondicionPagoComponent implements OnInit {
       }
     }else{
       Swal.fire('¡ADVERTENCIA!','Complete todos los campos para continuar','warning');
-    }*/
+    }
   }
 }
