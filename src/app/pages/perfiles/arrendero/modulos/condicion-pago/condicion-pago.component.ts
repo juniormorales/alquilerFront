@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CondicionPagoService } from 'src/app/services/apis/condicion-pago.service';
-import { ModalService } from 'src/app/services/common/modal.service';
+import { ModalCondicionPagoService } from 'src/app/services/common/modal-condicion-pago.service';
 
 @Component({
   selector: 'app-condicion-pago',
@@ -20,7 +20,7 @@ export class CondicionPagoComponent implements OnInit {
 
   constructor(
     private condicionPagoService: CondicionPagoService,
-    private modalService: ModalService,
+    private modalService: ModalCondicionPagoService,
   ) { }
 
   ngOnInit() {

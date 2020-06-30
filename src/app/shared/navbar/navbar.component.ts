@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef, OnDestroy } from "@angular/core";
-import { ROUTES } from "../sidebar/sidebar.component";
 import { Location } from "@angular/common";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { LoginService } from 'src/app/services/apis/login.service';
+import { RouteInfo } from 'src/models/IRouteInfo';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -66,8 +66,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    var routes : RouteInfo [] = JSON.parse(localStorage.getItem('ROUTES'));
     window.addEventListener("resize", this.updateColor);
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.listTitles = routes.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName("navbar-toggler")[0];
     this.router.events.subscribe(event => {
@@ -90,7 +91,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return this.listTitles[item].title;
       }
     }
-    return "Dashboard";
+    return "SUB MODULO";
   }
 
   sidebarOpen() {

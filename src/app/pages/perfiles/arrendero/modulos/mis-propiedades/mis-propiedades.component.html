@@ -66,14 +66,6 @@
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         {{row.alias}}
                                     </ng-template>
-                                </ngx-datatable-column>  
-                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false">
-                                    <ng-template ngx-datatable-header-template>
-                                        <span>Costo</span>
-                                    </ng-template>
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        {{row.condicionPago.precio}}
-                                    </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
@@ -83,16 +75,26 @@
                                         {{row.estado==0?'Fuera de Servicio':row.estado==1?'Disponible':row.estado==2?'En mantenimiento':'Ya ocupado'}}
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false">
+                                <ngx-datatable-column [width]="200">
                                     <ng-template ngx-datatable-header-template>
-                                        <span>Subir Imagen</span>
+                                        <span>Subir/Eliminar Imagen</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="tim-icons icon-image-02" id="edital" (click)="subirImagen(row)"
-                                            aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                        <div class="row justify-content-center">
+                                            <div class="col-6">
+                                                <i class="tim-icons icon-camera-18" id="edital"
+                                                    (click)="subirImagen(row)" aria-hidden="true"
+                                                    style="cursor: pointer; font-size: 25px;"></i>
+                                            </div>
+                                            <div class="col-6">
+                                                <i class="tim-icons icon-simple-remove" id="edital"
+                                                    (click)="eliminarImagenes(row)" aria-hidden="true"
+                                                    style="cursor: pointer; font-size: 25px;"></i>
+                                            </div>
+                                        </div>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false">
+                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false" [width]="100">
                                     <ng-template ngx-datatable-header-template>
                                         <span>Editar</span>
                                     </ng-template>
@@ -106,17 +108,23 @@
                                         <span>Editar Estado</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="tim-icons icon-settings" id="edital" (click)="editarEstadoPropiedad(row)"
-                                            aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                        <div class="row justify-content-center">
+                                            <i class="tim-icons icon-settings" id="edital"
+                                                (click)="editarEstadoPropiedad(row)" aria-hidden="true"
+                                                style="cursor: pointer; font-size: 25px;"></i>
+                                        </div>
                                     </ng-template>
                                 </ngx-datatable-column>
-                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false">
+                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false" [width]="100" >
                                     <ng-template ngx-datatable-header-template>
                                         <span>Eliminar</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="tim-icons icon-trash-simple" id="darbaja" (click)="eliminarPropiedad(row)"
-                                            aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                        <div class="row justify-content-center">
+                                            <i class="tim-icons icon-trash-simple" id="darbaja"
+                                                (click)="eliminarPropiedad(row)" aria-hidden="true"
+                                                style="cursor: pointer; font-size: 25px;"></i>
+                                        </div>
                                     </ng-template>
                                 </ngx-datatable-column>
                             </ngx-datatable>

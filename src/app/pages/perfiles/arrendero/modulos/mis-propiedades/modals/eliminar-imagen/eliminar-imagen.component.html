@@ -1,0 +1,33 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Imagenes</h6>
+    </div>
+    <div class="body">
+        <div *ngFor="let img of lsImagenes | paginate: { itemsPerPage: 3, currentPage: p }">
+
+            <div class="card">
+                <div class="card-body">
+                   <div class="row justify-content-center pl-4 pr-4">
+                    <img [src]="img.foto" [alt]="img.obj.nombreFoto" height="360">
+                   </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-danger  btn-lg btn-block" (click)="eliminarFoto(img)">Eliminar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row justify-content-center">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+        <div class="row p-3">
+            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="save()">Guardar Cambios</button>
+        </div>
+    </div>
+</div>

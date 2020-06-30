@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from 'src/app/services/common/modal.service';
 import { PropiedadService } from 'src/app/services/apis/propiedad.service';
 import { IPropiedad } from 'src/models/IPropiedad';
+import { ModalPropiedadService } from 'src/app/services/common/modal-propiedad.service';
 
 @Component({
   selector: 'app-mis-propiedades',
@@ -18,7 +18,7 @@ export class MisPropiedadesComponent implements OnInit {
 
   constructor(
     private propiedadService : PropiedadService,
-    private modalService: ModalService,
+    private modalService: ModalPropiedadService,
   ) { }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class MisPropiedadesComponent implements OnInit {
   });*/
     this.lsPropiedad = [
       {
-        idPropiedad: 1,
+        idPropiedad: 5,
         alias: 'Casa de verano Las Lomas',
         fechaRegistro: new Date(),
         descripcionGeneral: 'Esta es una descripcion',
@@ -210,7 +210,15 @@ export class MisPropiedadesComponent implements OnInit {
   }
 
   subirImagen(propiedad){
+    this.modalService.modalSubirImagen(propiedad).subscribe(resp => {}, err => {}, () => {
+      this.listarPropiedades();
+    });
+  }
 
+  eliminarImagenes(propiedad){
+    this.modalService.modalEliminarImagen(propiedad).subscribe(resp => {}, err => {}, () => {
+      this.listarPropiedades();
+    });
   }
 
 }

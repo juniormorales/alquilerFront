@@ -27,9 +27,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ModalService } from 'src/app/services/common/modal.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { ModalPropiedadService } from 'src/app/services/common/modal-propiedad.service';
+import { ModalCondicionPagoService } from 'src/app/services/common/modal-condicion-pago.service';
+import { AgregarImagenComponent } from './modulos/mis-propiedades/modals/agregar-imagen/agregar-imagen.component';
+import { EliminarImagenComponent } from './modulos/mis-propiedades/modals/eliminar-imagen/eliminar-imagen.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -48,6 +51,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     IUCondicionPagoComponent,
     IUPropiedadComponent,
     EditarEstadoPropiedadComponent,
+    AgregarImagenComponent,
+    EliminarImagenComponent,
   ],
   imports: [
     CommonModule,
@@ -57,9 +62,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxSpinnerModule,
     NgxDatatableModule,
     ModalModule.forRoot(),
+    NgxPaginationModule
   ],
   providers:[
-    ModalService
+    ModalPropiedadService,
+    ModalCondicionPagoService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
