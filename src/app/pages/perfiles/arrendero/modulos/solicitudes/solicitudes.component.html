@@ -26,7 +26,10 @@
                                 </div>
                             </div>
 
-                            <ngx-datatable id="print-section" class="bootstrap  selection-cell" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp" [scrollbarH]="true" [virtualization]="false">
+                            <ngx-datatable id="print-section" class="bootstrap  selection-cell" [columnMode]="'force'"
+                                [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+                                [limit]="entries != -1 ? entries : undefined" [rows]="temp" [scrollbarH]="true"
+                                [virtualization]="false">
 
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
@@ -70,7 +73,8 @@
                                         <span>Ver</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="mdi mdi-account-search" id="edital" (click)="Ver(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                        <i class="mdi mdi-account-search" id="edital" (click)="Ver(row)"
+                                            aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
                                     </ng-template>
                                 </ngx-datatable-column>
 
@@ -79,7 +83,8 @@
                                         <span>Aceptar</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="mdi mdi-account-check" id="aceptal" (click)="Ver(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                        <i class="mdi mdi-account-check" id="aceptal" (click)="Ver(row)"
+                                            aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
                                     </ng-template>
                                 </ngx-datatable-column>
 
@@ -88,7 +93,8 @@
                                         <span>Rechazar</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="mdi mdi-account-minus" id="rechazal" (click)="Ver(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                        <i class="mdi mdi-account-minus" id="rechazal" (click)="Ver(row)"
+                                            aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
                                     </ng-template>
                                 </ngx-datatable-column>
 
