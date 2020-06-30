@@ -33,6 +33,7 @@ import { ModalCondicionPagoService } from 'src/app/services/common/modal-condici
 import { AgregarImagenComponent } from './modulos/mis-propiedades/modals/agregar-imagen/agregar-imagen.component';
 import { EliminarImagenComponent } from './modulos/mis-propiedades/modals/eliminar-imagen/eliminar-imagen.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxSpinnerModule,
     NgxDatatableModule,
     ModalModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule
   ],
   providers:[
     ModalPropiedadService,

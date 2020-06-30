@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { IArrendatario } from 'src/models/IArrendatario';
+import { ICondicionPago } from 'src/models/ICondicionPago';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,20 @@ export class CondicionPagoService {
     private spinner: NgxSpinnerService
   ) { }
 
-  registrarCondicionPago(condicionpago){
+  registrarCondicionPago(condicionpago: ICondicionPago){
     this.spinner.show();
     return this.http.post( environment.urlApiRest + 'condicion-pago/registrar',condicionpago).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
+  modificarCondicionPago(condicionpago: ICondicionPago){
+    this.spinner.show();
+    return this.http.put( environment.urlApiRest + 'condicion-pago/modificar',condicionpago).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;

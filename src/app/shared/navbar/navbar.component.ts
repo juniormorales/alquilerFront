@@ -4,6 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { LoginService } from 'src/app/services/apis/login.service';
 import { RouteInfo } from 'src/models/IRouteInfo';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -74,6 +75,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(event => {
       this.sidebarClose();
     });
+
+    console.log(new Date())
   }
 
   ngOnDestroy() {

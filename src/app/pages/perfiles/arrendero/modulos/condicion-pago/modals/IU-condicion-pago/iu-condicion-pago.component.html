@@ -4,14 +4,51 @@
             type="button">
             <i class=" tim-icons icon-simple-remove"></i>
         </button>
-        <h6 class="card-title">{{input_condicion_pago!=null?'Actualizar Condicion Pago':'Nuevo Condicion Pago'}} </h6>
+        <h6 class="card-title text-center">{{input_condicion_pago!=null?'Actualizar Condicion Pago':'Nuevo Condicion Pago'}} </h6>
     </div>
     <div class="card-body">
-
+        <form [formGroup]="condicionForm">
+            <div class="row">
+                <div class="col-6">
+                    <label> Precio </label>
+                    <div class=" form-group">
+                        <input class="form-control" type="number" placeholder="S/." formControlName="precio"/>
+                    </div>
+                    <label> Tiempo de Contrato minimo </label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number"  placeholder="meses" formControlName="tiempo_contrato"/>
+                    </div>
+                    <label> Dia del mes para Cobrar </label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number" formControlName="diacobro"/>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label> Monto Minimo Garantia</label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number" placeholder="S/." formControlName="garantia_min" />
+                    </div>
+                    <label> Monto Maximo de Garantia</label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number"  placeholder="S/." formControlName="garantia_max"/>
+                    </div>
+                    <label> Tasa de recargo por retraso (%) </label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number" formControlName="tasa"/>
+                    </div>
+                </div>
+            </div>
+            <div class=" form-check mt-3">
+                <label class=" form-check-label">
+                    <input class=" form-check-input" type="checkbox" formControlName="responsabilidad"/>
+                    <span class=" form-check-sign"> </span> El propietario se responsabiliza por los daños de reparacion
+                </label>
+            </div>
+        </form>
     </div>
     <div class="card-footer mt-0">
         <div class="row p-3">
-            <button type="button" class="btn btn-primary  btn-lg btn-block"
+            <button type="button" class="btn btn-primary  btn-lg btn-block" [disabled]="condicionForm.invalid"
                 (click)="crud()">{{input_condicion_pago!=null?'Actualizar':'Registrar'}}</button>
         </div>
     </div>

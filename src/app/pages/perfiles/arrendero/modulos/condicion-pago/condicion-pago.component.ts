@@ -190,14 +190,11 @@ export class CondicionPagoComponent implements OnInit {
   }
 
   nuevoCondicionPago(){
-    var obj = null;
-    this.openModal(obj);
+    this.openModal(null);
   }
 
   editarCondicionPago(condicion) {
-    var obj = Object.assign({},condicion);
-    obj.accion = "A";
-    this.openModal(obj);
+    this.openModal(condicion);
   }
 
   eliminarCondicionPago(alumno) {
