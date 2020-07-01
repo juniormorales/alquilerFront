@@ -30,7 +30,11 @@ export class LoginComponent implements OnInit {
     if(this.usuarioForm.valid){
       this.construirObjeto();
       this.loginService.logueate(this.usuarioLogin).subscribe( (token:any)=>{
-        this.loginService.redirigirModulo();
+        this.loginService.verificarInhabilitado(this.usuarioLogin).subscribe((resp:any)=>{
+          if(!resp.obj){
+            this.loginService.redirigirModulo();
+          }
+        })
     })
     }else{
       Swal.fire('ADVERTENCIA','Llene todos los campos antes de continuar','warning');

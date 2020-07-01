@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IArrendatario } from 'src/models/IArrendatario';
 import { ArrendatarioService } from 'src/app/services/apis/arrendatario.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrarse',
@@ -31,6 +32,7 @@ export class RegistrarseClientComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private arrendatarioService: ArrendatarioService,
+    private route: Router
   ) {}
 
   ngOnInit() {
@@ -57,7 +59,7 @@ export class RegistrarseClientComponent implements OnInit {
     if(this.generalForm.valid && this.arrendatarioForm.valid){
       var arrendatario = this.construirObjeto();
       this.arrendatarioService.registrarArrendatario(arrendatario).subscribe((resp:any)=>{
-        Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+        this.redirigirLogin(resp);
       })
     }else{
       Swal.fire('¡INFO!','Complete los campos obligatorios para continuar','info');
@@ -95,5 +97,19 @@ export class RegistrarseClientComponent implements OnInit {
     this.eventsSubject.next();
   }
 
+  private redirigirLogin(resp:any){
+    Swal.fire({
+      title: resp.titulo,
+      text: resp.mensaje,
+      icon: resp.tipo,
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ir al login'
+    }).then((result) => {
+      if (result.value) {
+        this.route.navigate(['/inicio/login']);
+      }
+    })
+  }
 
 }

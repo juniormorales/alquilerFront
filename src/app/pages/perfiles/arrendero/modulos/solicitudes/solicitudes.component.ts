@@ -100,5 +100,5 @@ export class SolicitudesComponent implements OnInit {
   }
 */
 
-Ver(condicion) {}
+  Ver(condicion) {}
 }

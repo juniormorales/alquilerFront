@@ -1,7 +1,7 @@
 export interface IUsuario {
     idUsuario?:number;
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
     email?: string;
     dni?: string;
     nombres?: string;
@@ -12,4 +12,5 @@ export interface IUsuario {
     fechaNacimiento?:Date;
     estado?:boolean;
     perfil?:any;
+    fechaCreacion?:Date;
 }

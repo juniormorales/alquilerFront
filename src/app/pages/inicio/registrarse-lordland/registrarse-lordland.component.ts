@@ -93,7 +93,7 @@ export class RegistrarseLordlandComponent implements OnInit {
     if(this.generalForm.valid && this.arrenderoForm.valid){
       var arrendero = this.construirObjeto();
       this.arrenderoService.registrarArrendero(arrendero).subscribe((resp:any)=>{
-        Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+        this.redirigirLogin(resp);
       })
     }else{
       Swal.fire('¡INFO!','Complete los campos obligatorios para continuar','info');
@@ -183,5 +183,20 @@ export class RegistrarseLordlandComponent implements OnInit {
     this.arrenderoForm.patchValue({provincia:[]})
     this.arrenderoForm.patchValue({distrito:[]})
     this.listarProvincias({"idDepartamento":event.id});
+  }
+
+  private redirigirLogin(resp:any){
+    Swal.fire({
+      title: resp.titulo,
+      text: resp.mensaje,
+      icon: resp.tipo,
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ir al login'
+    }).then((result) => {
+      if (result.value) {
+        this.route.navigate(['/inicio/login']);
+      }
+    })
   }
 }

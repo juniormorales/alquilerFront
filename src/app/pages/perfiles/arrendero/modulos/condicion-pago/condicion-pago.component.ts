@@ -5,8 +5,7 @@ import { ModalCondicionPagoService } from 'src/app/services/common/modal-condici
 @Component({
   selector: 'app-condicion-pago',
   templateUrl: './condicion-pago.component.html',
-  styles: [
-  ]
+  styleUrls: ['./condicion-pago.component.scss']
 })
 export class CondicionPagoComponent implements OnInit {
   

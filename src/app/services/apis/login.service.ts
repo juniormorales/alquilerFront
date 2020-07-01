@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { IUsuario } from 'src/models/IUsuario';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,7 +21,20 @@ export class LoginService {
 		private router: Router,
 	) { }
 
-	public logueate(usuario) {
+	public verificarInhabilitado(usuario:IUsuario){
+		this.spinner.show();
+		return this.http.post(environment.urlApiRest + 'usuario/verificarInhabilitado',usuario).pipe(
+			map( (resp:any)=>{
+				if(resp.obj){
+					Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+				}
+				return resp;
+			}),
+			catchError((err: HttpErrorResponse) => this.errorHanlder(err))
+		);
+	}
+
+	public logueate(usuario:IUsuario) {
 		this.spinner.show();
 		let url = environment.urlBack + 'oauth/token';
 		const credenciales = btoa('alquiler:alquilerPass');
@@ -35,7 +49,6 @@ export class LoginService {
 		params.set('password', usuario.password);
 		return this.http.post(url, params.toString(), { headers: httpHeaders }).pipe(
 			map((token: any) => {
-
 				sessionStorage.setItem('sesion', token.access_token);
 				this.spinner.hide();
 				return token;
@@ -47,7 +60,7 @@ export class LoginService {
 	public redirigirModulo() {
 		const token = this.helper.decodeToken(sessionStorage.getItem('sesion'));
 		switch (token.nombre_perfil) {
-			case "ADMINISTRADOR": this.router.navigateByUrl('/administracion/dashboard'); break;
+			case "ADMINISTRADOR": this.router.navigateByUrl('/administracion/cuentas'); break;
 			case 'ARRENDERO': this.router.navigateByUrl('/arrendero/dashboard'); break;
 			case 'ARRENDATARIO': this.router.navigateByUrl('/arrendatario/buscar'); break;
 		}
