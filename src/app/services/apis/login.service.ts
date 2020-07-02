@@ -21,12 +21,12 @@ export class LoginService {
 		private router: Router,
 	) { }
 
-	public verificarInhabilitado(usuario:IUsuario){
+	public verificarInhabilitado(usuario: IUsuario) {
 		this.spinner.show();
-		return this.http.post(environment.urlApiRest + 'usuario/verificarInhabilitado',usuario).pipe(
-			map( (resp:any)=>{
-				if(resp.obj){
-					Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+		return this.http.post(environment.urlApiRest + 'usuario/verificarInhabilitado', usuario).pipe(
+			map((resp: any) => {
+				if (resp.obj) {
+					Swal.fire(resp.titulo, resp.mensaje, resp.tipo);
 				}
 				return resp;
 			}),
@@ -34,7 +34,7 @@ export class LoginService {
 		);
 	}
 
-	public logueate(usuario:IUsuario) {
+	public logueate(usuario: IUsuario) {
 		this.spinner.show();
 		let url = environment.urlBack + 'oauth/token';
 		const credenciales = btoa('alquiler:alquilerPass');
@@ -58,12 +58,46 @@ export class LoginService {
 	}
 
 	public redirigirModulo() {
+		this.spinner.show();
 		const token = this.helper.decodeToken(sessionStorage.getItem('sesion'));
 		switch (token.nombre_perfil) {
-			case "ADMINISTRADOR": this.router.navigateByUrl('/administracion/cuentas'); break;
-			case 'ARRENDERO': this.router.navigateByUrl('/arrendero/dashboard'); break;
-			case 'ARRENDATARIO': this.router.navigateByUrl('/arrendatario/buscar'); break;
+			case "ADMINISTRADOR":
+				this.spinner.hide();
+				this.router.navigateByUrl('/administracion/cuentas');
+				break;
+			case 'ARRENDERO':
+				this.guardarDatosArrendero(token.id_usuario).subscribe((resp: any) => {
+					sessionStorage.setItem('id',resp.obj.idArrendero);
+					this.router.navigateByUrl('/arrendero/dashboard');
+				});
+				break;
+			case 'ARRENDATARIO':
+				this.guardarDatosArrendatario(token.id_usuario).subscribe((resp: any) => {
+					sessionStorage.setItem('id',resp.obj.idArrendatario);
+					this.router.navigateByUrl('/arrendatario/buscar');
+				});
+				break;
 		}
+	}
+
+	private guardarDatosArrendero(id: number) {
+		return this.http.post(environment.urlApiRest + 'usuario/retornarArrendero', { idUsuario: id }).pipe(
+			map((obj: any) => {
+				this.spinner.hide();
+				return obj;
+			}),
+			catchError((err: HttpErrorResponse) => this.errorHanlder(err))
+		);
+	}
+
+	private guardarDatosArrendatario(id: number) {
+		return this.http.post(environment.urlApiRest + 'usuario/retornarArrendatario', { idUsuario: id }).pipe(
+			map((obj: any) => {
+				this.spinner.hide();
+				return obj;
+			}),
+			catchError((err: HttpErrorResponse) => this.errorHanlder(err))
+		);
 	}
 
 	public logOut() {
@@ -72,6 +106,8 @@ export class LoginService {
 		if (body.classList.contains("white-content")) {
 			body.classList.remove("white-content");
 		}
+		environment.idArrendatario = 0;
+		environment.idArrendero = 0;
 		this.router.navigateByUrl('/inicio');
 	}
 
@@ -83,10 +119,10 @@ export class LoginService {
 
 	private errorHanlder(err: HttpErrorResponse) {
 		this.spinner.hide();
-		if(err.status==0){
-			Swal.fire('ERROR',environment.msg_servicio_no_disponible,'error');
-		}else{
-			Swal.fire('ERROR', err.error.error_description,'error');
+		if (err.status == 0) {
+			Swal.fire('ERROR', environment.msg_servicio_no_disponible, 'error');
+		} else {
+			Swal.fire('ERROR', err.error.error_description, 'error');
 		}
 		return Observable.throw(err);
 	}

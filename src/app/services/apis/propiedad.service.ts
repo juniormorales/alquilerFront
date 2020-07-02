@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { IPropiedad } from 'src/models/IPropiedad';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,20 @@ export class PropiedadService {
     private spinner: NgxSpinnerService
   ) { }
 
-  registrarPropiedad(propiedad) {
+  registrarPropiedad(propiedad: IPropiedad) {
     this.spinner.show();
     return this.http.post(environment.urlApiRest + 'propiedad/registrar', propiedad).pipe(
+      map(obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+    );
+  }
+
+  modificarPropiedad(propiedad: IPropiedad) {
+    this.spinner.show();
+    return this.http.put(environment.urlApiRest + 'propiedad/modificar', propiedad).pipe(
       map(obj => {
         this.spinner.hide();
         return obj;

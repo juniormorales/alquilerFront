@@ -9,7 +9,9 @@ export const environment = {
   urlOauth: 'http://localhost:2000/oauth/token',
   urlApiRest: 'http://localhost:2000/api/',
   urlPublicRest: 'http://localhost:2000/public/',
-  msg_servicio_no_disponible: 'Servicio no disponible, intentelo más tarde nuevamente.'
+  msg_servicio_no_disponible: 'Servicio no disponible, intentelo más tarde nuevamente.',
+  idArrendero:0,
+  idArrendatario:0
 
 };
 

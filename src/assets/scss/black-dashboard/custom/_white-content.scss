@@ -1,6 +1,10 @@
 .white-content {
   background: $light-bg;
 
+  ngx-datatable.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell{
+    color: $black;
+  }
+
   .navbar.navbar-transparent .navbar-brand {
     color: $black-states;
   }

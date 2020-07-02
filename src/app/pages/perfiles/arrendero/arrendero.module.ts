@@ -34,6 +34,9 @@ import { AgregarImagenComponent } from './modulos/mis-propiedades/modals/agregar
 import { EliminarImagenComponent } from './modulos/mis-propiedades/modals/eliminar-imagen/eliminar-imagen.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ReactiveFormsModule } from '@angular/forms';
+import { VerDetalleSolicitudComponent } from './modulos/solicitudes/ver-detalle-solicitud/ver-detalle-solicitud.component';
+import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 
 @NgModule({
@@ -54,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditarEstadoPropiedadComponent,
     AgregarImagenComponent,
     EliminarImagenComponent,
+    VerDetalleSolicitudComponent,
   ],
   imports: [
     CommonModule,
@@ -64,11 +68,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxDatatableModule,
     ModalModule.forRoot(),
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularMultiSelectModule,
   ],
   providers:[
     ModalPropiedadService,
-    ModalCondicionPagoService
+    ModalCondicionPagoService,
+    ModalVerDetalleSolService,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

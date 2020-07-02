@@ -17,11 +17,12 @@ export class MisPropiedadesComponent implements OnInit {
   idArrendero: number;
 
   constructor(
-    private propiedadService : PropiedadService,
+    private propiedadService: PropiedadService,
     private modalService: ModalPropiedadService,
   ) { }
 
   ngOnInit() {
+    this.idArrendero = Number.parseFloat(sessionStorage.getItem('id'));
     this.listarPropiedades();
   }
 
@@ -41,141 +42,18 @@ export class MisPropiedadesComponent implements OnInit {
 
 
   //WEB SERVICES
-  listarPropiedades() {/*
+  listarPropiedades() {
+
     this.propiedadService.listarPropiedades(this.idArrendero).subscribe((resp: any) => {
-    this.lsCondicionPago = resp.aaData;
-    this.llenarTabla();
-  });*/
-    this.lsPropiedad = [
-      {
-        idPropiedad: 5,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 3,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 2,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 1,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 1,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 0,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 3,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 2,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      {
-        idPropiedad: 1,
-        alias: 'Casa de verano Las Lomas',
-        fechaRegistro: new Date(),
-        descripcionGeneral: 'Esta es una descripcion',
-        descripcionDanios: 'No hay registro de daños',
-        nroHabitaciones: 5,
-        cantidadPisos: 2,
-        tamano: 200,
-        permiteMascotas: true,
-        estado: 1,
-        condicionPago:{
-          precio: 250
-        }
-      },
-      
-      
-    ]
-    this.llenarTabla();
+      this.lsPropiedad = resp.aaData;
+      this.llenarTabla();
+    });
+
   }
 
   filterTable(event) {
     let val = event.target.value;
-    this.temp = this.lsPropiedad.filter( propiedad => {
+    this.temp = this.lsPropiedad.filter(propiedad => {
       return propiedad.alias.toLocaleLowerCase().indexOf(val.toLocaleLowerCase()) > -1
     })
   }
@@ -183,24 +61,24 @@ export class MisPropiedadesComponent implements OnInit {
 
   //Modal
   private openModal(obj) {
-    this.modalService.modalUIPropiedad(obj).subscribe(resp => {}, err => {}, () => {
+    this.modalService.modalUIPropiedad(obj).subscribe(resp => { }, err => { }, () => {
       this.listarPropiedades();
     });
   }
 
-  nuevaPropiedad(){
+  nuevaPropiedad() {
     var obj = null;
     this.openModal(obj);
   }
 
   editarPropiedad(propiedad) {
-    var obj = Object.assign({},propiedad);
+    var obj = Object.assign({}, propiedad);
     obj.accion = "A";
     this.openModal(obj);
   }
 
-  editarEstadoPropiedad(propiedad){
-    this.modalService.modalEditarEstadoPropiedad(propiedad).subscribe(resp => {}, err => {}, () => {
+  editarEstadoPropiedad(propiedad) {
+    this.modalService.modalEditarEstadoPropiedad(propiedad).subscribe(resp => { }, err => { }, () => {
       this.listarPropiedades();
     });
   }
@@ -209,14 +87,14 @@ export class MisPropiedadesComponent implements OnInit {
 
   }
 
-  subirImagen(propiedad){
-    this.modalService.modalSubirImagen(propiedad).subscribe(resp => {}, err => {}, () => {
+  subirImagen(propiedad) {
+    this.modalService.modalSubirImagen(propiedad).subscribe(resp => { }, err => { }, () => {
       this.listarPropiedades();
     });
   }
 
-  eliminarImagenes(propiedad){
-    this.modalService.modalEliminarImagen(propiedad).subscribe(resp => {}, err => {}, () => {
+  eliminarImagenes(propiedad) {
+    this.modalService.modalEliminarImagen(propiedad).subscribe(resp => { }, err => { }, () => {
       this.listarPropiedades();
     });
   }

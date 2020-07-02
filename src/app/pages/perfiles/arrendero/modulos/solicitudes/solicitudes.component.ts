@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
+import Swal from 'sweetalert2';
+import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
 
 @Component({
   selector: 'app-solicitudes',
-  templateUrl: './solicitudes.component.html',
-  styles: [
-  ]
+  templateUrl: './solicitudes.component.html'
 })
 export class SolicitudesComponent implements OnInit {
 
@@ -12,9 +13,11 @@ export class SolicitudesComponent implements OnInit {
   entries: number = 5;
   temp = [];
 
-  solicitantes: any[] = [];
+  solicitudes: ISolicitudPropiedad[] = [];
 
-  constructor() { }
+  constructor(
+    private modalService : ModalVerDetalleSolService,
+  ) { }
 
   ngOnInit(): void {
     this.listarSolicitantes();
@@ -23,7 +26,7 @@ export class SolicitudesComponent implements OnInit {
 
   //Metodos Para NgxTable
   llenarTabla() {
-    this.temp = this.solicitantes.map((prop, key) => {
+    this.temp = this.solicitudes.map((prop, key) => {
       return {
         ...prop,
         id: key
@@ -34,48 +37,60 @@ export class SolicitudesComponent implements OnInit {
 
    listarSolicitantes() {
   
-    this.solicitantes = [
+    this.solicitudes= [
       {
-        fecha: '28/06/2020',
-        solicitante: 'Juan Hairo',
-        propiedad: 1818,
-        estado: 'desocupado',
-       
+        idSolicitudPropiedad: 1,
+        fechaSolicitud: new Date(),
+        nroHuespedPropuesto: 10,
+        estado: 2,
+        tiempoArrendamiento: 12,
+        arrendatario: {
+          idArrendatario:1,
+          usuario:{
+            apellidos: 'Morales Brenis',
+            dni: '73058001',
+            nombres: 'Junior Angel',
+          }
+        },
+        propiedad: {
+          alias: 'Casa de Playa San Borja'
+        }
       },
       {
-        fecha:'29/06/2020',
-        solicitante: 'Juan Miguel',
-        propiedad: 1818,
-        estado: 'desocupado',
-       
+        idSolicitudPropiedad: 1,
+        fechaSolicitud: new Date(),
+        nroHuespedPropuesto: 10,
+        estado: 2,
+        tiempoArrendamiento: 12,
+        arrendatario: {
+          idArrendatario:1,
+          usuario:{
+            apellidos: 'Morales Brenis',
+            dni: '73058001',
+            nombres: 'Junior Angel',
+          }
+        },
+        propiedad: {
+          alias: 'Casa de Playa San Borja'
+        }
       },
       {
-        fecha: '28/06/2020',
-        solicitante: 'Luis Miguel',
-        propiedad: 1819,
-        estado: 'contrato',
-       
-      },
-      {
-        fecha:'29/06/2020',
-        solicitante: 'Jhon Lenon',
-        propiedad: 1820,
-        estado: 'desocupado',
-       
-      },
-      {
-        fecha: '28/06/2020',
-        solicitante: 'Britny Spyers',
-        propiedad: 1820,
-        estado: 'desocupado',
-       
-      },
-      {
-        fecha:'29/06/2020',
-        solicitante: 'Luis Garcia',
-        propiedad: 1821,
-        estado: 'desocupado',
-       
+        idSolicitudPropiedad: 1,
+        fechaSolicitud: new Date(),
+        nroHuespedPropuesto: 10,
+        estado: 2,
+        tiempoArrendamiento: 12,
+        arrendatario: {
+          idArrendatario:1,
+          usuario:{
+            apellidos: 'Morales Brenis',
+            dni: '73058001',
+            nombres: 'Junior Angel',
+          }
+        },
+        propiedad: {
+          alias: 'Casa de Playa San Borja'
+        }
       }
     ];
       this.llenarTabla();
@@ -84,21 +99,56 @@ export class SolicitudesComponent implements OnInit {
   entriesChange($event) {
     this.entries = $event.target.value;
   }
-/*
-   //Modal
-   private openModal(obj) {
-    this.modalService.modalNuevoCondicionPago(obj).subscribe(resp => {}, err => {}, () => {
-      this.listarCondicionPago();
+
+
+  verDetalles(solicitud:ISolicitudPropiedad) {
+    this.modalService.modalVerDetalleSolicitante(solicitud).subscribe(resp => {}, err => {}, () => {
     });
   }
 
-
-  Ver(condicion) {
-    var obj = Object.assign({},condicion);
-    obj.accion = "A";
-    this.openModal(obj);
+  aceptarSolicitud(solicitud){
+    Swal.fire({
+      title: 'Aceptar Solicitud Inquilino',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: 'question',
+      text: 'Una vez que acepte, le llegara la notificacion al inquilino para que confirme la aprobacion',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar inquilino',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+       
+      }
+    })
   }
-*/
 
-  Ver(condicion) {}
+  rechazarSolicitud(solicitud){
+    Swal.fire({
+      title: 'Rechazar Solicitud Inquilino',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: 'question',
+      text: 'Este proceso es irreversible, estas seguro?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Rechazar solicitud',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+       
+      }
+    })
+  }
 }

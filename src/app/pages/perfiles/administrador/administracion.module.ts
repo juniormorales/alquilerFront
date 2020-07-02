@@ -18,7 +18,8 @@ import {  NgxDatatableModule } from '@swimlane/ngx-datatable';
     AdministracionComponent,
     DashboardAdminComponent,
     GestionCuentasComponent,
-    SolicitudesPendientesComponent
+    SolicitudesPendientesComponent,
+    
   ],
   imports: [
     CommonModule,
