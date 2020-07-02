@@ -27,7 +27,7 @@
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
         </div>
         <div class="row p-3">
-            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="save()">Guardar Cambios</button>
+            <button [disabled]="!eliminado" type="button" class="btn btn-primary  btn-lg btn-block" (click)="save()">Guardar Cambios</button>
         </div>
     </div>
 </div>

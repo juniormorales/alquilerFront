@@ -106,8 +106,6 @@ export class LoginService {
 		if (body.classList.contains("white-content")) {
 			body.classList.remove("white-content");
 		}
-		environment.idArrendatario = 0;
-		environment.idArrendero = 0;
 		this.router.navigateByUrl('/inicio');
 	}
 

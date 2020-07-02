@@ -9,6 +9,12 @@
     <div class="card-body">
         <form [formGroup]="condicionForm">
             <div class="row">
+                <div class="col-12">
+                    <label> Alias (Para identificar) </label>
+                    <div class=" form-group">
+                        <input class="form-control" type="text" formControlName="alias"/>
+                    </div>
+                </div>
                 <div class="col-6">
                     <label> Precio </label>
                     <div class=" form-group">

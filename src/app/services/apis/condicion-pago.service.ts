@@ -40,9 +40,20 @@ export class CondicionPagoService {
     );
   }
 
-  listarCondicionPago(idArrendatario: number){
+  eliminarCondicionPago(idCondicion : number){
     this.spinner.show();
-    return this.http.get( environment.urlApiRest + 'condicion-pago/listar/'+idArrendatario).pipe(
+    return this.http.delete( environment.urlApiRest + 'condicion-pago/eliminar/'+idCondicion).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
+  listarCondicionPago(idArrendero: number){
+    this.spinner.show();
+    return this.http.get( environment.urlApiRest + 'condicion-pago/listar/'+idArrendero).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;

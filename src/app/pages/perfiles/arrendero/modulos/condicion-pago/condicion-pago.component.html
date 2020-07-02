@@ -37,9 +37,12 @@
                                 [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
                                 [limit]="entries != -1 ? entries : undefined" [rows]="temp" [scrollbarH]="true"
                                 [virtualization]="false">
-                                <ngx-datatable-column name="N°" [width]="30">
-                                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                                        <strong>{{ rowIndex }}</strong>
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
+                                        <span>Alias</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.alias}}
                                     </ng-template>
                                 </ngx-datatable-column>
                                 <ngx-datatable-column>

@@ -39,7 +39,8 @@ export class IUCondicionPagoComponent implements OnInit {
       garantia_min: [0,[Validators.required]],
       garantia_max: [0,[Validators.required]],
       tasa:[0.0,[Validators.required]],
-      responsabilidad: [false,[Validators.required]]
+      responsabilidad: [false,[Validators.required]],
+      alias: ['',Validators.required]
     });
   }
 
@@ -51,7 +52,8 @@ export class IUCondicionPagoComponent implements OnInit {
       garantia_min: this.input_condicion_pago.montoMinGarantia,
       garantia_max: this.input_condicion_pago.montoMaxGarantia,
       tasa: this.input_condicion_pago.tasaRecargo,
-      responsabilidad: this.input_condicion_pago.responsabilidadReparar
+      responsabilidad: this.input_condicion_pago.responsabilidadReparar,
+      alias: this.input_condicion_pago.alias
     });
   }
 
@@ -63,7 +65,11 @@ export class IUCondicionPagoComponent implements OnInit {
       precio: this.condicionForm.get('precio').value,
       responsabilidadReparar: this.condicionForm.get('responsabilidad').value,
       tasaRecargo: this.condicionForm.get('tasa').value,
-      tiempoMinContrato: this.condicionForm.get('tiempo_contrato').value
+      tiempoMinContrato: this.condicionForm.get('tiempo_contrato').value,
+      alias: this.condicionForm.get('alias').value,
+      arrendero:{
+        idArrendero: Number.parseInt(sessionStorage.getItem('id'))
+      }
     }
     return condicion;
   }
@@ -78,9 +84,9 @@ export class IUCondicionPagoComponent implements OnInit {
   public crud() {
     if(this.condicionForm.valid){
       var condicion = this.armarObjeto();
-      if(this.accion!=null){
+      if(this.accion==null){
         this.condicionPagoService.registrarCondicionPago(condicion).subscribe((resp:any)=>{
-          Swal.fire(resp.titutlo,resp.mensaje,resp.tipo);
+          Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
           this.bsModalRef.hide();
         });
       }else{

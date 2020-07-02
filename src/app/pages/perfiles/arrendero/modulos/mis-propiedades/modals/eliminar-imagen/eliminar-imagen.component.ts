@@ -14,6 +14,7 @@ export class EliminarImagenComponent implements OnInit {
 
   input_propiedad: IPropiedad;
   lsImagenes: any[] = [];
+  eliminado: boolean = false;
 
   lsIds = {
     "lsIds":  []
@@ -46,6 +47,7 @@ export class EliminarImagenComponent implements OnInit {
   }
 
   eliminarFoto(imagen){
+    this.eliminado = true;
     this.lsImagenes.forEach( img => {
       if(img.obj.nombreFoto == imagen.obj.nombreFoto){
         this.lsIds.lsIds.push(img.obj.idImagenPropiedad)

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CondicionPagoService } from 'src/app/services/apis/condicion-pago.service';
 import { ModalCondicionPagoService } from 'src/app/services/common/modal-condicion-pago.service';
+import { ICondicionPago } from 'src/models/ICondicionPago';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-condicion-pago',
@@ -14,7 +16,7 @@ export class CondicionPagoComponent implements OnInit {
   entries: number = 5;
   temp = [];
 
-  lsCondicionPago: any[] = [];
+  lsCondicionPago: ICondicionPago[] = [];
   idArrendero: number;
 
   constructor(
@@ -23,6 +25,7 @@ export class CondicionPagoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.idArrendero = Number.parseInt(sessionStorage.getItem('id'));
     this.listarCondicionPago();
   }
 
@@ -43,141 +46,10 @@ export class CondicionPagoComponent implements OnInit {
 
   //WEB SERVICES
   listarCondicionPago() {
-    /*this.condicionPagoService.listarCondicionPago(this.idArrendero).subscribe((resp: any) => {
+    this.condicionPagoService.listarCondicionPago(this.idArrendero).subscribe((resp: any) => {
     this.lsCondicionPago = resp.aaData;
     this.llenarTabla();
-  });*/
-    this.lsCondicionPago = [
-      {
-        idCondicionPago: 1,
-        precio: 250,
-        tiempoMinContrato: 6,
-        montoMinGarantia: 400,
-        montoMaxGarantia: 2000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.2
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      }, {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      }, {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      },
-      {
-        idCondicionPago: 2,
-        precio: 550,
-        tiempoMinContrato: 12,
-        montoMinGarantia: 800,
-        montoMaxGarantia: 10000,
-        diaMesCobro: 15,
-        responsabilidadReparar: false,
-        tasaRecargo: 0.5
-      }
-    ];
-    this.llenarTabla();
+  });
   }
 
 
@@ -196,8 +68,30 @@ export class CondicionPagoComponent implements OnInit {
     this.openModal(condicion);
   }
 
-  eliminarCondicionPago(alumno) {
-
+  eliminarCondicionPago(condicion: ICondicionPago) {
+    Swal.fire({
+      title: 'Eliminar Condicion de Pago',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: 'question',
+      text: '¿Estas seguro de eliminar?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        this.condicionPagoService.eliminarCondicionPago(condicion.idCondicionPago).subscribe((resp:any)=>{
+          Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+          this.listarCondicionPago();
+        })
+      }
+    })
   }
 
 }

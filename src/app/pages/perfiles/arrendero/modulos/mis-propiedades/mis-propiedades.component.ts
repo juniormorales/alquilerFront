@@ -67,14 +67,11 @@ export class MisPropiedadesComponent implements OnInit {
   }
 
   nuevaPropiedad() {
-    var obj = null;
-    this.openModal(obj);
+    this.openModal(null);
   }
 
   editarPropiedad(propiedad) {
-    var obj = Object.assign({}, propiedad);
-    obj.accion = "A";
-    this.openModal(obj);
+    this.openModal(propiedad);
   }
 
   editarEstadoPropiedad(propiedad) {
