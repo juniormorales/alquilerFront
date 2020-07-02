@@ -7,27 +7,39 @@
         <h6 class="card-title text-center">Imagenes</h6>
     </div>
     <div class="body">
-        <div *ngFor="let img of lsImagenes | paginate: { itemsPerPage: 3, currentPage: p }">
-
-            <div class="card">
-                <div class="card-body">
-                   <div class="row justify-content-center pl-4 pr-4">
-                    <img [src]="img.foto" [alt]="img.obj.nombreFoto" height="360">
-                   </div>
+        <div class="row justify-content-center mt-3">  
+            <div *ngFor="let img of lsImagenes | paginate: { itemsPerPage: 3, currentPage: p }">
+               <div class="col-4">
+                <div class="card" style="width: 15rem;">
+                    <img class="card-img-top" [src]="img.foto" [alt]="img.obj.nombreFoto" height="180"> 
+                    <div class="card-body">
+                        <button type="button" class="btn btn-danger  btn-lg btn-block"
+                            (click)="eliminarFoto(img)">Eliminar</button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-danger  btn-lg btn-block" (click)="eliminarFoto(img)">Eliminar</button>
-                </div>
+               </div>
             </div>
-
         </div>
     </div>
-    <div class="card-footer">
+    <div class="card-footer">   
         <div class="row justify-content-center">
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            <div *ngIf="lsImagenes.length>0; else noitems">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </div>
+              <ng-template #noitems>
+                <div *ngIf="!eliminado">
+                    <alert class="" data-notify="container" [type]="'info alert-with-icon'">
+                        <span class=" tim-icons icon-upload" data-notify="icon"> </span>
+                        <span data-notify="message">
+                          ¡No hay imagenes para esta propiedad actualmente!. Ingrese algunas en la opcion de añadir.
+                        </span>
+                      </alert>
+                  </div>
+              </ng-template>
         </div>
         <div class="row p-3">
-            <button [disabled]="!eliminado" type="button" class="btn btn-primary  btn-lg btn-block" (click)="save()">Guardar Cambios</button>
+            <button [disabled]="!eliminado" type="button" class="btn btn-primary  btn-lg btn-block"
+                (click)="save()">Guardar Cambios</button>
         </div>
     </div>
 </div>

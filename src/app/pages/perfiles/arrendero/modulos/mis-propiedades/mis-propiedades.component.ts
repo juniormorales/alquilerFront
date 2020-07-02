@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PropiedadService } from 'src/app/services/apis/propiedad.service';
 import { IPropiedad } from 'src/models/IPropiedad';
 import { ModalPropiedadService } from 'src/app/services/common/modal-propiedad.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mis-propiedades',
@@ -80,8 +81,30 @@ export class MisPropiedadesComponent implements OnInit {
     });
   }
 
-  eliminarPropiedad(propiedad) {
-
+  eliminarPropiedad(propiedad: IPropiedad) {
+    Swal.fire({
+      title: 'Eliminar Propiedad',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      icon: 'question',
+      text: '¿Estas seguro de eliminar esta Propiedad? Este proceso es irreversible',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        this.propiedadService.eliminarPropiedad(propiedad.idPropiedad).subscribe((resp:any)=>{
+          Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+          this.listarPropiedades();
+        })
+      }
+    })
   }
 
   subirImagen(propiedad) {

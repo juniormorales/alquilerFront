@@ -7,8 +7,6 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-eliminar-imagen',
   templateUrl: './eliminar-imagen.component.html',
-  styles: [
-  ]
 })
 export class EliminarImagenComponent implements OnInit {
 

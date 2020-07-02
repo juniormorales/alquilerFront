@@ -37,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VerDetalleSolicitudComponent } from './modulos/solicitudes/ver-detalle-solicitud/ver-detalle-solicitud.component';
 import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { AlertModule } from "ngx-bootstrap/alert";
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
     NgxSpinnerModule,
     NgxDatatableModule,
     ModalModule.forRoot(),
+    AlertModule.forRoot(),
     NgxPaginationModule,
     ReactiveFormsModule,
     AngularMultiSelectModule,

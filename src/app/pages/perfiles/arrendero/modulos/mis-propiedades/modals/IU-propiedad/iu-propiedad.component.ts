@@ -59,11 +59,12 @@ export class IUPropiedadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.construirFormulario();
     this.idArrendero = Number.parseInt(sessionStorage.getItem('id'));
     if (this.input_propiedad != null) {
       this.accion = "A";
+      this.setearValores();
     }
-    this.construirFormulario();
     this.listarCondicionesPago();
   }
 
@@ -89,6 +90,24 @@ export class IUPropiedadComponent implements OnInit {
         this.propiedadForm.get('descripcion_dano').disable();
       }
     })
+  }
+
+  private setearValores(){
+    this.propiedadForm.setValue({
+      alias: this.input_propiedad.alias,
+      descripcion_ge: this.input_propiedad.descripcionGeneral,
+      nro_hab: this.input_propiedad.nroHabitaciones,
+      cant_pisos: this.input_propiedad.cantidadPisos,
+      tamano: this.input_propiedad.tamano,
+      estado: [{id:this.input_propiedad.estado, itemName:this.dataEstado[this.input_propiedad.estado].itemName}],
+      tiene_dano: this.input_propiedad.tieneDanios,
+      mascota: this.input_propiedad.permiteMascotas,
+      condicion_pago: [{id:this.input_propiedad.condicionPago.idCondicionPago,itemName:this.input_propiedad.condicionPago.alias}],
+      descripcion_dano: this.input_propiedad.descripcionDanios
+    });
+    if(this.input_propiedad.tieneDanios){
+      this.propiedadForm.get('descripcion_dano').enable();
+    }
   }
 
   private construirObjeto() {
@@ -130,6 +149,7 @@ export class IUPropiedadComponent implements OnInit {
         });
       } else {
         propiedad.idPropiedad = this.input_propiedad.idPropiedad;
+        propiedad.fechaRegistro = this.input_propiedad.fechaRegistro;
         this.propiedadService.modificarPropiedad(propiedad).subscribe((resp: any) => {
           Swal.fire(resp.titutlo, resp.mensaje, resp.tipo);
           this.bsModalRef.hide();

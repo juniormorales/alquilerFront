@@ -38,6 +38,17 @@ export class PropiedadService {
     );
   }
 
+  eliminarPropiedad(idPropiedad: number) {
+    this.spinner.show();
+    return this.http.delete(environment.urlApiRest + 'propiedad/eliminar/'+idPropiedad).pipe(
+      map(obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+    );
+  }
+
   listarPropiedades(idArrendatario: number) {
     this.spinner.show();
     return this.http.get(environment.urlApiRest + 'propiedad/listar/' + idArrendatario).pipe(
