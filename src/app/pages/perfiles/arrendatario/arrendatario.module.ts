@@ -12,6 +12,8 @@ import { PagosPorVencerComponent } from './modulos/pagos-por-vencer/pagos-por-ve
 import { DeudasPendientesComponent } from './modulos/deudas-pendientes/deudas-pendientes.component';
 import { RecordPagosComponent } from './modulos/record-pagos/record-pagos.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -31,7 +33,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ArrendatarioRoutingModule,
     SharedModule,
     NgxSpinnerModule,
+    NgxDatatableModule,
     CollapseModule.forRoot(),
+    ReactiveFormsModule,
     
   ],
   schemas:[

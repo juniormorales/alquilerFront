@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
 import Swal from 'sweetalert2';
 import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
+import { SolicitudPropiedadService } from 'src/app/services/apis/solicitud-propiedad.service';
 
 @Component({
   selector: 'app-solicitudes',
@@ -12,14 +13,17 @@ export class SolicitudesComponent implements OnInit {
   //Variables NgxTable
   entries: number = 5;
   temp = [];
-
+  idArrendero: number;
   solicitudes: ISolicitudPropiedad[] = [];
+  
 
   constructor(
     private modalService : ModalVerDetalleSolService,
+    private solPropiedad: SolicitudPropiedadService,
   ) { }
 
   ngOnInit(): void {
+    this.idArrendero = Number.parseInt(sessionStorage.getItem('id'));
     this.listarSolicitantes();
   }
 
@@ -36,65 +40,11 @@ export class SolicitudesComponent implements OnInit {
   }
 
    listarSolicitantes() {
-  
-    this.solicitudes= [
-      {
-        idSolicitudPropiedad: 1,
-        fechaSolicitud: new Date(),
-        nroHuespedPropuesto: 10,
-        estado: 2,
-        tiempoArrendamiento: 12,
-        arrendatario: {
-          idArrendatario:1,
-          usuario:{
-            apellidos: 'Morales Brenis',
-            dni: '73058001',
-            nombres: 'Junior Angel',
-          }
-        },
-        propiedad: {
-          alias: 'Casa de Playa San Borja'
-        }
-      },
-      {
-        idSolicitudPropiedad: 1,
-        fechaSolicitud: new Date(),
-        nroHuespedPropuesto: 10,
-        estado: 2,
-        tiempoArrendamiento: 12,
-        arrendatario: {
-          idArrendatario:1,
-          usuario:{
-            apellidos: 'Morales Brenis',
-            dni: '73058001',
-            nombres: 'Junior Angel',
-          }
-        },
-        propiedad: {
-          alias: 'Casa de Playa San Borja'
-        }
-      },
-      {
-        idSolicitudPropiedad: 1,
-        fechaSolicitud: new Date(),
-        nroHuespedPropuesto: 10,
-        estado: 2,
-        tiempoArrendamiento: 12,
-        arrendatario: {
-          idArrendatario:1,
-          usuario:{
-            apellidos: 'Morales Brenis',
-            dni: '73058001',
-            nombres: 'Junior Angel',
-          }
-        },
-        propiedad: {
-          alias: 'Casa de Playa San Borja'
-        }
-      }
-    ];
+    this.solPropiedad.listarSolicitudesEnTramiteParaArrendero(this.idArrendero).subscribe((resp:any)=>{
+      this.solicitudes = resp.aaData;
       this.llenarTabla();
-    }
+    })
+  }
 
   entriesChange($event) {
     this.entries = $event.target.value;

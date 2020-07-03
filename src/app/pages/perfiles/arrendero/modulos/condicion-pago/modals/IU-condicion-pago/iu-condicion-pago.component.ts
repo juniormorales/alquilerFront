@@ -92,7 +92,7 @@ export class IUCondicionPagoComponent implements OnInit {
       }else{
         condicion.idCondicionPago = this.input_condicion_pago.idCondicionPago;
         this.condicionPagoService.modificarCondicionPago(condicion).subscribe((resp:any)=>{
-          Swal.fire(resp.titutlo,resp.mensaje,resp.tipo);
+          Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
           this.bsModalRef.hide();
         });
       }

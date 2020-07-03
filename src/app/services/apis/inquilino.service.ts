@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
+import { IInquilino } from 'src/models/IInquilino';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SolicitudPropiedadService {
+export class InquilinoService {
 
   constructor(
     private http: HttpClient,
@@ -17,9 +18,9 @@ export class SolicitudPropiedadService {
   ) { }
 
 
-  listarSolicitudesEnTramiteParaArrendero(idArrendero: number){
+  listarInquilinos(idArrendero: number){
     this.spinner.show();
-    return this.http.get( environment.urlApiRest + 'sol-prop/listarParaArrendero/'+idArrendero).pipe(
+    return this.http.get( environment.urlApiRest + 'inquilino/listar/'+idArrendero).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;
@@ -28,9 +29,9 @@ export class SolicitudPropiedadService {
     );
   }
 
-  listarSolicitudesParaArrendatario(idArrendatario: number){
+  darBajaInquilino(inquilino: IInquilino){
     this.spinner.show();
-    return this.http.get( environment.urlApiRest + 'sol-prop/listarParaArrendatario/'+idArrendatario).pipe(
+    return this.http.post( environment.urlApiRest + 'inquilino/darBaja',inquilino).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;

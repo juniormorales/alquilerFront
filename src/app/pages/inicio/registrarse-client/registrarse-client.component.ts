@@ -59,7 +59,11 @@ export class RegistrarseClientComponent implements OnInit {
     if(this.generalForm.valid && this.arrendatarioForm.valid){
       var arrendatario = this.construirObjeto();
       this.arrendatarioService.registrarArrendatario(arrendatario).subscribe((resp:any)=>{
-        this.redirigirLogin(resp);
+        if(resp.estado){
+          this.redirigirLogin(resp);
+        }else{
+          Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+        }
       })
     }else{
       Swal.fire('¡INFO!','Complete los campos obligatorios para continuar','info');

@@ -93,8 +93,12 @@ export class RegistrarseLordlandComponent implements OnInit {
     if(this.generalForm.valid && this.arrenderoForm.valid){
       var arrendero = this.construirObjeto();
       this.arrenderoService.registrarArrendero(arrendero).subscribe((resp:any)=>{
-        this.redirigirLogin(resp);
-      })
+        if(resp.estado){
+          this.redirigirLogin(resp);
+        }else{
+          Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+        }
+      });
     }else{
       Swal.fire('¡INFO!','Complete los campos obligatorios para continuar','info');
     }
