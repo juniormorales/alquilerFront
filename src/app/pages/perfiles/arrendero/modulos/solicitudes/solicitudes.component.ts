@@ -56,7 +56,7 @@ export class SolicitudesComponent implements OnInit {
     });
   }
 
-  aceptarSolicitud(solicitud){
+  aceptarSolicitud(solicitud:ISolicitudPropiedad){
     Swal.fire({
       title: 'Aceptar Solicitud Inquilino',
       showClass: {
@@ -74,31 +74,18 @@ export class SolicitudesComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-       
+        solicitud.estado = 1;
+      this.solPropiedad.editarSolicitudArrendatario(solicitud).subscribe((resp:any)=>{
+        Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+        this.listarSolicitantes();
+      })
       }
     })
   }
 
   rechazarSolicitud(solicitud){
-    Swal.fire({
-      title: 'Rechazar Solicitud Inquilino',
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      },
-      icon: 'question',
-      text: 'Este proceso es irreversible, estas seguro?',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Rechazar solicitud',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.value) {
-       
-      }
-    })
+   this.modalService.modalEscribirRechazo(solicitud).subscribe(resp=>{},err=>{},()=>{
+     this.listarSolicitantes();
+   })
   }
 }

@@ -38,6 +38,7 @@ import { VerDetalleSolicitudComponent } from './modulos/solicitudes/ver-detalle-
 import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { AlertModule } from "ngx-bootstrap/alert";
+import { RechazarSolicitudComponent } from './modulos/solicitudes/rechazar-solicitud/rechazar-solicitud.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { AlertModule } from "ngx-bootstrap/alert";
     AgregarImagenComponent,
     EliminarImagenComponent,
     VerDetalleSolicitudComponent,
+    RechazarSolicitudComponent,
   ],
   imports: [
     CommonModule,
