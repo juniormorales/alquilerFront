@@ -6,8 +6,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-condicion-pago',
-  templateUrl: './condicion-pago.component.html',
-  styleUrls: ['./condicion-pago.component.scss']
+  templateUrl: './condicion-pago.component.html'
 })
 export class CondicionPagoComponent implements OnInit {
   

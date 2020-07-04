@@ -4,7 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { LoginService } from 'src/app/services/apis/login.service';
 import { RouteInfo } from 'src/models/IRouteInfo';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { ModuloService } from 'src/app/services/apis/modulo.service';
 
 var misc: any = {
   sidebar_mini_active: true
@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     public toastr: ToastrService,
     private loginService: LoginService,
+    private moduloService: ModuloService,
   ) {
     this.location = location;
   }
@@ -67,17 +68,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    var routes : RouteInfo [] = JSON.parse(localStorage.getItem('ROUTES'));
-    window.addEventListener("resize", this.updateColor);
-    this.listTitles = routes.filter(listTitle => listTitle);
-    const navbar: HTMLElement = this.element.nativeElement;
-    this.toggleButton = navbar.getElementsByClassName("navbar-toggler")[0];
-    this.router.events.subscribe(event => {
-      this.sidebarClose();
-    });
-
-    console.log(new Date())
-  }
+    this.moduloService.moduloStorage.subscribe((routes: RouteInfo[])=>{
+      window.addEventListener("resize", this.updateColor);
+      this.listTitles = routes.filter(listTitle => listTitle);
+      const navbar: HTMLElement = this.element.nativeElement;
+      this.toggleButton = navbar.getElementsByClassName("navbar-toggler")[0];
+      this.router.events.subscribe(event => {
+        this.sidebarClose();
+      });
+    })
+ }
 
   ngOnDestroy() {
     window.removeEventListener("resize", this.updateColor);

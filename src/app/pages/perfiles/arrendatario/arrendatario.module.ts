@@ -15,6 +15,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReactiveFormsModule } from '@angular/forms';
 
+//MAPS
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { EditarSolicitudComponent } from './modulos/sol-hechas/editar-solicitud/editar-solicitud.component';
+import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
 
 
 @NgModule({
@@ -26,7 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MisBoletasComponent, 
     PagosPorVencerComponent, 
     DeudasPendientesComponent, 
-    RecordPagosComponent
+    RecordPagosComponent, EditarSolicitudComponent
   ],
   imports: [
     CommonModule,
@@ -36,10 +41,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgxDatatableModule,
     CollapseModule.forRoot(),
     ReactiveFormsModule,
-    
+    GoogleMapsModule,
+    GooglePlaceModule,  
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
+  ],
+  providers:[
+    ModalVerDetalleSolService
   ],
   bootstrap: [
     ArrendatarioComponent

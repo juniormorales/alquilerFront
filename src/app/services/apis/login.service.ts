@@ -102,6 +102,7 @@ export class LoginService {
 
 	public logOut() {
 		sessionStorage.clear();
+		localStorage.clear();
 		const body = document.getElementsByTagName("body")[0];
 		if (body.classList.contains("white-content")) {
 			body.classList.remove("white-content");

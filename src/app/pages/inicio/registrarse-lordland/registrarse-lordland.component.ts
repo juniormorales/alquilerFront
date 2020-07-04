@@ -10,8 +10,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrarse-lordland',
-  templateUrl: './registrarse-lordland.component.html',
-  styleUrls: ['./registrarse-lordland.component.scss']
+  templateUrl: './registrarse-lordland.component.html'
 })
 export class RegistrarseLordlandComponent implements OnInit {
 

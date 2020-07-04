@@ -3,14 +3,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { RouteInfo } from 'src/models/IRouteInfo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModuloService {
 
+  moduloStorage: Subject<RouteInfo[]> = new Subject<RouteInfo[]>();
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService

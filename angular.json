@@ -4,11 +4,15 @@
   "newProjectRoot": "projects",
   "projects": {
     "alquiler-Front": {
-      "projectType": "application",
-      "schematics": {},
       "root": "",
       "sourceRoot": "src",
+      "projectType": "application",
       "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -26,7 +30,7 @@
             "styles": [
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/css/nucleo-icons.css",
               "src/assets/demo/demo.css",
               "node_modules/bs-stepper/dist/css/bs-stepper.css",

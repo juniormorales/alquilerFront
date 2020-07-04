@@ -1,0 +1,36 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Reformular Solicitud </h6>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="solForm">
+            <div class="row">
+                <div class="col-12">
+                    <div *ngIf="input_sol_prop.descripcionRechazo">
+                        <label> Informacion de Rechazo </label>
+                        <div class=" form-group">
+                            <input class="form-control" type="text" formControlName="rechazo" disabled />
+                        </div>
+                    </div>
+                    <label> Tiempo de Arrendamiento Propuesto</label>
+                    <div class=" form-group">
+                        <input class="form-control" type="number" placeholder="meses" formControlName="tiempo_arrend" />
+                    </div>
+                    <label> N° Huespedes Propuesto </label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number" formControlName="nro_huesp" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer mt-0">
+        <div class="row p-3">
+            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="enviar()" [disabled]="solForm.invalid">Enviar Solicitud</button>
+        </div>
+    </div>
+</div>

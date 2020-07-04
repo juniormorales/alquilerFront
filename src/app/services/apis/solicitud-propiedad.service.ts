@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,29 @@ export class SolicitudPropiedadService {
   listarSolicitudesParaArrendatario(idArrendatario: number){
     this.spinner.show();
     return this.http.get( environment.urlApiRest + 'sol-prop/listarParaArrendatario/'+idArrendatario).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
+  
+  listarSolAceptadasArrendatario(idArrendatario: number){
+    this.spinner.show();
+    return this.http.get( environment.urlApiRest + 'sol-prop/listarSolAcep/'+idArrendatario).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }listarSolAcep
+
+  editarSolicitudArrendatario(sol:ISolicitudPropiedad){
+    this.spinner.show();
+    return this.http.post( environment.urlApiRest + 'sol-prop/modificar',sol).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;

@@ -25,6 +25,9 @@ import { registerLocaleData } from '@angular/common';
 import localesPE from '@angular/common/locales/es-PE'
 registerLocaleData(localesPE,'es-Pe');
 
+//MAPS
+import { GoogleMapsModule } from '@angular/google-maps';
+
 
 
 @NgModule({

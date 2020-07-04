@@ -1,3 +1,16 @@
 <div class="content animate__animated animate__fadeIn animate__fast">
-    <p>presentacion-propiedades works!</p>
+    <div class="row">
+        <input ngx-google-places-autocomplete [options]='optionsSearch' #placesRef="ngx-places"
+            (onAddressChange)="handleAddressChange($event)" />
+    </div>
+    <div class=" mt-5 ml-3 mr-3">
+        <google-map height="700px" width="100%" [zoom]="zoom" [center]="center" [options]="options"
+            (mapClick)="click($event)">
+            <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+                [title]="marker.title" [options]="marker.options" (mapClick)="openInfo(markerElem, marker.info)">
+            </map-marker>
+
+            <map-info-window>{{ infoContent }}</map-info-window>
+        </google-map>
+    </div>
 </div>
