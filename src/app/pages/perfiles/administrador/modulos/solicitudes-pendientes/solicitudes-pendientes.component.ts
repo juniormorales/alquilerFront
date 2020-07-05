@@ -45,14 +45,6 @@ export class SolicitudesPendientesComponent implements OnInit {
   entriesChange($event) {
     this.entries = $event.target.value;
   }
-  /*
-     //Modal
-     private openModal(obj) {
-      this.modalService.modalNuevoCondicionPago(obj).subscribe(resp => {}, err => {}, () => {
-        this.listarCondicionPago();
-      });
-    }
-  */
 
   aceptarCuenta(user:IArrendatario) {
     Swal.fire({
