@@ -14,7 +14,7 @@ var misc: any = {
   templateUrl: "./navbar.component.html",
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  private listTitles: any[];
+  private listTitles: any[] = [];
   location: Location;
 
   private toggleButton: any;

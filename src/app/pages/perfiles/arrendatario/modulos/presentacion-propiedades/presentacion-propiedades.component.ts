@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { add } from 'ngx-bootstrap/chronos';
 import { MapMarker, MapInfoWindow, GoogleMap } from '@angular/google-maps';
 
 @Component({
@@ -57,7 +56,8 @@ export class PresentacionPropiedadesComponent implements OnInit {
       options: {
         animation: google.maps.Animation.BOUNCE,
       },
-    })
+    });
+
   }
 
 
@@ -67,8 +67,27 @@ export class PresentacionPropiedadesComponent implements OnInit {
   }
 
   public handleAddressChange(address: Address) {
-
-    this.center.lat = address.geometry.location.lat();
-    this.center.lng = address.geometry.location.lng();
+    console.log(address.formatted_address)
+    navigator.geolocation.getCurrentPosition(position => {
+      this.center = {
+        lat: address.geometry.location.lat(),
+        lng: address.geometry.location.lng()
+      }
+      this.markers.push({
+        position:{
+          lat: address.geometry.location.lat(),
+          lng: address.geometry.location.lng()
+        },
+        label: {
+          color: 'red',
+          text: 'Marker label ' + (this.markers.length + 1),
+        },
+        title: 'Marker title ' + (this.markers.length + 1),
+        info: 'Marker info ' + (this.markers.length + 1),
+        options: {
+          animation: google.maps.Animation.BOUNCE,
+        },
+      })
+    });
   }
 }
