@@ -1,3 +1,15 @@
 <div class="content animate__animated animate__fadeIn animate__fast">
-    <p>pagos-por-vencer works!</p>
+    <p>Pagos por vencer</p>
+    <button class="btn btn-primary" (click)="openModal(template)">Registrar Pago</button>
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Registro de Pagos</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-registro-pago></app-registro-pago>
+        </div>
+    </ng-template>
 </div>
