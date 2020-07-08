@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModalOptions, BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-//katriel
+
 import { VisualizarReciboComponent } from 'src/app/pages/perfiles/arrendero/modulos/pago-por-aceptar/visualizar-recibo/visualizar-recibo.component';
 import { IPago } from '../../../models/IPago';
-//
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ModalVisualizarReciboService {
     private bsModalService: BsModalService
   ) { }
 
- //katriel
+
   modalVerRecibo(obj: IPago): Observable<any> {
   const config: ModalOptions = {
     initialState:  {
@@ -46,6 +46,6 @@ export class ModalVisualizarReciboService {
     }
   });
 }
-//
+
 
 }

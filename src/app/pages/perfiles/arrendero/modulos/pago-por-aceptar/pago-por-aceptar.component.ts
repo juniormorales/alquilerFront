@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-//katriel
+
 import { ModalVisualizarReciboService } from './../../../../../services/common/modal-visualizar-recibo.service';
 import { IPago } from '../../../../../../models/IPago';
-//
+
 
 @Component({
   selector: 'app-pago-por-aceptar',
@@ -21,9 +21,9 @@ export class PagoPorAceptarComponent implements OnInit {
 
   idArrendero: number;
  
-  //katriel
+ 
   pagos: IPago[] = [];
-  //
+  
 
   constructor( private modalService : ModalVisualizarReciboService
    /*,private solPropiedad: SolicitudPropiedadService,*/) { }
