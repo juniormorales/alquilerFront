@@ -1,0 +1,32 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()" type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Recibo</h6>
+    </div>
+    <div class="card-body">
+
+
+
+        <div class="row justify-content-center mt-3">
+
+            <div class="col-9">
+                <div class="card" style="width: 22rem;">
+                    <img class="card-img-top" [src]="input_sol_prop.propiedad.descripcionGeneral" alt="boleta" height="280">
+                </div>
+
+                <div class="card-body">
+                    <button type="button" class="btn btn-success  ">Confirmar</button>
+                    <button type="button" class="btn btn-danger  ">Rechazar</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</div>
