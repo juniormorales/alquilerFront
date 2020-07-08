@@ -26,23 +26,13 @@
                             </div>
 
                             <ngx-datatable id="print-section" class="bootstrap  selection-cell" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="entries != -1 ? entries : undefined" [rows]="temp" [scrollbarH]="true" [virtualization]="false">
-                                <!--
-                                <ngx-datatable-column>
-                                    <ng-template ngx-datatable-header-template>
-                                        <span>Fecha</span>
-                                    </ng-template>
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        {{row.fechaSolicitud | date:'fullDate'}}
-                                    </ng-template>
-                                </ngx-datatable-column>
-                            -->
 
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
                                         <span>DNI</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        {{row.arrendatario.usuario.dni}}
+                                        {{row.renta.inquilino.arrendatario.usuario.dni}}
                                     </ng-template>
                                 </ngx-datatable-column>
 
@@ -51,7 +41,7 @@
                                         <span>Arrendatario</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        {{row.arrendatario.usuario.apellidos + ' ' + row.arrendatario.usuario.nombres}}
+                                        {{row.renta.inquilino.arrendatario.usuario.nombres+' '+row.renta.inquilino.arrendatario.usuario.apellidos}}
                                     </ng-template>
                                 </ngx-datatable-column>
 
@@ -60,32 +50,10 @@
                                         <span>Propiedad</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        {{row.propiedad.alias}}
+                                        {{row.renta.inquilino.propiedad.alias}}
                                     </ng-template>
                                 </ngx-datatable-column>
 
-                                <!--    
-                                  <ngx-datatable-column>
-                                    <ng-template ngx-datatable-header-template>
-                                        <span>Estado</span>
-                                    </ng-template>
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        {{row.estado==1?'Esperando Confirmacion':row.estado==2?'Por aceptar':'Cancelado'}}
-                                    </ng-template>
-                                </ngx-datatable-column>
-                                -->
-                                <!--
-                                <ngx-datatable-column>
-                                    <ng-template ngx-datatable-header-template>
-                                        <span>Ver Detalles</span>
-                                    </ng-template>
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div class="row justify-content-center" *ngIf="row.estado==2">
-                                            <i class="mdi mdi-account-search" id="edital" (click)="verDetalles(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
-                                        </div>
-                                    </ng-template>
-                                </ngx-datatable-column>
-                            -->
 
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
@@ -93,34 +61,11 @@
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         <div class="row justify-content-center">
-                                            <i class="mdi mdi-image" id="edital" (click)="verDetalles(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                            <i class="mdi mdi-image" id="edital" (click)="verRecibo(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
                                         </div>
                                     </ng-template>
                                 </ngx-datatable-column>
 
-                                <!--
-                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false">
-                                    <ng-template ngx-datatable-header-template>
-                                        <span>Aceptar</span>
-                                    </ng-template>
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div class="row justify-content-center" *ngIf="row.estado==2">
-                                            <i class="mdi mdi-account-check" id="aceptal" (click)="aceptarSolicitud(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
-                                        </div>
-                                    </ng-template>
-                                </ngx-datatable-column>
-
-                                <ngx-datatable-column [resizeable]="false" [draggable]="false" [canAutoResize]="false">
-                                    <ng-template ngx-datatable-header-template>
-                                        <span>Rechazar</span>
-                                    </ng-template>
-                                    <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <div class="row justify-content-center" *ngIf="row.estado==2">
-                                            <i class="mdi mdi-account-minus" id="rechazal" (click)="rechazarSolicitud(row)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
-                                        </div>
-                                    </ng-template>
-                                </ngx-datatable-column>
-                            -->
                             </ngx-datatable>
                         </div>
                     </div>

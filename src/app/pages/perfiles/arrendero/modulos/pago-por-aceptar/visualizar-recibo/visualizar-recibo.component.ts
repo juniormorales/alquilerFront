@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { IPago } from '../../../../../../../models/IPago';
+
 @Component({
   selector: 'app-visualizar-recibo',
   templateUrl: './visualizar-recibo.component.html',
@@ -8,8 +10,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class VisualizarReciboComponent implements OnInit {
 
-  
-  input_sol_prop: ISolicitudPropiedad;
+  input_pago:IPago;
+
   constructor( private modalService : BsModalService,
     private bsModalRef : BsModalRef) { }
 
