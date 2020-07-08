@@ -40,6 +40,11 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { AlertModule } from "ngx-bootstrap/alert";
 import { RechazarSolicitudComponent } from './modulos/solicitudes/rechazar-solicitud/rechazar-solicitud.component';
 
+/////////////katriel
+import { VisualizarReciboComponent } from './modulos/pago-por-aceptar/visualizar-recibo/visualizar-recibo.component';
+import { ModalVisualizarReciboService } from './../../../services/common/modal-visualizar-recibo.service';
+
+
 
 @NgModule({
   declarations: [
@@ -61,6 +66,8 @@ import { RechazarSolicitudComponent } from './modulos/solicitudes/rechazar-solic
     EliminarImagenComponent,
     VerDetalleSolicitudComponent,
     RechazarSolicitudComponent,
+    
+    VisualizarReciboComponent,/////////////katriel
   ],
   imports: [
     CommonModule,
@@ -79,6 +86,8 @@ import { RechazarSolicitudComponent } from './modulos/solicitudes/rechazar-solic
     ModalPropiedadService,
     ModalCondicionPagoService,
     ModalVerDetalleSolService,
+    
+    ModalVisualizarReciboService //////////////katriel
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
