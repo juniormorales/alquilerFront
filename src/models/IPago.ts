@@ -1,6 +1,6 @@
 import { IRenta } from './IRenta';
 
-export interface IPropiedad {
+export interface IPago {
 
     idPago?: number;
     monto?:number;
