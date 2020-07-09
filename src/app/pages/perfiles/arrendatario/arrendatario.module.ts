@@ -14,12 +14,13 @@ import { RecordPagosComponent } from './modulos/record-pagos/record-pagos.compon
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 //MAPS
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { EditarSolicitudComponent } from './modulos/sol-hechas/editar-solicitud/editar-solicitud.component';
 import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
+import { RegistroPagoComponent } from './modulos/pagos-por-vencer/registro-pago/registro-pago.component';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-det
     MisBoletasComponent, 
     PagosPorVencerComponent, 
     DeudasPendientesComponent, 
-    RecordPagosComponent, EditarSolicitudComponent
+    RecordPagosComponent, 
+    EditarSolicitudComponent, 
+    RegistroPagoComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-det
     CollapseModule.forRoot(),
     ReactiveFormsModule,
     GoogleMapsModule,
-    GooglePlaceModule,  
+    GooglePlaceModule,
+    ModalModule.forRoot(),
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
