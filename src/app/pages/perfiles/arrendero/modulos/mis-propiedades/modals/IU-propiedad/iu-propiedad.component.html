@@ -7,70 +7,91 @@
         <h6 class="card-title">{{input_propiedad!=null?'Actualizar Propiedad':'Nueva Propiedad'}} </h6>
     </div>
     <div class="card-body">
-        <form [formGroup]="propiedadForm">
-            <div class="row">
-                <div class="col-12">
-                    <label> Alias (Para identificar)</label>
-                    <div class=" form-group">
-                        <input class="form-control" type="text"  formControlName="alias"/>
-                    </div>
-                    <label> Descripcion General (Para presentar a los solicitantes) </label>
-                    <div class=" form-group">
-                        <input class=" form-control" type="text"  formControlName="descripcion_ge"/>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <label> N° Habitaciones</label>
-                    <div class=" form-group">
-                        <input class="form-control" type="number"  formControlName="nro_hab"/>
-                    </div>
-                    <label>Cantidad Pisos </label>
-                    <div class=" form-group">
-                        <input class=" form-control" type="number"  formControlName="cant_pisos"/>
-                    </div>
-                </div>          
-                <div class="col-6">
-                    <label> Tamaño ( m² )</label>
-                    <div class=" form-group">
-                        <input class=" form-control" type="number" placeholder=" m²" formControlName="tamano" />
-                    </div>
-                        <label>Estado</label>
-                        <div class="form-group pb-3">
-                            <angular2-multiselect name="estado" [data]="dataEstado" formControlName="estado"
-                                [settings]="settingsGeneral">
-                            </angular2-multiselect>
+        <tabset class="nav-pills-danger nav-pills-icons justify-content-center " type="pills" #staticTabs>
+            <tab>
+                <ng-template tabHeading>
+                    <i class="tim-icons icon-square-pin"> </i>Ubique su propiedad
+                </ng-template>
+                <app-ubicacion-maps (event)="recibirMark($event)"></app-ubicacion-maps>
+            </tab>
+            <tab>
+                <ng-template tabHeading>
+                    <i class="tim-icons icon-single-copy-04"> </i> Detalles de Propiedad
+                </ng-template>
+                <form [formGroup]="propiedadForm">
+                    <div class="row">
+                        <div class="col-12">
+                            <label> Direccion</label>
+                            <div class=" form-group">
+                                <input class="form-control" type="text" [value]="address" disabled />
+                            </div>
                         </div>
-                </div>
-                <div class="col-12">
-                    <div class=" form-group">
-                        <label>Condiciones de Pago</label>
-                        <div class="form-group pb-3">
-                            <angular2-multiselect name="estado" [data]="dataCondPago" formControlName="condicion_pago"
-                                [settings]="settingsGeneral">
-                            </angular2-multiselect>
+                        <div class="col-12">
+                            <label> Alias (Para identificar)</label>
+                            <div class=" form-group">
+                                <input class="form-control" type="text" formControlName="alias" />
+                            </div>
+                            <label> Descripcion General (Para presentar a los solicitantes) </label>
+                            <div class=" form-group">
+                                <input class=" form-control" type="text" formControlName="descripcion_ge" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label> N° Habitaciones</label>
+                            <div class=" form-group">
+                                <input class="form-control" type="number" formControlName="nro_hab" />
+                            </div>
+                            <label>Cantidad Pisos </label>
+                            <div class=" form-group">
+                                <input class=" form-control" type="number" formControlName="cant_pisos" />
+                            </div>
+                            <div class="w-100 pb-3"></div>
+                            <label>Condiciones de Pago</label>
+                            <div class="form-group">
+                                <angular2-multiselect name="estado" [data]="dataCondPago"
+                                    formControlName="condicion_pago" [settings]="settingsGeneral">
+                                </angular2-multiselect>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label> Tamaño ( m² )</label>
+                            <div class=" form-group">
+                                <input class=" form-control" type="number" placeholder=" m²" formControlName="tamano" />
+                            </div>
+                            <label>Estado</label>
+                            <div class="form-group pb-3">
+                                <angular2-multiselect name="estado" [data]="dataEstado" formControlName="estado"
+                                    [settings]="settingsGeneral">
+                                </angular2-multiselect>
+                            </div>
+                            <label>N° Partida Registral</label>
+                            <div class=" form-group">
+                                <input class=" form-control" type="number" formControlName="partida" />
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class=" form-check mt-1 ml-2 mb-2">
+                                <label class=" form-check-label">
+                                    <input class=" form-check-input" type="checkbox" formControlName="tiene_dano" />
+                                    <span class=" form-check-sign"> </span>¿Tiene daños?
+                                </label>
+                            </div>
+                            <label> Descripcion de daños</label>
+                            <div class=" form-group">
+                                <input class=" form-control" type="text" formControlName="descripcion_dano" />
+                            </div>
+                            <div class=" form-check mt-2 ml-2">
+                                <label class=" form-check-label">
+                                    <input class=" form-check-input" type="checkbox" formControlName="mascota" />
+                                    <span class=" form-check-sign"> </span>¿Permite mascotas?
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class=" form-check mt-1 ml-2 mb-2">
-                        <label class=" form-check-label">
-                            <input class=" form-check-input" type="checkbox" formControlName="tiene_dano"/>
-                            <span class=" form-check-sign"> </span>¿Tiene daños?
-                          </label>
-                    </div>       
-                      <label> Descripcion de daños</label>
-                      <div class=" form-group">
-                          <input class=" form-control" type="text"  formControlName="descripcion_dano" />
-                      </div>
-                      <div class=" form-check mt-2 ml-2">
-                        <label class=" form-check-label">
-                            <input class=" form-check-input" type="checkbox" formControlName="mascota"/>
-                            <span class=" form-check-sign"> </span>¿Permite mascotas?
-                          </label>
-                    </div>  
-                </div>
-            </div>
-        </form>
+                </form>
+            </tab>
+        </tabset>
     </div>
     <div class="card-footer mt-0">
         <div class="row p-3">

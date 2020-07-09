@@ -43,7 +43,10 @@ import { RechazarSolicitudComponent } from './modulos/solicitudes/rechazar-solic
 /////////////katriel
 import { VisualizarReciboComponent } from './modulos/pago-por-aceptar/visualizar-recibo/visualizar-recibo.component';
 import { ModalVisualizarReciboService } from './../../../services/common/modal-visualizar-recibo.service';
-
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { UbicacionMapsComponent } from './modulos/mis-propiedades/modals/IU-propiedad/ubicacion-maps/ubicacion-maps.component';
 
 
 @NgModule({
@@ -66,8 +69,8 @@ import { ModalVisualizarReciboService } from './../../../services/common/modal-v
     EliminarImagenComponent,
     VerDetalleSolicitudComponent,
     RechazarSolicitudComponent,
-    
-    VisualizarReciboComponent,/////////////katriel
+    VisualizarReciboComponent,
+    UbicacionMapsComponent,/////////////katriel
   ],
   imports: [
     CommonModule,
@@ -80,13 +83,16 @@ import { ModalVisualizarReciboService } from './../../../services/common/modal-v
     AlertModule.forRoot(),
     NgxPaginationModule,
     ReactiveFormsModule,
+    GoogleMapsModule,
+    GooglePlaceModule,
     AngularMultiSelectModule,
+    TabsModule.forRoot(),
+    
   ],
   providers:[
     ModalPropiedadService,
     ModalCondicionPagoService,
     ModalVerDetalleSolService,
-    
     ModalVisualizarReciboService //////////////katriel
   ],
   schemas: [

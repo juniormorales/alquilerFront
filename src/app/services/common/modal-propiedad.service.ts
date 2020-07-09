@@ -26,6 +26,7 @@ export class ModalPropiedadService {
       ignoreBackdropClick: true,
       backdrop: "static",
       keyboard: false,
+      class: 'gray modal-lg',
     }
     this.modalRef = this.bsModalService.show(IUPropiedadComponent, config);
     return new Observable<any>(observer => {

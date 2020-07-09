@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { IPropiedad } from 'src/models/IPropiedad';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
 import { PropiedadService } from 'src/app/services/apis/propiedad.service';
 import { CondicionPagoService } from 'src/app/services/apis/condicion-pago.service';
 import { ICondicionPago } from 'src/models/ICondicionPago';
 import Swal from 'sweetalert2';
+import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { IUbicacionMaps } from 'src/models/IUbicacionMaps';
+import { MapsService } from 'src/app/services/apis/maps.service';
 
 @Component({
   selector: 'app-iu-propiedad',
@@ -14,9 +17,14 @@ import Swal from 'sweetalert2';
 })
 export class IUPropiedadComponent implements OnInit {
 
+  @ViewChild('staticTabs', { static: true }) staticTabs: TabsetComponent;
+  
   input_propiedad: IPropiedad;
+  ubicacion_map: IUbicacionMaps;
+  address: string = '';
   accion: String = null;
   propiedadForm: FormGroup;
+  confirmado: boolean;
   idArrendero: number;
   lsCondicionPago: ICondicionPago[] = [];
   dataCondPago: any[] = [];
@@ -45,10 +53,12 @@ export class IUPropiedadComponent implements OnInit {
     enableSearchFilter: false,
     classes: 'selectpicker btn-info',
     lazyLoading: true,
-    maxHeight: 200,
+    maxHeight: 150,
     autoPosition: false,
     position: 'bottom'
   }
+
+  maps: ISolicitudPropiedad;
 
   constructor(
     private modalService: BsModalService,
@@ -56,6 +66,7 @@ export class IUPropiedadComponent implements OnInit {
     private builder: FormBuilder,
     private propiedadService: PropiedadService,
     private condicionPagoService: CondicionPagoService,
+    private mapsService: MapsService,
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +74,13 @@ export class IUPropiedadComponent implements OnInit {
     this.idArrendero = Number.parseInt(sessionStorage.getItem('id'));
     if (this.input_propiedad != null) {
       this.accion = "A";
+      this.staticTabs.tabs[0].disabled = true;
+      this.staticTabs.tabs[1].active = true;
+      this.confirmado = true;
       this.setearValores();
+    }else{
+      this.staticTabs.tabs[1].disabled = true;
+      this.confirmado = false;
     }
     this.listarCondicionesPago();
   }
@@ -79,6 +96,7 @@ export class IUPropiedadComponent implements OnInit {
       tiene_dano: [false, Validators.required],
       mascota: [false, Validators.required],
       condicion_pago: [[], Validators.required],
+      partida: ['', Validators.required],
       descripcion_dano: [''],
     });
     this.propiedadForm.get('descripcion_dano').disable();
@@ -92,22 +110,24 @@ export class IUPropiedadComponent implements OnInit {
     })
   }
 
-  private setearValores(){
+  private setearValores() {
     this.propiedadForm.setValue({
       alias: this.input_propiedad.alias,
       descripcion_ge: this.input_propiedad.descripcionGeneral,
       nro_hab: this.input_propiedad.nroHabitaciones,
       cant_pisos: this.input_propiedad.cantidadPisos,
       tamano: this.input_propiedad.tamano,
-      estado: [{id:this.input_propiedad.estado, itemName:this.dataEstado[this.input_propiedad.estado].itemName}],
+      estado: [{ id: this.input_propiedad.estado, itemName: this.dataEstado[this.input_propiedad.estado].itemName }],
       tiene_dano: this.input_propiedad.tieneDanios,
       mascota: this.input_propiedad.permiteMascotas,
-      condicion_pago: [{id:this.input_propiedad.condicionPago.idCondicionPago,itemName:this.input_propiedad.condicionPago.alias}],
-      descripcion_dano: this.input_propiedad.descripcionDanios
+      condicion_pago: [{ id: this.input_propiedad.condicionPago.idCondicionPago, itemName: this.input_propiedad.condicionPago.alias }],
+      descripcion_dano: this.input_propiedad.descripcionDanios,
+      partida: this.input_propiedad.nroPartida
     });
-    if(this.input_propiedad.tieneDanios){
+    if (this.input_propiedad.tieneDanios) {
       this.propiedadForm.get('descripcion_dano').enable();
-    }
+    };
+    this.propiedadForm.get('partida').disable();
   }
 
   private construirObjeto() {
@@ -121,6 +141,8 @@ export class IUPropiedadComponent implements OnInit {
       nroHabitaciones: this.propiedadForm.get('nro_hab').value,
       tamano: this.propiedadForm.get('tamano').value,
       tieneDanios: this.propiedadForm.get('tiene_dano').value,
+      nroPartida: this.propiedadForm.get('partida').value,
+      confirmado: this.confirmado,
       condicionPago: {
         idCondicionPago: this.propiedadForm.get('condicion_pago').value[0].id
       },
@@ -142,10 +164,14 @@ export class IUPropiedadComponent implements OnInit {
     if (this.propiedadForm.valid) {
       var propiedad = this.construirObjeto();
       if (this.accion == null) {
-        console.log(propiedad)
         this.propiedadService.registrarPropiedad(propiedad).subscribe((resp: any) => {
-          Swal.fire(resp.titulo, resp.mensaje, resp.tipo);
-          this.bsModalRef.hide();
+          this.ubicacion_map.propiedad = {
+            idPropiedad: resp.id
+          }
+          this.mapsService.registrarPropiedad(this.ubicacion_map).subscribe((ub)=>{
+            Swal.fire(resp.titulo, resp.mensaje, resp.tipo);
+            this.bsModalRef.hide();
+          })
         });
       } else {
         propiedad.idPropiedad = this.input_propiedad.idPropiedad;
@@ -167,6 +193,20 @@ export class IUPropiedadComponent implements OnInit {
         this.dataCondPago.push({ "id": element.idCondicionPago, "itemName": element.alias });
       });
     })
+  }
+
+  recibirMark(event) {
+    console.log(event)
+    this.staticTabs.tabs[1].disabled = false;
+    this.staticTabs.tabs[0].disabled = true;
+    this.staticTabs.tabs[0].active = false;
+    this.staticTabs.tabs[1].active = true;
+    this.address = event.address;
+    this.ubicacion_map = {
+      descripcionDireccion: event.address,
+      latitud: event.position.lat,
+      longitud: event.position.lng
+    }
   }
 
 }

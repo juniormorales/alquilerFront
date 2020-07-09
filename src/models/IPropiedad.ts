@@ -16,4 +16,6 @@ export interface IPropiedad {
     condicionPago?: ICondicionPago;
     arrendero?: IArrendero;
     tieneDanios?:boolean;
+    nroPartida?:number;
+    confirmado?:boolean;
 }
