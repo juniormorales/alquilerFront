@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ICondicionPago } from 'src/models/ICondicionPago';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { IUCondicionPagoComponent } from 'src/app/pages/perfiles/arrendero/modulos/condicion-pago/modals/iu-condicion-pago/iu-condicion-pago.component';
+import { IUCondicionPagoComponent } from 'src/app/pages/perfiles/arrendero/modulos/condicion-pago/modals/IU-condicion-pago/iu-condicion-pago.component';
 
 @Injectable({
   providedIn: 'root'

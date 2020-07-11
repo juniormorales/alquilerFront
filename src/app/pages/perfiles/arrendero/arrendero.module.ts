@@ -17,7 +17,7 @@ import { ContratosPendientesComponent } from './modulos/contratos-pendientes/con
 //Modals
 import { IUPropiedadComponent } from './modulos/mis-propiedades/modals/IU-propiedad/iu-propiedad.component';
 import { EditarEstadoPropiedadComponent } from './modulos/mis-propiedades/modals/editar-estado-propiedad/editar-estado-propiedad.component';
-import { IUCondicionPagoComponent } from './modulos/condicion-pago/modals/iu-condicion-pago/iu-condicion-pago.component';
+import { IUCondicionPagoComponent } from './modulos/condicion-pago/modals/IU-condicion-pago/iu-condicion-pago.component';
 
 //Rutas
 import { ArrenderoRoutingModule } from './arrendero.routes';
