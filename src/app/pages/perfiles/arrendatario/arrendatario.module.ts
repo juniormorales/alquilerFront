@@ -21,6 +21,10 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { EditarSolicitudComponent } from './modulos/sol-hechas/editar-solicitud/editar-solicitud.component';
 import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
 import { RegistroPagoComponent } from './modulos/pagos-por-vencer/registro-pago/registro-pago.component';
+import { VerPropiedadInfoComponent } from './modulos/presentacion-propiedades/ver-propiedad-info/ver-propiedad-info.component';
+import { ModalPresentarPropiedadService } from 'src/app/services/common/modal-presentar-propiedad.service';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -34,7 +38,8 @@ import { RegistroPagoComponent } from './modulos/pagos-por-vencer/registro-pago/
     DeudasPendientesComponent, 
     RecordPagosComponent, 
     EditarSolicitudComponent, 
-    RegistroPagoComponent,
+    RegistroPagoComponent, 
+    VerPropiedadInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -47,12 +52,14 @@ import { RegistroPagoComponent } from './modulos/pagos-por-vencer/registro-pago/
     GoogleMapsModule,
     GooglePlaceModule,
     ModalModule.forRoot(),
+    NgxPaginationModule,
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers:[
-    ModalVerDetalleSolService
+    ModalVerDetalleSolService,
+    ModalPresentarPropiedadService,
   ],
   bootstrap: [
     ArrendatarioComponent

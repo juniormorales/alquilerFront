@@ -143,6 +143,7 @@ export class IUPropiedadComponent implements OnInit {
       tieneDanios: this.propiedadForm.get('tiene_dano').value,
       nroPartida: this.propiedadForm.get('partida').value,
       confirmado: this.confirmado,
+      rechazado: false,
       condicionPago: {
         idCondicionPago: this.propiedadForm.get('condicion_pago').value[0].id
       },

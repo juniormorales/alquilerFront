@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { GestionCuentasComponent } from './modulos/gestion-cuentas/gestion-cuentas.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { SolicitudesPendientesComponent } from './modulos/solicitudes-pendientes/solicitudes-pendientes.component';
+import { ConfirmarPropiedadesComponent } from './modulos/confirmar-propiedades/confirmar-propiedades.component';
 
 const AdministracionRoute: Routes = [
     {
@@ -24,6 +25,11 @@ const AdministracionRoute: Routes = [
             {
                 path:'ver-sol',
                 component: SolicitudesPendientesComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path:'propiedad-confirmar',
+                component: ConfirmarPropiedadesComponent,
                 canActivate: [AuthGuard]
             }
         ]

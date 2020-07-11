@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselImages } from 'src/models/ICarouselImages';
 
-interface Image {
-  src: string;
-  title?: string;
-  alt?: string;
-  text?:string;
-}
 
 @Component({
   selector: 'app-contenido',
@@ -15,7 +10,7 @@ interface Image {
 })
 export class ContenidoComponent implements OnInit {
 
-  imagesData: Image[] = [
+  imagesData: CarouselImages[] = [
 
     {
       src: 'assets/img/bg1.jpg',

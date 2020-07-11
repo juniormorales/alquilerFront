@@ -26,6 +26,17 @@ export class MapsService {
       catchError((err: HttpErrorResponse) => this.errorHandler(err))
     );
   }
+  
+  listarPropiedadesDisponibles(){
+    this.spinner.show();
+    return this.http.get(environment.urlApiRest + 'maps/listarDisponibles').pipe(
+      map(obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+    );
+  }
 
   private errorHandler(err: HttpErrorResponse) {
     this.spinner.hide();

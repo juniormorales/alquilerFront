@@ -60,6 +60,17 @@ export class PropiedadService {
     );
   }
 
+  listarPropiedadPorAceptar(){
+    this.spinner.show();
+    return this.http.get(environment.urlApiRest + 'propiedad/listarPorAceptar').pipe(
+      map(obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+    );
+  }
+
   subirImagen(file: File, id) {
     this.spinner.show();
     let formData = new FormData();

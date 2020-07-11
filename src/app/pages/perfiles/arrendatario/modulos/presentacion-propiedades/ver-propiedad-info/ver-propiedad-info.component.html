@@ -1,0 +1,41 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h5 class="card-title text-center">Detalles de la Propiedad</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+
+            </div>
+            <div class="col-6">
+                <div class="row justify-content-center mt-3">
+                    <div *ngIf="lsImagenes.length>0">
+                        <div *ngFor="let img of lsImagenes | paginate: { itemsPerPage: 1, currentPage: p }">
+                            <div class="col-12">
+                                <div class="card" style="width: 20rem;">
+                                    <img class="card-img-top" [src]="img.foto" [alt]="img.obj.nombreFoto" height="360">
+                                </div>
+                            </div>
+                        </div>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                    <div *ngIf="lsImagenes.length==0">
+                        <label><h5 class="text-center">La propiedad no presenta imagenes disponibles</h5></label>
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="assets/img/house_placeholder.jpg" alt="house_placeholder" height="360">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer mt-0">
+        <div class="row p-3">
+            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="solicitar()">Solicitar</button>
+        </div>
+    </div>
+</div>

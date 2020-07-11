@@ -18,4 +18,5 @@ export interface IPropiedad {
     tieneDanios?:boolean;
     nroPartida?:number;
     confirmado?:boolean;
+    rechazado?:boolean;
 }

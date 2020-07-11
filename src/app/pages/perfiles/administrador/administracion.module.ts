@@ -10,6 +10,7 @@ import { GestionCuentasComponent } from './modulos/gestion-cuentas/gestion-cuent
 import { SolicitudesPendientesComponent } from './modulos/solicitudes-pendientes/solicitudes-pendientes.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {  NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ConfirmarPropiedadesComponent } from './modulos/confirmar-propiedades/confirmar-propiedades.component';
 
 
 
@@ -19,6 +20,7 @@ import {  NgxDatatableModule } from '@swimlane/ngx-datatable';
     DashboardAdminComponent,
     GestionCuentasComponent,
     SolicitudesPendientesComponent,
+    ConfirmarPropiedadesComponent,
     
   ],
   imports: [
