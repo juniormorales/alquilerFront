@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CarouselImages } from 'src/models/ICarouselImages';
 import { PropiedadService } from 'src/app/services/apis/propiedad.service';
+import { ModalCondicionPagoService } from 'src/app/services/common/modal-condicion-pago.service';
+import Swal from 'sweetalert2';
+import { SolicitudPropiedadService } from 'src/app/services/apis/solicitud-propiedad.service';
+import { ModalSolicitudPropiedadService } from 'src/app/services/common/modal-solicitud-propiedad.service';
 
 @Component({
   selector: 'app-ver-propiedad-info',
@@ -20,6 +22,8 @@ export class VerPropiedadInfoComponent implements OnInit {
     private modalService : BsModalService,
     private bsModalRef : BsModalRef,
     private propiedadService : PropiedadService,
+    private modal2Service: ModalCondicionPagoService,
+    private modalSolicitudService: ModalSolicitudPropiedadService,
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +37,9 @@ export class VerPropiedadInfoComponent implements OnInit {
   }
 
   public solicitar() {
-
+    this.modalSolicitudService.modalFormularPropuestaSolicitud(this.input_propiedad_map.propiedad).subscribe(resp=>{},err=>{},()=>{
+      this.bsModalRef.hide();
+    })
   }
 
   listarImagenes() {
@@ -42,4 +48,7 @@ export class VerPropiedadInfoComponent implements OnInit {
     })
   }
 
+  verCondicionPago(){
+    this.modal2Service.modalVerCondicionPagoPropiedad(this.input_propiedad_map.propiedad.condicionPago).subscribe();
+  }
 }

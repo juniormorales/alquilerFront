@@ -23,9 +23,16 @@ import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-det
 import { RegistroPagoComponent } from './modulos/pagos-por-vencer/registro-pago/registro-pago.component';
 import { VerPropiedadInfoComponent } from './modulos/presentacion-propiedades/ver-propiedad-info/ver-propiedad-info.component';
 import { ModalPresentarPropiedadService } from 'src/app/services/common/modal-presentar-propiedad.service';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { VerCondicionPagoPropiedadComponent } from './modulos/presentacion-propiedades/ver-condicion-pago-propiedad/ver-condicion-pago-propiedad.component';
+import { ModalCondicionPagoService } from 'src/app/services/common/modal-condicion-pago.service';
+import { ProponerSolicitudPropiedadComponent } from './modulos/presentacion-propiedades/proponer-solicitud-propiedad/proponer-solicitud-propiedad.component';
+import { ModalSolicitudPropiedadService } from 'src/app/services/common/modal-solicitud-propiedad.service';
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -39,7 +46,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RecordPagosComponent, 
     EditarSolicitudComponent, 
     RegistroPagoComponent, 
-    VerPropiedadInfoComponent,
+    VerPropiedadInfoComponent, VerCondicionPagoPropiedadComponent, ProponerSolicitudPropiedadComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +60,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     GooglePlaceModule,
     ModalModule.forRoot(),
     NgxPaginationModule,
+    PerfectScrollbarModule,
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
@@ -60,6 +68,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers:[
     ModalVerDetalleSolService,
     ModalPresentarPropiedadService,
+    ModalCondicionPagoService,
+    ModalSolicitudPropiedadService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   bootstrap: [
     ArrendatarioComponent

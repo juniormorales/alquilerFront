@@ -8,25 +8,104 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title text-center">Datos de la Propiedad</div>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">Direccion</dt>
+                            <dd class="col-sm-8"> <p>{{input_propiedad_map.descripcionDireccion}}</p></dd>
 
+                            <dt class="col-sm-4">Propiedad</dt>
+                            <dd class="col-sm-8">
+                                <p>{{input_propiedad_map.propiedad.alias}}</p>
+                            </dd>
+
+                            <dt class="col-sm-4">Condicion</dt>
+                            <dd class="col-sm-8">
+                                <p>{{input_propiedad_map.propiedad.condicionPropiedad}}</p>
+                            </dd>
+
+                            <dt class="col-sm-4">Dueño</dt>
+                            <dd class="col-sm-8">
+                                <p>{{input_propiedad_map.propiedad.arrendero.usuario.apellidos + ' ' + input_propiedad_map.propiedad.arrendero.usuario.nombres }}</p>
+                            </dd>
+
+                            <dt class="col-sm-4">Descripcion</dt>
+                            <dd class="col-sm-8">
+                                <p>{{input_propiedad_map.propiedad.descripcionGeneral }}</p>
+                            </dd>
+                            <dt class="col-sm-4">Interior</dt>
+                            <dd class="col-sm-8">
+                                <dl class="row mt-0 mb-0" >
+                                    <dt class="col-sm-6 text-warning">N° Pisos:</dt>
+                                    <dd class="col-sm-6">
+                                        <p>{{input_propiedad_map.propiedad.cantidadPisos}}</p>
+                                    </dd>
+                                </dl>
+                                <dl class="row mt-0 mb-0">
+                                    <dt class="col-sm-6 text-warning">N° Habitaciones:</dt>
+                                    <dd class="col-sm-6">
+                                        <p>{{input_propiedad_map.propiedad.nroHabitaciones}}</p>
+                                    </dd>
+                                </dl>
+                                <dl class="row mt-0 mb-0" >
+                                    <dt class="col-sm-6 text-warning">Tamaño terreno:</dt>
+                                    <dd class="col-sm-6">
+                                        <p>{{input_propiedad_map.propiedad.tamano}}</p>
+                                    </dd>
+                                </dl>
+                            </dd>
+                            <dt class="col-sm-4">Daños registrados</dt>
+                            <dd class="col-sm-8">
+                                <p>{{input_propiedad_map.propiedad.descripcionDanios }}</p>
+                            </dd>
+                            <dt class="col-sm-4">Permite Mascotas?</dt>
+                            <dd class="col-sm-8">
+                                <p>{{input_propiedad_map.propiedad.permiteMascotas?'Sí':'No'}}</p>
+                            </dd>
+
+                            <dt class="col-sm-4">Condiciones de Pago</dt>
+                            <dd class="col-sm-8">
+                                <button class="btn btn-primary" (click)="verCondicionPago()">Ver las Condiciones de Pago</button>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-                <div class="row justify-content-center mt-3">
-                    <div *ngIf="lsImagenes.length>0">
-                        <div *ngFor="let img of lsImagenes | paginate: { itemsPerPage: 1, currentPage: p }">
-                            <div class="col-12">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title text-center">Imagenes de la propiedad</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-center mt-3">
+                            <div *ngIf="lsImagenes.length>0">
+                                <div *ngFor="let img of lsImagenes | paginate: { itemsPerPage: 1, currentPage: p }">
+                                    <div class="col-12">
+                                        <div class="card" style="width: 20rem;">
+                                            <img class="card-img-top" [src]="img.foto" [alt]="img.obj.nombreFoto"
+                                                height="360">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="lsImagenes.length==0">
+                                <label>
+                                    <h5 class="text-center">La propiedad no presenta imagenes disponibles</h5>
+                                </label>
                                 <div class="card" style="width: 20rem;">
-                                    <img class="card-img-top" [src]="img.foto" [alt]="img.obj.nombreFoto" height="360">
+                                    <img class="card-img-top" src="assets/img/house_placeholder.jpg"
+                                        alt="house_placeholder" height="360">
                                 </div>
                             </div>
                         </div>
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
-                    <div *ngIf="lsImagenes.length==0">
-                        <label><h5 class="text-center">La propiedad no presenta imagenes disponibles</h5></label>
-                        <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" src="assets/img/house_placeholder.jpg" alt="house_placeholder" height="360">
+                    <div class="card-footer">
+                        <div class="row justify-content-center">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
                         </div>
                     </div>
                 </div>
@@ -35,7 +114,7 @@
     </div>
     <div class="card-footer mt-0">
         <div class="row p-3">
-            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="solicitar()">Solicitar</button>
+            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="solicitar()">Formular Propuesta para Alquilar</button>
         </div>
     </div>
 </div>

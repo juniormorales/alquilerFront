@@ -1,0 +1,42 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h5 class="card-title text-center">Condiciones de Pago</h5>
+    </div>
+    <div class="card-body justify-content-center">
+        <dl class="row">
+            <dt class="col-sm-6 text-warning">Precio</dt>
+            <dd class="col-sm-6">
+                <p>{{ input_condicion_pago.precio}}</p>
+            </dd>
+
+            <dt class="col-sm-6 text-warning">Tiempo Min. Contrato</dt>
+            <dd class="col-sm-6">
+                <p>{{ input_condicion_pago.tiempoMinContrato + " meses"}}</p>
+            </dd>
+
+            <dt class="col-sm-6 text-warning">Rango Monto Garantia</dt>
+            <dd class="col-sm-6">
+                <p>{{"S/."+ input_condicion_pago.montoMinGarantia + " - " + "S/."+ input_condicion_pago.montoMaxGarantia }}</p>
+            </dd>
+
+            <dt class="col-sm-6 text-warning">Dia del mes Cobro</dt>
+            <dd class="col-sm-6">
+                <p>{{ input_condicion_pago.diaMesCobro }}</p>
+            </dd>
+
+            <dt class="col-sm-6 text-warning">Tasa Recargo por retraso</dt>
+            <dd class="col-sm-6">
+                <p>{{ input_condicion_pago.tasaRecargo + "%"}}</p>
+            </dd>
+
+            <dt class="col-sm-6 text-warning">El arrendero se hace cargo de las reparaciones por daños hechos?</dt>
+            <dd class="col-sm-6">
+                <p>{{ input_condicion_pago.responsabilidadReparar?'Sí':'No' }}</p>
+            </dd>
+        </dl>
+    </div>
+</div>

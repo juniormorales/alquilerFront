@@ -1,0 +1,32 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Formular Propuesta</h6>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="solForm">
+            <div class="row">
+                <div class="col-12">
+                    <label> Tiempo de Arrendamiento</label>
+                    <div class=" form-group">
+                        <input class="form-control" type="number" placeholder="meses" formControlName="tiempo" />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label> N° Huespedes </label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number" formControlName="nrohuesp" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer mt-0">
+        <div class="row p-3">
+            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="solicitar()" [disabled]="solForm.invalid">Enviar Solicitud</button>
+        </div>
+    </div>
+</div>

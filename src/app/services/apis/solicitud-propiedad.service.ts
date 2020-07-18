@@ -17,6 +17,17 @@ export class SolicitudPropiedadService {
     private spinner: NgxSpinnerService
   ) { }
 
+  registrarSolicitudPropiedad(solicitud: ISolicitudPropiedad){
+    this.spinner.show();
+    return this.http.post( environment.urlApiRest + 'sol-prop/registrarSolicitud',solicitud).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
 
   listarSolicitudesEnTramiteParaArrendero(idArrendero: number){
     this.spinner.show();
@@ -50,7 +61,7 @@ export class SolicitudPropiedadService {
       }),
       catchError((err:HttpErrorResponse)=> this.errorHandler(err))
     );
-  }listarSolAcep
+  }
 
   editarSolicitudArrendatario(sol:ISolicitudPropiedad){
     this.spinner.show();
