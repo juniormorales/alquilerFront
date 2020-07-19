@@ -7,5 +7,7 @@ export interface IRenta {
     cantidad?: number;
     estado?: number;
     importeAtrasado:number;
+    envioPago?: number;
+    montoAcumuladoCancelado?:number;
     inquilino?: IInquilino;
 }

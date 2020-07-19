@@ -1,3 +1,89 @@
 <div class="content animate__animated animate__fadeIn animate__fast">
-    <p>record-pagos works!</p>
+    <div class=" header text-center">
+        <h3 class=" title">Record de Pagos Tramitados </h3>
+    </div>
+    <div class=" row">
+        <div class=" col-md-12">
+            <div class=" card card-timeline card-plain">
+                <div class=" card-body">
+                    <ul class="timeline" *ngFor="let pago of lsPagos; let i = index;">
+                        <li [ngClass]="{'timeline-inverted': i%2!=0}">
+                            <div class=" timeline-badge"
+                                [ngClass]="{'danger':pago.rechazado, 'success':'pago.estado','warning':!pago.estado}">
+                                <i class=" tim-icons"
+                                    [ngClass]="{'icon-check-2':pago.estado,'icon-simple-remove':pago.rechazado,'icon-button-pause':!pago.estado }">
+                                </i>
+                            </div>
+                            <div class=" timeline-panel">
+                                <div class=" timeline-heading">
+                                    <div *ngIf="!pago.rechazado; else rechazado">
+                                        <span class=" badge badge-pill"
+                                            [ngClass]="{'badge-success':pago.estado,'badge-warning':!pago.estado }">
+                                            Pago {{pago.estado?'Aceptado':'Por Confirmar'}}
+                                        </span>
+                                    </div>
+                                    <ng-template #rechazado>
+                                        <span class=" badge badge-pill badge-danger">
+                                            Pago Rechazado
+                                        </span>
+                                    </ng-template>
+                                </div>
+                                <div class=" timeline-body">
+                                    <p class="h4 text-center pb-3">
+                                        <i class="mdi mdi-calendar-clock"> <span class="pl-3">Registrado:
+                                                {{pago.fechaRegistro | date:'fullDate'}}</span></i>
+                                    </p>
+                                    <blockquote class="blockquote text-center">
+                                        <dl class="row pt-3">
+                                            <dt class="col-sm-6">
+                                                <p class="text-center" [ngClass]="{'text-white':i%2==0}">Monto Cancelado
+                                                </p>
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                <p [ngClass]="{'text-white':i%2==0}">S/.{{ pago.monto}}</p>
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                <p class="text-center" [ngClass]="{'text-white':i%2==0}">Monto Restante
+                                                </p>
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                <p [ngClass]="{'text-white':i%2==0}">S/.{{ pago.montoRestante}}</p>
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                <p class="text-center" [ngClass]="{'text-white':i%2==0}">Vencimiento
+                                                    Renta</p>
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                <p [ngClass]="{'text-white':i%2==0}">
+                                                    {{ pago.renta.fechaRenta | date:'fullDate'}}</p>
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                <p class="text-center" [ngClass]="{'text-white':i%2==0}">Estado Renta
+                                                </p>
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                <p [ngClass]="{'text-white':i%2==0}">
+                                                    {{ pago.renta.estado==1?'Cancelado':pago.renta.estado==0?'Incompleto':'Atrasado'}}
+                                                </p>
+                                            </dd>
+                                        </dl>
+                                    </blockquote>
+                                </div>
+                                <div class="row justify-content-center p-3" *ngIf="!pago.rechazado && pago.estado">
+                                    <button class="btn btn-info  btn-lg btn-block">Ver Boleta</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

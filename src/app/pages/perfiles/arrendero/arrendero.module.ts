@@ -50,6 +50,7 @@ import { UbicacionMapsComponent } from './modulos/mis-propiedades/modals/IU-prop
 import { FechaInicioContratoComponent } from './modulos/contratos-pendientes/modals/fecha-inicio-contrato/fecha-inicio-contrato.component';
 import { ModalContratoService } from 'src/app/services/common/modal-contrato.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -92,8 +93,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     GooglePlaceModule,
     AngularMultiSelectModule,
     TabsModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    
+    BsDatepickerModule.forRoot(),    
   ],
   providers:[
     ModalPropiedadService,

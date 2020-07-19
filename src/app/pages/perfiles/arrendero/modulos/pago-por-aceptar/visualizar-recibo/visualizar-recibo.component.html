@@ -18,24 +18,34 @@
                         <p>S./{{ input_pago.renta.cantidad}}</p>
                     </ng-template>
                 </dd>
+                <dt class="col-sm-8 text-warning">Monto restante</dt>
+                <dd class="col-sm-4">
+                    <div *ngIf="input_pago.renta.estado==2; else noAtrasadoRestante">
+                        <p>S./{{ input_pago.renta.cantidad + input_pago.renta.importeAtrasado - input_pago.renta.montoAcumuladoCancelado }}</p>
+                    </div>
+                    <ng-template #noAtrasadoRestante>
+                        <p>S./{{ input_pago.renta.cantidad - input_pago.renta.montoAcumuladoCancelado }}</p>
+                    </ng-template>
+                </dd>
             </dl>
             <label> Monto indicado en el voucher</label>
             <div class="form-group">
-                <input class="form-control" type="number" placeholder="S/." />
+                <input class="form-control" type="number" placeholder="S/." [(ngModel)]="monto" />
             </div>
         </div>
         <div class="col-12">
             <div class="row justify-content-center">
                 <div class="card" style="width: 22rem;">
-                    <img class="card-img-top" [src]="input_pago.urlVoucher" alt="boleta" height="280">
+                    <img class="card-img-top" [ngClass]="{'zoom-in zoom-minus':disminuir, 'zoom-out zoom-plus':!disminuir}" [src]="imgURL" alt="boleta" height="380" 
+                    (click)="disminuir = !disminuir;">
                 </div>
             </div>
         </div>
     </div>
     <div class="card-footer">
         <div class="row justify-content-center">
-            <button type="button" class="btn btn-success  ">Confirmar</button>
-            <button type="button" class="btn btn-danger  ">Rechazar</button>
+            <button type="button" class="btn btn-success" [disabled]="monto==0" (click)="confirmar()">Confirmar Pago</button>
+            <button type="button" class="btn btn-danger" (click)="rechazar()">Rechazar</button>
         </div>
     </div>
 </div>

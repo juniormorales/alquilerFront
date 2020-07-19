@@ -45,7 +45,6 @@ export class AgregarImagenComponent implements OnInit {
     reader.onloadend = () => {
       this.file = file;
       this.imagePreviewUrl = reader.result;
-      // this.state.imagePreviewUrl1 = reader.result;
     };
     reader.readAsDataURL(file);
   }
@@ -66,9 +65,6 @@ export class AgregarImagenComponent implements OnInit {
 
   handleSubmit($event) {
     $event.preventDefault();
-    // this.state.file is the file/image uploaded
-    // in this function you can save the image (this.state.file) on form submit
-    // you have to call it yourself
   }
 
   subirImagen() {

@@ -37,9 +37,11 @@ export class PagosPorVencerComponent implements OnInit {
   }
 
   registrarPago(renta: IRenta){
-    this.modalBoleta.modalRegistrarPago(renta).subscribe(resp=>{},err=>{},()=>{
-      this.listarRentasPendientes();
-    })
+    if(renta.envioPago != 0){
+      this.modalBoleta.modalRegistrarPago(renta).subscribe(resp=>{},err=>{},()=>{
+        this.listarRentasPendientes();
+      })
+    }
   }
 
   listarRentasPendientes(){

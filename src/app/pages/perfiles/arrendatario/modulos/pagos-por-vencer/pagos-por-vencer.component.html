@@ -48,7 +48,7 @@
                                 </ngx-datatable-column>
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
-                                        <span>Estado</span>
+                                        <span>Estado Renta</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         {{row.estado==0?'Pendiente':row.estado==1?'Cancelado':'Vencido'}}
@@ -56,12 +56,21 @@
                                 </ngx-datatable-column>
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
+                                        <span>Estado Pago</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.envioPago==0?'Pago enviado':row.envioPago==1?'Pago Rechazado':row.envioPago==2?'Sin Enviar':'Incompleto'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
                                         <span>Registrar Pago</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
-                                        <i class="tim-icons icon-money-coins" aria-hidden="true"
-                                            style="cursor: pointer; font-size: 25px;"
-                                            (click)="registrarPago(row)"></i>
+                                        <div class="icon" [ngClass]="{' icon-danger': row.envioPago!=0, 'icon-success':row.envioPago==0 }">
+                                            <i class="tim-icons icon-money-coins" aria-hidden="true"
+                                            style="cursor: pointer; font-size: 25px;" (click)="registrarPago(row)"></i>
+                                        </div>
                                     </ng-template>
                                 </ngx-datatable-column>
                             </ngx-datatable>

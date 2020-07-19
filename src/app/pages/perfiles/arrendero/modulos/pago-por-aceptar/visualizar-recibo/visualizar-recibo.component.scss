@@ -1,0 +1,15 @@
+.zoom-plus:hover {
+  cursor: zoom-in;
+}
+
+.zoom-minus:hover {
+  cursor: zoom-out;
+}
+
+.zoom-out{
+  transform: scale(1);
+}
+
+.zoom-in{
+  transform: scale(2);
+}

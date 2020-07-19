@@ -43,7 +43,6 @@ export class PagoPorAceptarComponent implements OnInit {
   listarPagosPorAceptar() {
     this.pagoService.listarPagosPendientesPorConfirmar(this.idArrendero).subscribe((resp: any) => {
       this.lsPagos = resp.aaData;
-      console.log(this.lsPagos)
       this.llenarTabla();
     })
   }
@@ -55,6 +54,7 @@ export class PagoPorAceptarComponent implements OnInit {
 
   verRecibo(pago: IPago) {
     this.modalService.modalVerRecibo(pago).subscribe(resp => { }, err => { }, () => {
+      this.listarPagosPorAceptar();
     });
   }
 

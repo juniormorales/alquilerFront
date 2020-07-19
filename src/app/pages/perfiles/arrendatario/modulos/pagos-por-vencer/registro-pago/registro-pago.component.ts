@@ -30,6 +30,7 @@ export class RegistroPagoComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.input_renta)
     this.file = null;
     this.imagePreviewUrl =
       this.image !== undefined
@@ -76,8 +77,10 @@ export class RegistroPagoComponent implements OnInit {
       arrendero: this.input_renta.inquilino.arrendero
     }
     this.pagoService.enviarPagoParaConfirmacion(pago).subscribe((resp:any)=>{
-      Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+      this.pagoService.subirImagenVoucher(this.file,resp.id).subscribe((res:any)=>{
+        Swal.fire(res.titulo,res.mensaje,res.tipo);
       this.bsModalRef.hide();
+      })
     });
   }
 
