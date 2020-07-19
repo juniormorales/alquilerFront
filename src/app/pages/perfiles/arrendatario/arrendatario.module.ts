@@ -13,7 +13,7 @@ import { DeudasPendientesComponent } from './modulos/deudas-pendientes/deudas-pe
 import { RecordPagosComponent } from './modulos/record-pagos/record-pagos.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 //MAPS
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -29,6 +29,10 @@ import { VerCondicionPagoPropiedadComponent } from './modulos/presentacion-propi
 import { ModalCondicionPagoService } from 'src/app/services/common/modal-condicion-pago.service';
 import { ProponerSolicitudPropiedadComponent } from './modulos/presentacion-propiedades/proponer-solicitud-propiedad/proponer-solicitud-propiedad.component';
 import { ModalSolicitudPropiedadService } from 'src/app/services/common/modal-solicitud-propiedad.service';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
+import { ModalVisualizarReciboService } from 'src/app/services/common/modal-visualizar-recibo.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,21 +50,27 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RecordPagosComponent, 
     EditarSolicitudComponent, 
     RegistroPagoComponent, 
-    VerPropiedadInfoComponent, VerCondicionPagoPropiedadComponent, ProponerSolicitudPropiedadComponent,
+    VerPropiedadInfoComponent, 
+    VerCondicionPagoPropiedadComponent, 
+    ProponerSolicitudPropiedadComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: "never" }),
     ArrendatarioRoutingModule,
     SharedModule,
     NgxSpinnerModule,
     NgxDatatableModule,
     CollapseModule.forRoot(),
-    ReactiveFormsModule,
     GoogleMapsModule,
     GooglePlaceModule,
     ModalModule.forRoot(),
     NgxPaginationModule,
+    AlertModule.forRoot(),
     PerfectScrollbarModule,
+    AngularMultiSelectModule,
+    JwBootstrapSwitchNg2Module,
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
@@ -70,6 +80,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalPresentarPropiedadService,
     ModalCondicionPagoService,
     ModalSolicitudPropiedadService,
+    ModalVisualizarReciboService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

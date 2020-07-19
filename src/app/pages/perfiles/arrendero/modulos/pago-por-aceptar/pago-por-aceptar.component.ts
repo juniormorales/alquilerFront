@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-
 import { ModalVisualizarReciboService } from './../../../../../services/common/modal-visualizar-recibo.service';
 import { IPago } from '../../../../../../models/IPago';
+import { PagoService } from 'src/app/services/apis/pago.service';
 
 
 @Component({
@@ -13,120 +12,49 @@ import { IPago } from '../../../../../../models/IPago';
 })
 export class PagoPorAceptarComponent implements OnInit {
 
-
-  
   //Variables NgxTable
   entries: number = 5;
   temp = [];
 
   idArrendero: number;
- 
- 
-  pagos: IPago[] = [];
-  
+  lsPagos: IPago []=[];
 
-  constructor( private modalService : ModalVisualizarReciboService
-   /*,private solPropiedad: SolicitudPropiedadService,*/) { }
+  constructor(
+    private modalService: ModalVisualizarReciboService,
+    private pagoService: PagoService,
+  ) { }
 
   ngOnInit(): void {
     this.idArrendero = Number.parseInt(sessionStorage.getItem('id'));
-    //this.listarSolicitantes();
-    this.pagosPorAceptar();
+    this.listarPagosPorAceptar();
   }
 
   //Metodos Para NgxTable
   llenarTabla() {
-    this.temp = this.pagos.map((prop, key) => {
+    this.temp = this.lsPagos.map((prop, key) => {
       return {
         ...prop,
         id: key
       };
-      
+
     });
   }
-  //LLAMA AL SERVICIO
-  /*
-   listarSolicitantes() {
-    this.solPropiedad.listarSolicitudesEnTramiteParaArrendero(this.idArrendero).subscribe((resp:any)=>{
-      this.solicitudes = resp.aaData;
+
+  listarPagosPorAceptar() {
+    this.pagoService.listarPagosPendientesPorConfirmar(this.idArrendero).subscribe((resp: any) => {
+      this.lsPagos = resp.aaData;
+      console.log(this.lsPagos)
       this.llenarTabla();
     })
   }
-*/
-
-// DATOS FICTICIOS DE PAGO AUN NO ACEPTADOS
-pagosPorAceptar() {
-
-  this.pagos = [
-    //recibo 1
-    { 
-        idPago: 1,
-        monto: 500,
-        urlVoucher:'assets/img/recibos/r1.jpg',
-        estado:false,//SI SE ACPETA DEBE CAMBIAR A TRUE
-        renta:{
-          importeAtrasado:500,
-            inquilino:
-              {
-                propiedad: {
-                  alias:'Propiedad del Callao',
-
-                  
-                },
-                arrendatario: {
-                  usuario:{
-                    dni: '18181818',
-                    nombres: 'Jose Luis',
-                    apellidos:'Hernandez Ramirez',
-
-                  }
-                },
-                        
-              },
-          },
-      
-    },
-    //recibo 2
-    { 
-      idPago: 2,
-      monto: 680,
-      urlVoucher:'assets/img/recibos/r1.jpg',
-      estado:false,//SI SE ACPETA DEBE CAMBIAR A TRUE
-      renta:{
-        importeAtrasado:680,
-          inquilino:
-            {
-              propiedad: {
-                alias:'Propiedad de Lima',
-
-                
-              },
-              arrendatario: {
-                usuario:{
-                  dni: '20202020',
-                  nombres: 'Jhon Hairo',
-                  apellidos:'Velasquez',
-
-                }
-              },
-                      
-            },
-        },
-    },
-  ];
-
-  this.llenarTabla();
-}
-
-
 
   entriesChange($event) {
     this.entries = $event.target.value;
   }
 
 
-  verRecibo(pago:IPago) {
-    this.modalService.modalVerRecibo(pago).subscribe(resp => {}, err => {}, () => {
+  verRecibo(pago: IPago) {
+    this.modalService.modalVerRecibo(pago).subscribe(resp => { }, err => { }, () => {
     });
   }
 

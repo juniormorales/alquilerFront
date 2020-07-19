@@ -1,22 +1,68 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { IInquilino } from 'src/models/IInquilino';
+import { InquilinoService } from 'src/app/services/apis/inquilino.service';
+import { RentaService } from 'src/app/services/apis/renta.service';
+import { IRenta } from 'src/models/IRenta';
+import { ModalVisualizarReciboService } from 'src/app/services/common/modal-visualizar-recibo.service';
 
 @Component({
   selector: 'app-pagos-por-vencer',
-  templateUrl: './pagos-por-vencer.component.html',
-  styleUrls: ['./pagos-por-vencer.component.scss']
+  templateUrl: './pagos-por-vencer.component.html'
 })
 export class PagosPorVencerComponent implements OnInit {
 
-  modalRef: BsModalRef;
+  //Variables NgxTable
+  entries: number = 5;
+  temp = [];
 
-  constructor(private modalService: BsModalService) { }
+  modalRef: BsModalRef;
+  inquilino: IInquilino;
+  idArrendatario: number;
+
+  lsRentas: IRenta[] = [];
+
+  constructor(
+    private modalBoleta : ModalVisualizarReciboService,
+    private inquilinoService : InquilinoService,
+    private rentaService: RentaService,
+    ) { }
 
   ngOnInit(): void {
+    this.idArrendatario = Number.parseInt(sessionStorage.getItem('id'));
+    this.inquilinoService.obtenerInquilinoActivo(this.idArrendatario).subscribe((resp:any)=>{
+      this.inquilino = resp.defaultObj;
+      this.listarRentasPendientes();
+    })
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  registrarPago(renta: IRenta){
+    this.modalBoleta.modalRegistrarPago(renta).subscribe(resp=>{},err=>{},()=>{
+      this.listarRentasPendientes();
+    })
+  }
+
+  listarRentasPendientes(){
+    this.rentaService.listarRentasPendientes(this.inquilino).subscribe((resp:any)=>{
+      this.lsRentas = resp.aaData;
+      console.log(this.lsRentas)
+      this.llenarTabla();
+    })
+  }
+
+  entriesChange($event) {
+    this.entries = $event.target.value;
+  }
+
+   //Metodos Para NgxTable
+   llenarTabla() {
+    this.temp = this.lsRentas.map((prop, key) => {
+      return {
+        ...prop,
+        id: key
+      };
+      
+    });
   }
 
 }

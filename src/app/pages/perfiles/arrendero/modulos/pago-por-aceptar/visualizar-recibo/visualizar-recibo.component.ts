@@ -5,8 +5,7 @@ import { IPago } from '../../../../../../../models/IPago';
 
 @Component({
   selector: 'app-visualizar-recibo',
-  templateUrl: './visualizar-recibo.component.html',
-  styleUrls: ['./visualizar-recibo.component.scss']
+  templateUrl: './visualizar-recibo.component.html'
 })
 export class VisualizarReciboComponent implements OnInit {
 
@@ -16,6 +15,7 @@ export class VisualizarReciboComponent implements OnInit {
     private bsModalRef : BsModalRef) { }
 
   ngOnInit(): void {
+    console.log(this.input_pago)
   }
 
 

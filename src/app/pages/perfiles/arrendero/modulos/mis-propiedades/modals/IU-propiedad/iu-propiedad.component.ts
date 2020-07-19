@@ -10,6 +10,7 @@ import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { IUbicacionMaps } from 'src/models/IUbicacionMaps';
 import { MapsService } from 'src/app/services/apis/maps.service';
+import { add } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-iu-propiedad',
@@ -73,11 +74,11 @@ export class IUPropiedadComponent implements OnInit {
     this.construirFormulario();
     this.idArrendero = Number.parseInt(sessionStorage.getItem('id'));
     if (this.input_propiedad != null) {
+      this.setearValores();
       this.accion = "A";
       this.staticTabs.tabs[0].disabled = true;
       this.staticTabs.tabs[1].active = true;
       this.confirmado = true;
-      this.setearValores();
     }else{
       this.staticTabs.tabs[1].disabled = true;
       this.confirmado = false;
@@ -87,6 +88,7 @@ export class IUPropiedadComponent implements OnInit {
 
   construirFormulario() {
     this.propiedadForm = this.builder.group({
+      
       alias: ['', Validators.required],
       descripcion_ge: ['', Validators.required],
       nro_hab: [0, Validators.required],
@@ -111,6 +113,7 @@ export class IUPropiedadComponent implements OnInit {
   }
 
   private setearValores() {
+    this.address = this.input_propiedad.direccion;
     this.propiedadForm.setValue({
       alias: this.input_propiedad.alias,
       descripcion_ge: this.input_propiedad.descripcionGeneral,
@@ -151,6 +154,7 @@ export class IUPropiedadComponent implements OnInit {
         idArrendero: this.idArrendero
       }
     };
+    propiedad.direccion = this.address;
     return propiedad;
   }
 
@@ -197,7 +201,6 @@ export class IUPropiedadComponent implements OnInit {
   }
 
   recibirMark(event) {
-    console.log(event)
     this.staticTabs.tabs[1].disabled = false;
     this.staticTabs.tabs[0].disabled = true;
     this.staticTabs.tabs[0].active = false;

@@ -3,17 +3,46 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="text-center">Busqueda</h3>
+                    <h3 class="text-center">Busqueda Propiedades</h3>
                 </div>
             </div>
             <div class=" card-body">
                 <div class="row justify-content-center">
-                    <div class="col-6">
-                        <input class="form-control" ngx-google-places-autocomplete [options]='optionsSearch'
-                            #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
+                    <div class="col-12 col-lg-4 text-center">
+                        <label class="pb-3">¡Muevete a una direccion!</label>
+                        <div class="input-group">
+                            <div class=" input-group-prepend">
+                                <div class=" input-group-text">
+                                    <i class="tim-icons icon-map-big"></i>
+                                </div>
+                            </div>
+                            <input class="form-control" ngx-google-places-autocomplete [options]='optionsSearch'
+                                #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <input class="form-control" />
+                    <div class="col-12 col-lg-8 text-center">
+                        <label class="pb-3">Selecciona un filtro para tu busqueda</label>
+                        <div class="row">
+                            <div class="col-12 col-md-3 pb-3 pb-md-0">
+                                <angular2-multiselect [data]="dataTarifa" [(ngModel)]="selectTarifa"
+                                    [settings]="settingsTarifa" (onDeSelect)="onTarifaDeselect($event)">
+                                </angular2-multiselect>
+                            </div>
+                            <div class=" col-12 col-md-3 pb-3 pb-md-0">
+                                <angular2-multiselect [data]="datapisos" [(ngModel)]="selectPiso"
+                                    [settings]="settingsPisos" (onDeSelect)="onPisoDeselect($event)">
+                                </angular2-multiselect>
+                            </div>
+                            <div class=" col-12 col-md-3 pb-3 pb-md-0">
+                                <angular2-multiselect [data]="datahabitaciones" [(ngModel)]="selectHabitacion"
+                                    [settings]="settingsHabitaciones" (onDeSelect)="onHabitacionDeselect($event)">
+                                </angular2-multiselect>
+                            </div>
+                            <div class=" col-12 col-md-3 pb-3 pb-md-0">
+                                <button class="btn btn-danger" (click)="filtrar()">Filtrar</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -25,8 +54,7 @@
                 <div class=" mt-5 ml-3 mr-3">
                     <google-map height="600px" width="100%" [zoom]="zoom" [center]="center" [options]="options">
                         <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position"
-                            [label]="marker.label" [options]="marker.options"
-                            (mapClick)="openInfo(markerElem, marker)">
+                            [label]="marker.label" [options]="marker.options" (mapClick)="openInfo(markerElem, marker)">
                         </map-marker>
                     </google-map>
                 </div>

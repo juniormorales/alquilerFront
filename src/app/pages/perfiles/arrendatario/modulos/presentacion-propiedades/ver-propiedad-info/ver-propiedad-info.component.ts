@@ -14,6 +14,7 @@ export class VerPropiedadInfoComponent implements OnInit {
 
   input_propiedad_map: any;
   lsImagenes: any[] = [];
+  encontroSolicitud: boolean;
 
   //Variables de paginacion
   p: number = 1;
@@ -24,9 +25,11 @@ export class VerPropiedadInfoComponent implements OnInit {
     private propiedadService : PropiedadService,
     private modal2Service: ModalCondicionPagoService,
     private modalSolicitudService: ModalSolicitudPropiedadService,
+    private solicitudPropiedadService: SolicitudPropiedadService,
   ) { }
 
   ngOnInit(): void {
+    this.buscarSolicitudExistente();
     this.listarImagenes();
   }
 
@@ -45,6 +48,12 @@ export class VerPropiedadInfoComponent implements OnInit {
   listarImagenes() {
     this.propiedadService.listarImagenes(this.input_propiedad_map.propiedad.idPropiedad).subscribe((resp: any) => {
       this.lsImagenes = resp.aaData;
+    })
+  }
+
+  buscarSolicitudExistente(){
+    this.solicitudPropiedadService.buscarSolicitudExistente(this.input_propiedad_map.propiedad.idPropiedad).subscribe((resp:any)=>{
+      this.encontroSolicitud = resp.encontro;
     })
   }
 

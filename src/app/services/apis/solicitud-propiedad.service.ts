@@ -51,6 +51,17 @@ export class SolicitudPropiedadService {
     );
   }
 
+  buscarSolicitudExistente(idPropiedad: number){
+    this.spinner.show();
+    return this.http.get( environment.urlApiRest + 'sol-prop/buscarSolicitudExistente/'+idPropiedad).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
   
   listarSolAceptadasArrendatario(idArrendatario: number){
     this.spinner.show();

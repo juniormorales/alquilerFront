@@ -1,17 +1,42 @@
-<div class="content animate__animated animate__fadeIn animate__fast">
-    <p>Subir tu Boleta</p>
-    <form [formGroup]="uploadForm" (ngSubmit)="submit()">
-        <!-- Select File -->
-        <input type="file" accept="image/*" (change)="showPreview($event)" />
-
-        <!-- Image Preview -->
-        <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
-            <img [src]="imageURL" [alt]="uploadForm.value.name">
+<div class="card mb-0 content animate__animated animate__fadeIn animate__fast">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Subir imagen del voucher cancelado para la fecha {{input_renta.fechaRenta | date:'fullDate'}}</h6>
+    </div>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="fileinput text-center">
+                <input type="file" (change)="handleImageChange($event)" #fileInput accept="image/x-png,image/jpg,image/jpeg" />
+                <div class="thumbnail" [ngClass]="{ 'img-circle': avatar }">
+                  <img src="{{ imagePreviewUrl }}" alt="..." />
+                </div>
+                <div>
+                  <button *ngIf="file === null && avatar" class="btn-round btn btn-danger" (click)="handleClick()">
+                    Agregar Foto
+                  </button>
+                  <button *ngIf="file === null && !avatar" class="btn-round btn btn-primary" (click)="handleClick()">
+                    Seleccionar Imagen voucher
+                  </button>
+                  <span *ngIf="file !== null">
+                    <button class="btn-round btn btn-primary" (click)="handleClick()">
+                      Cambiar
+                    </button>
+                    <br *ngIf="avatar" />
+                    <button class="btn-round btn btn-danger" (click)="handleRemove()">
+                      <i class="fa fa-times"></i> Remover
+                    </button>
+                  </span>
+                </div>
+              </div>
         </div>
-
-        <!-- Assign Image Alt -->
-        <input formControlName="name" placeholder="Enter name">
-
-        <button class="btn btn-primary" type="submit">Subir</button>
-    </form>
+    </div>
+    <div class="card-footer mt-0">
+        <div class="row p-3">
+            <button type="button" class="btn btn-primary  btn-lg btn-block"
+                (click)="subirImagen()" [disabled]="file==null">Subir Imagen</button>
+        </div>
+    </div>
 </div>

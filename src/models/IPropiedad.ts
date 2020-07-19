@@ -19,4 +19,5 @@ export interface IPropiedad {
     nroPartida?:number;
     confirmado?:boolean;
     rechazado?:boolean;
+    direccion?:string;
 }

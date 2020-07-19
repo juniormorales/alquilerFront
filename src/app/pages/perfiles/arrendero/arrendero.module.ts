@@ -33,7 +33,7 @@ import { ModalCondicionPagoService } from 'src/app/services/common/modal-condici
 import { AgregarImagenComponent } from './modulos/mis-propiedades/modals/agregar-imagen/agregar-imagen.component';
 import { EliminarImagenComponent } from './modulos/mis-propiedades/modals/eliminar-imagen/eliminar-imagen.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { VerDetalleSolicitudComponent } from './modulos/solicitudes/ver-detalle-solicitud/ver-detalle-solicitud.component';
 import { ModalVerDetalleSolService } from 'src/app/services/common/modal-ver-detalle-sol.service';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
@@ -47,6 +47,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { UbicacionMapsComponent } from './modulos/mis-propiedades/modals/IU-propiedad/ubicacion-maps/ubicacion-maps.component';
+import { FechaInicioContratoComponent } from './modulos/contratos-pendientes/modals/fecha-inicio-contrato/fecha-inicio-contrato.component';
+import { ModalContratoService } from 'src/app/services/common/modal-contrato.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -70,7 +73,8 @@ import { UbicacionMapsComponent } from './modulos/mis-propiedades/modals/IU-prop
     VerDetalleSolicitudComponent,
     RechazarSolicitudComponent,
     VisualizarReciboComponent,
-    UbicacionMapsComponent,/////////////katriel
+    UbicacionMapsComponent,
+    FechaInicioContratoComponent,/////////////katriel
   ],
   imports: [
     CommonModule,
@@ -82,17 +86,20 @@ import { UbicacionMapsComponent } from './modulos/mis-propiedades/modals/IU-prop
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     NgxPaginationModule,
+    FormsModule,
     ReactiveFormsModule,
     GoogleMapsModule,
     GooglePlaceModule,
     AngularMultiSelectModule,
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     
   ],
   providers:[
     ModalPropiedadService,
     ModalCondicionPagoService,
     ModalVerDetalleSolService,
+    ModalContratoService,
     ModalVisualizarReciboService //////////////katriel
   ],
   schemas: [

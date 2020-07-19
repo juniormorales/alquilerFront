@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { IRenta } from 'src/models/IRenta';
+import Swal from 'sweetalert2';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { IPago } from 'src/models/IPago';
+import { PagoService } from 'src/app/services/apis/pago.service';
 
 @Component({
   selector: 'app-registro-pago',
@@ -7,40 +12,79 @@ import { FormBuilder, FormGroup } from "@angular/forms";
   styleUrls: ['./registro-pago.component.scss']
 })
 export class RegistroPagoComponent implements OnInit {
+  
+  input_renta: IRenta;
 
-  imageURL: string;
-  uploadForm: FormGroup;
+  @Input() avatar: boolean = false;
+  @Input() image: string;
+  file: any = {};
+  imagePreviewUrl: any = {};
+  @ViewChild("fileInput") fileInput: ElementRef;
 
-  constructor(public fb: FormBuilder) {
-    // Reactive Form
-    this.uploadForm = this.fb.group({
-      avatar: [null],
-      name: ['']
-    })
+  constructor(
+    private modalService: BsModalService,
+    private bsModalRef: BsModalRef,
+    private pagoService: PagoService,
+  ) {
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
-  ngOnInit(): void { }
+  ngOnInit() {
+    this.file = null;
+    this.imagePreviewUrl =
+      this.image !== undefined
+        ? this.image
+        : this.avatar
+          ? "assets/img/placeholder.jpg"
+          : "assets/img/image_placeholder.jpg";
+  }
 
+  handleImageChange($event) {
+    $event.preventDefault();
+    let reader = new FileReader();
+    let file = $event.target.files[0];
+    reader.onloadend = () => {
+      this.file = file;
+      this.imagePreviewUrl = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
 
-  // Image Preview
-  showPreview(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.uploadForm.patchValue({
-      avatar: file
-    });
-    this.uploadForm.get('avatar').updateValueAndValidity()
+  handleClick() {
+    this.fileInput.nativeElement.click();
+  }
+  handleRemove() {
+    this.file = null;
+    this.imagePreviewUrl =
+      this.image !== undefined
+        ? this.image
+        : this.avatar
+          ? "assets/img/placeholder.jpg"
+          : "assets/img/image_placeholder.jpg";
+    this.fileInput.nativeElement.value = null;
+  }
 
-    // File Preview
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imageURL = reader.result as string;
+  handleSubmit($event) {
+    $event.preventDefault();
+  }
+
+  subirImagen() {
+    var pago :IPago = {
+      estado: false,
+      monto: 0.0,
+      renta: this.input_renta,
+      arrendero: this.input_renta.inquilino.arrendero
     }
-    reader.readAsDataURL(file)
+    this.pagoService.enviarPagoParaConfirmacion(pago).subscribe((resp:any)=>{
+      Swal.fire(resp.titulo,resp.mensaje,resp.tipo);
+      this.bsModalRef.hide();
+    });
   }
 
-  // Submit Form
-  submit() {
-    console.log(this.uploadForm.value)
+  //Metodos modal
+  public cerrarModal() {
+    this.modalService.setDismissReason('CERRAR');
+    this.bsModalRef.hide();
   }
 
 }

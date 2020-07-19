@@ -1,15 +1,74 @@
-<div class="content animate__animated animate__fadeIn animate__fast">
-    <p>Pagos por vencer</p>
-    <button class="btn btn-primary" (click)="openModal(template)">Registrar Pago</button>
-    <ng-template #template>
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">Registro de Pagos</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<div class=" content animate__animated animate__fadeIn animate__fast">
+    <div class="col-md-8 ml-auto mr-auto">
+        <h2 class=" text-center">Rentas y Pagos Por Vencer</h2>
+    </div>
+    <div class="row mt-5">
+        <div class=" col-md-12">
+            <div class="card">
+                <div class=" card-body">
+                    <div class=" toolbar">
+                        <div class="dataTables_wrapper py-4 pl-lg-5 pr-lg-5">
+                            <div class="row mb-3">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="datatable_length">
+                                        <label> Mostrar
+                                            <select name="datatable_length" aria-controls="datatable"
+                                                class="form-control form-control-sm" (change)="entriesChange($event)">
+                                                <option value="5" [selected]="entries == 5">5</option>
+                                                <option value="10" [selected]="entries == 10">10</option>
+                                                <option value="25" [selected]="entries == 25">25</option>
+                                                <option value="50" [selected]="entries == 50">50</option>
+                                                <option value="-1" [selected]="entries == -1">All</option>
+                                            </select> registros
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ngx-datatable id="print-section" class="bootstrap  selection-cell" [columnMode]="'force'"
+                                [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+                                [limit]="entries != -1 ? entries : undefined" [rows]="temp" [scrollbarH]="true"
+                                [virtualization]="false">
+
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
+                                        <span>Fecha Vencimiento</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.fechaRenta| date:'fullDate'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
+                                        <span>Propiedad</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.inquilino.propiedad.alias}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
+                                        <span>Estado</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.estado==0?'Pendiente':row.estado==1?'Cancelado':'Vencido'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
+                                        <span>Registrar Pago</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        <i class="tim-icons icon-money-coins" aria-hidden="true"
+                                            style="cursor: pointer; font-size: 25px;"
+                                            (click)="registrarPago(row)"></i>
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <app-registro-pago></app-registro-pago>
-        </div>
-    </ng-template>
+    </div>
 </div>

@@ -4,48 +4,39 @@ import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
+import { IPago } from 'src/models/IPago';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { IUbicacionMaps } from 'src/models/IUbicacionMaps';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MapsService {
+export class PagoService {
+
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService
   ) { }
 
-  registrarPropiedad(ubicacion: IUbicacionMaps) {
+
+  enviarPagoParaConfirmacion(pago: IPago){
     this.spinner.show();
-    return this.http.post(environment.urlApiRest + 'maps/registrarMaps', ubicacion).pipe(
-      map(obj => {
+    return this.http.post( environment.urlApiRest + 'pagos/enviarPagoConfirmacion',pago).pipe(
+      map( obj => {
         this.spinner.hide();
         return obj;
       }),
-      catchError((err: HttpErrorResponse) => this.errorHandler(err))
-    );
-  }
-  
-  listarPropiedadesDisponibles(){
-    this.spinner.show();
-    return this.http.get(environment.urlApiRest + 'maps/listarDisponibles').pipe(
-      map(obj => {
-        this.spinner.hide();
-        return obj;
-      }),
-      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
     );
   }
 
-  filtrarPropiedadesDisponibles(filtro: any){
+  listarPagosPendientesPorConfirmar(idArrendero: number){
     this.spinner.show();
-    return this.http.post(environment.urlApiRest + 'maps/filtrarDisponibles',filtro).pipe(
-      map(obj => {
+    return this.http.get( environment.urlApiRest + 'pagos/listarPagosPorConfirmar/'+idArrendero).pipe(
+      map( obj => {
         this.spinner.hide();
         return obj;
       }),
-      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
     );
   }
 

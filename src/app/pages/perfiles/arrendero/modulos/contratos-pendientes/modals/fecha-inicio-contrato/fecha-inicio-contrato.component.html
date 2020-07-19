@@ -1,0 +1,35 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Fecha de Inicio de Contrato </h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <label> Fecha de Inicio Acordada</label>
+                <div class=" form-group">
+                    <input class="form-control" name="fechaNac" placeholder="Fecha Inicio..."
+                        [(ngModel)]="input_inquilino.fecha_inicio" autocomplete="nope" bsDatepicker type="text"
+                        data-datepicker-color="danger" [bsConfig]="{ isAnimated: true, containerClass: 'theme-red' }" />
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <label>Dia de mes de cobro</label>
+                <div class=" form-group">
+                    <input class="form-control" name="diaCobro" type="number" 
+                    [(ngModel)]="input_inquilino.propiedad.condicionPago.diaMesCobro" disabled/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer mt-0">
+        <div class="row p-3">
+            <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="crearContrato()"
+                [disabled]="input_inquilino.fecha_inicio==null">Crear
+                Contrato</button>
+        </div>
+    </div>
+</div>

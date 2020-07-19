@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ISolicitudPropiedad } from 'src/models/ISolicitudPropiedad';
 import { SolicitudPropiedadService } from 'src/app/services/apis/solicitud-propiedad.service';
+import { ModalPresentarPropiedadService } from 'src/app/services/common/modal-presentar-propiedad.service';
 
 @Component({
   selector: 'app-sol-aceptadas',
@@ -20,6 +21,7 @@ export class SolAceptadasComponent implements OnInit {
  
    constructor(
      private solPropiedad: SolicitudPropiedadService,
+     private modalService: ModalPresentarPropiedadService,
    ) { }
  
    ngOnInit(): void {
@@ -51,9 +53,11 @@ export class SolAceptadasComponent implements OnInit {
    }
 
    verDetallePropiedad(sol: ISolicitudPropiedad){
-      /*this.modalService.modalEditarSolicitud(sol).subscribe(resp=>{},err=>{},()=>{
-        this.listarSolicitudes();
-      })*/
+     var propiedad_map :any = {
+        propiedad: sol.propiedad,
+        ver_detalle: true
+     }
+    this.modalService.modalVerPropiedadInfo(propiedad_map).subscribe();
    }
 
    aceptar(sol:ISolicitudPropiedad){

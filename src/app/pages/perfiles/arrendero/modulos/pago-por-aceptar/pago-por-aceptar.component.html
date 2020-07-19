@@ -38,7 +38,7 @@
 
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>
-                                        <span>Arrendatario</span>
+                                        <span>Inquilino</span>
                                     </ng-template>
                                     <ng-template let-row="row" ngx-datatable-cell-template>
                                         {{row.renta.inquilino.arrendatario.usuario.nombres+' '+row.renta.inquilino.arrendatario.usuario.apellidos}}
@@ -54,6 +54,14 @@
                                     </ng-template>
                                 </ngx-datatable-column>
 
+                                <ngx-datatable-column>
+                                    <ng-template ngx-datatable-header-template>
+                                        <span>Fecha Renta a pagar</span>
+                                    </ng-template>
+                                    <ng-template let-row="row" ngx-datatable-cell-template>
+                                        {{row.renta.fechaRenta | date:'fullDate'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
 
                                 <ngx-datatable-column>
                                     <ng-template ngx-datatable-header-template>

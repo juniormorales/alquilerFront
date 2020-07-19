@@ -29,6 +29,28 @@ export class InquilinoService {
     );
   }
 
+  obtenerInquilinoActivo(idArrendatario: number){
+    this.spinner.show();
+    return this.http.get( environment.urlApiRest + 'inquilino/obtenerInquilino/'+idArrendatario).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
+  listarInquilinosSinContrato(idArrendero: number){
+    this.spinner.show();
+    return this.http.get( environment.urlApiRest + 'inquilino/listarSinContrato/'+idArrendero).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
   darBajaInquilino(inquilino: IInquilino){
     this.spinner.show();
     return this.http.post( environment.urlApiRest + 'inquilino/darBaja',inquilino).pipe(
