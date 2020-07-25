@@ -77,9 +77,11 @@
                     <div class=" input-group" [ngClass]="{'input-group-focus': focus1 === true, 'has-danger': (focus1Touched &&
                       registerF.nroPartidaRegistral.errors) ||(registerF.nroPartidaRegistral.value != '' && registerF.nroPartidaRegistral.errors), 
                       'has-success': !registerF.nroPartidaRegistral.errors}">
-                      <div class=" input-group-prepend">
+                      <div class=" input-group-prepend" style="cursor: pointer;">
                         <div class=" input-group-text">
-                          <i class="tim-icons icon-badge"></i>
+                          <i class="tim-icons icon-badge " tooltip="Usted como propietario debe poseer un numero de partida registral, si posee mas de una propiedad puede 
+                          ingresar cualquier numero, esto es solo para validar que usted posee almenos una propiedad a su nombre"
+                          placement="right" [adaptivePosition]="false"></i>
                         </div>
                       </div>
                       <input class=" form-control" name="nro" autocomplete="off" placeholder="N° Partida Registral"

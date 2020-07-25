@@ -3,7 +3,8 @@ import { IInquilino } from './IInquilino';
 export interface IRenta {
 
     idRenta?: number;
-    fechaRenta?:Date;
+    fechaFinRenta?:Date;
+    fechaIniRenta?:Date;
     cantidad?: number;
     estado?: number;
     importeAtrasado:number;

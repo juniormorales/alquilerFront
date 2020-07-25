@@ -31,8 +31,10 @@ export class PagosPorVencerComponent implements OnInit {
   ngOnInit(): void {
     this.idArrendatario = Number.parseInt(sessionStorage.getItem('id'));
     this.inquilinoService.obtenerInquilinoActivo(this.idArrendatario).subscribe((resp:any)=>{
-      this.inquilino = resp.defaultObj;
+      if(resp.defaultObj!=null){
+        this.inquilino = resp.defaultObj;
       this.listarRentasPendientes();
+      }
     })
   }
 

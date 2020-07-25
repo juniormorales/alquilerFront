@@ -4,8 +4,8 @@
       type="button">
       <i class=" tim-icons icon-simple-remove"></i>
     </button>
-    <h6 class="card-title text-center">Subir imagen del voucher cancelado para la fecha
-      {{input_renta.fechaRenta | date:'fullDate'}}</h6>
+    <h6 class="card-title text-center">Subir imagen del voucher cancelado para la renta
+      {{input_renta.fechaFinRenta | date:'fullDate'}}</h6>
   </div>
   <div class="card-body">
     <div class="row justify-content-center">
@@ -13,7 +13,12 @@
         <dl class="row justify-content-center">
           <dt class="col-sm-8 text-warning">Importe Total (Incluido retraso si hay)</dt>
           <dd class="col-sm-4">         
+             <div *ngIf="input_renta.estado==2; else importaTotalNoAtrasado">
               <p>S./{{ input_renta.cantidad + input_renta.importeAtrasado}}</p>
+             </div>
+             <ng-template #importaTotalNoAtrasado>
+              <p>S./{{ input_renta.cantidad}}</p>
+             </ng-template>
           </dd>
           <dt class="col-sm-8 text-warning">Importe restante (Incluido retraso si hay)</dt>
           <dd class="col-sm-4">

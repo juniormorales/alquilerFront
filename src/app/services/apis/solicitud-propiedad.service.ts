@@ -51,9 +51,9 @@ export class SolicitudPropiedadService {
     );
   }
 
-  buscarSolicitudExistente(idPropiedad: number){
+  buscarSolicitudExistente(idPropiedad: number, idArrendatario:number){
     this.spinner.show();
-    return this.http.get( environment.urlApiRest + 'sol-prop/buscarSolicitudExistente/'+idPropiedad).pipe(
+    return this.http.get( environment.urlApiRest + 'sol-prop/buscarSolicitudExistente/'+idPropiedad+'/'+idArrendatario).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;

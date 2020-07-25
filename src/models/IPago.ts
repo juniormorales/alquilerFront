@@ -11,6 +11,9 @@ export interface IPago {
     estado?: boolean;
     rechazado?:boolean;
     reciboCreado?:boolean;
+    banco?: string;
+    nro_boleta?:string;
+    fechaConfirmado?:Date;
     renta?: IRenta;
     arrendero?: IArrendero;
     inquilino?: IInquilino;

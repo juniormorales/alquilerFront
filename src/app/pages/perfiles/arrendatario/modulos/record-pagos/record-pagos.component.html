@@ -76,7 +76,7 @@
                                     </blockquote>
                                 </div>
                                 <div class="row justify-content-center p-3" *ngIf="!pago.rechazado && pago.estado">
-                                    <button class="btn btn-info  btn-lg btn-block">Ver Boleta</button>
+                                    <button class="btn btn-info  btn-lg btn-block" (click)="descargarBoleta(pago)">Descargar Boleta</button>
                                 </div>
                             </div>
                         </li>

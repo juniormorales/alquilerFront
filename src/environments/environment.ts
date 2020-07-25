@@ -8,6 +8,7 @@ export const environment = {
   urlOauth: 'http://localhost:2000/oauth/token',
   urlApiRest: 'http://localhost:2000/api/',
   urlPublicRest: 'http://localhost:2000/public/',
+  
   /*
  urlLocalHost: 'https://rentame-back.herokuapp.com',
   urlBack: 'https://rentame-back.herokuapp.com/',

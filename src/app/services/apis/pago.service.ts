@@ -102,6 +102,18 @@ export class PagoService {
     return environment.urlApiRest + "pagos/verVoucher/" + id;
   }
 
+  public descargarBoleta(id){
+    this.spinner.show();
+    return this.http.get(environment.urlApiRest + "pagos/descargarBoleta/"+id, {responseType: "arraybuffer"}).pipe(
+      map(obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err: HttpErrorResponse) => this.errorHandler(err))
+    );
+    
+  }
+
   private errorHandler(err: HttpErrorResponse) {
     this.spinner.hide();
     if (err.status == 0) {
