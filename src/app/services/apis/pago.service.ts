@@ -110,8 +110,7 @@ export class PagoService {
         return obj;
       }),
       catchError((err: HttpErrorResponse) => this.errorHandler(err))
-    );
-    
+    );  
   }
 
   private errorHandler(err: HttpErrorResponse) {

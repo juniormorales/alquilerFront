@@ -24,7 +24,8 @@ export class ModalVerDetalleSolService {
       animated: true,
       ignoreBackdropClick: true,
       backdrop: "static",
-      keyboard: false
+      keyboard: false,
+      class: 'gray modal-lg',
     }
     this.modalRef = this.bsModalService.show(VerDetalleSolicitudComponent, config);
     return new Observable<any>(observer => {

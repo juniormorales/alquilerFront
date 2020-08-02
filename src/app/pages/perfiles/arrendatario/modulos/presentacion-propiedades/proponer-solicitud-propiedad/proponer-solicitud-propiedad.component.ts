@@ -24,6 +24,8 @@ export class ProponerSolicitudPropiedadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.input_propiedad.condicionPago.montoMaxGarantia
+    this.input_propiedad.condicionPago.montoMinGarantia
     this.id_arrendatario = Number.parseInt(sessionStorage.getItem('id'));
     this.construirFormulario();
   }
@@ -31,7 +33,8 @@ export class ProponerSolicitudPropiedadComponent implements OnInit {
   private construirFormulario(){
     this.solForm = this.builder.group({
       tiempo: ['',Validators.required],
-      nrohuesp: ['',Validators.required],  
+      nrohuesp: ['',Validators.required],
+      garantia: ['',Validators.required]
     });
   }
 
@@ -48,7 +51,8 @@ export class ProponerSolicitudPropiedadComponent implements OnInit {
       },
       estado: 2,
       nroHuespedPropuesto: this.solForm.get('nrohuesp').value,
-      tiempoArrendamiento: this.solForm.get('tiempo').value
+      tiempoArrendamiento: this.solForm.get('tiempo').value,
+      garantiaPropuesta: this.solForm.get('garantia').value
     }
     return solicitud;
   }

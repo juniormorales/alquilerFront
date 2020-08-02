@@ -6,7 +6,6 @@ import { CondicionPagoComponent } from './modulos/condicion-pago/condicion-pago.
 import { MisPropiedadesComponent } from './modulos/mis-propiedades/mis-propiedades.component';
 import { DashboardArrenderoComponent } from './modulos/dashboard-arrendero/dashboard-arrendero.component';
 import { PagoInquilinoComponent } from './modulos/pago-inquilino/pago-inquilino.component';
-import { RecibosComponent } from './modulos/recibos/recibos.component';
 import { ContratosComponent } from './modulos/contratos/contratos.component';
 import { SolicitudesComponent } from './modulos/solicitudes/solicitudes.component';
 import { GestionInquilinoComponent } from './modulos/gestion-inquilino/gestion-inquilino.component';
@@ -42,11 +41,6 @@ const ArrenderoRoute: Routes = [
             {
                 path:'pagos',
                 component: PagoInquilinoComponent,
-                canActivate: [AuthGuard]
-            },
-            {
-                path:'recibos',
-                component: RecibosComponent,
                 canActivate: [AuthGuard]
             },
             {

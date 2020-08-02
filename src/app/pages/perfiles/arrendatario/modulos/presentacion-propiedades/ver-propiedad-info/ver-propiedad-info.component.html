@@ -40,19 +40,19 @@
                             <dt class="col-sm-4">Interior</dt>
                             <dd class="col-sm-8">
                                 <dl class="row mt-0 mb-0" >
-                                    <dt class="col-sm-6 text-warning">N° Pisos:</dt>
+                                    <dt class="col-sm-6">N° Pisos:</dt>
                                     <dd class="col-sm-6">
                                         <p>{{input_propiedad_map.propiedad.cantidadPisos}}</p>
                                     </dd>
                                 </dl>
                                 <dl class="row mt-0 mb-0">
-                                    <dt class="col-sm-6 text-warning">N° Habitaciones:</dt>
+                                    <dt class="col-sm-6">N° Habitaciones:</dt>
                                     <dd class="col-sm-6">
                                         <p>{{input_propiedad_map.propiedad.nroHabitaciones}}</p>
                                     </dd>
                                 </dl>
                                 <dl class="row mt-0 mb-0" >
-                                    <dt class="col-sm-6 text-warning">Tamaño terreno:</dt>
+                                    <dt class="col-sm-6">Tamaño terreno:</dt>
                                     <dd class="col-sm-6">
                                         <p>{{input_propiedad_map.propiedad.tamano}}</p>
                                     </dd>
@@ -69,7 +69,7 @@
 
                             <dt class="col-sm-4">Condiciones de Pago</dt>
                             <dd class="col-sm-8">
-                                <button class="btn btn-primary" (click)="verCondicionPago()">Ver las Condiciones de Pago</button>
+                                <button class="btn btn-danger btn-round" (click)="verCondicionPago()">Ver las Condiciones de Pago</button>
                             </dd>
                         </dl>
                     </div>
@@ -123,7 +123,7 @@
               </alert>
            </div>
            <ng-template #noEncontro>
-                <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="solicitar()">Formular Propuesta para Alquilar</button>
+                <button type="button" class="btn btn-danger btn-round btn-lg btn-block" (click)="solicitar()">Formular Propuesta para Alquilar</button>
            </ng-template>
         </div>
     </div>

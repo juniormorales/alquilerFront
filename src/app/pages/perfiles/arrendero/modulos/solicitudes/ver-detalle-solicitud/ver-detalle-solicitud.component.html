@@ -1,12 +1,82 @@
 <div class="card mb-0">
-    <div class="card-header">
-        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
-            type="button">
-            <i class=" tim-icons icon-simple-remove"></i>
-        </button>
-        <h6 class="card-title">Detalles del solicitante </h6>
-    </div>
-    <div class="card-body">
+  <div class="card-header">
+    <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+      type="button">
+      <i class=" tim-icons icon-simple-remove"></i>
+    </button>
+    <h6 class="card-title">Detalles del solicitante </h6>
+  </div>
+  <div class="card-body">
+    <div class=" row">
+      <div class=" card card-user">
+        <div class=" card-body">
+          <p class=" card-text"></p>
+          <div class=" author">
+            <div class=" block block-one"></div>
+            <div class=" block block-two"></div>
+            <div class=" block block-three"></div>
+            <div class=" block block-four"></div>
+            <a href="javascript:void(0)">
+              <img alt="..." class=" avatar" src="assets/img/default-avatar.png" />
 
+              <h5 class="title">
+                {{input_sol_prop.arrendatario.usuario.nombres + " " + input_sol_prop.arrendatario.usuario.apellidos}}
+              </h5>
+            </a>
+            <p class=" description">DNI {{input_sol_prop.arrendatario.usuario.dni}}</p>
+            <div class="pt-0 row justify-content-center">
+              <bar-rating [(rate)]="rate" [max]="5" [readOnly]="true"></bar-rating>
+            </div>
+          </div>
+          <div class=" card-description">
+            <h3 class="title">Datos Personales</h3>
+            <p> <strong class="title">Direccion temporal: </strong><em>
+                {{ input_sol_prop.arrendatario.direccionTemporal}}.</em></p>
+            <p><strong class="title">Fecha de Nacimiento: </strong><em>
+                {{ input_sol_prop.arrendatario.usuario.fechaNacimiento | date:'fullDate'}}.</em></p>
+            <p> <strong class="title">Correo Electronico: </strong><em>
+                {{ input_sol_prop.arrendatario.usuario.email}}.</em></p>
+            <div *ngIf="input_sol_prop.arrendatario.usuario.telefono">
+              <p> <strong class="title">Telefono: </strong><em> {{ input_sol_prop.arrendatario.usuario.telefono}}.</em>
+              </p>
+            </div>
+            <div *ngIf="input_sol_prop.arrendatario.usuario.nroCel">
+              <p> <strong class="title">N° Celular: </strong><em> {{ input_sol_prop.arrendatario.usuario.nroCel}}.</em>
+              </p>
+            </div>
+            <div class="w-100 pt-4"></div>
+            <h3 class="title">Comentarios de otros Arrenderos</h3>
+            <p></p>
+            <div class="ps" style="position: relative; max-width: 1500px; max-height: 300px;" [perfectScrollbar]="config">
+              <div *ngIf="lsCalificaciones.length>0; else sincomentarios;">
+                <div *ngFor="let calificacion of lsCalificaciones;">
+                  <div class="col-12">
+                    <blockquote class="blockquote">
+                      <p class="mb-0">
+                        {{calificacion.arrendero.usuario.nombres + " " + calificacion.arrendero.usuario.apellidos}}</p>
+                      <footer class="blockquote-footer">{{calificacion.comentario}}</footer>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+              <ng-template #sincomentarios>
+                <alert class="text-center" data-notify="container" [type]="'info alert-with-icon'">
+                  <span data-notify="message">
+                    ¡Aún no hay comentarios para este usuario!.
+                  </span>
+                </alert>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div class=" card-footer">
+          <div class=" button-container">
+            <button class=" btn btn-round btn-danger">
+              <i class="tim-icons icon-coins"></i> Ver Historial
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

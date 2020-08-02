@@ -47,11 +47,11 @@
           <button *ngIf="file === null && avatar" class="btn-round btn btn-danger" (click)="handleClick()">
             Agregar Foto
           </button>
-          <button *ngIf="file === null && !avatar" class="btn-round btn btn-primary" (click)="handleClick()">
+          <button *ngIf="file === null && !avatar" class="btn-round btn btn-info" (click)="handleClick()">
             Seleccionar Imagen voucher
           </button>
           <span *ngIf="file !== null">
-            <button class="btn-round btn btn-primary" (click)="handleClick()">
+            <button class="btn-round btn btn-info" (click)="handleClick()">
               Cambiar
             </button>
             <br *ngIf="avatar" />
@@ -65,7 +65,7 @@
   </div>
   <div class="card-footer mt-0">
     <div class="row p-3">
-      <button type="button" class="btn btn-primary  btn-lg btn-block" (click)="subirImagen()"
+      <button type="button" class="btn btn-danger btn-round  btn-lg btn-block" (click)="subirImagen()"
         [disabled]="file==null">Registrar Pago</button>
     </div>
   </div>

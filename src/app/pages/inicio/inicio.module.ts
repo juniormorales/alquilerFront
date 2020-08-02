@@ -20,6 +20,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { CardRegistroGeneralComponent } from './card-registro-general/card-registro-general.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { LightboxModule } from 'ngx-lightbox';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,7 +47,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     CarouselModule,
     NgxSpinnerModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    LightboxModule
   ],
   providers: [
     {

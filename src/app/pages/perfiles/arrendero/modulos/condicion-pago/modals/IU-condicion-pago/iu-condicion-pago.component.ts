@@ -40,7 +40,8 @@ export class IUCondicionPagoComponent implements OnInit {
       garantia_max: [0,[Validators.required]],
       tasa:[0.0,[Validators.required]],
       responsabilidad: [false,[Validators.required]],
-      alias: ['',Validators.required]
+      alias: ['',Validators.required],
+      desocupar: ['',Validators.required]
     });
   }
 
@@ -53,7 +54,8 @@ export class IUCondicionPagoComponent implements OnInit {
       garantia_max: this.input_condicion_pago.montoMaxGarantia,
       tasa: this.input_condicion_pago.tasaRecargo,
       responsabilidad: this.input_condicion_pago.responsabilidadReparar,
-      alias: this.input_condicion_pago.alias
+      alias: this.input_condicion_pago.alias,
+      desocupar: this.input_condicion_pago.penalidadNoDesocupar
     });
   }
 
@@ -67,6 +69,7 @@ export class IUCondicionPagoComponent implements OnInit {
       tasaRecargo: this.condicionForm.get('tasa').value,
       tiempoMinContrato: this.condicionForm.get('tiempo_contrato').value,
       alias: this.condicionForm.get('alias').value,
+      penalidadNoDesocupar: this.condicionForm.get('desocupar').value,
       arrendero:{
         idArrendero: Number.parseInt(sessionStorage.getItem('id'))
       }

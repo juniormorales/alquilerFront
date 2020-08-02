@@ -40,7 +40,13 @@
                     </div>
                     <label> Tasa de recargo por retraso (%) </label>
                     <div class=" form-group">
-                        <input class=" form-control" type="number" formControlName="tasa"/>
+                        <input class=" form-control" type="number" placeholder="0-100" formControlName="tasa"/>
+                    </div>              
+                </div>
+                <div class="col-12">
+                    <label> Monto de penalidad por no desocupar la propiedad</label>
+                    <div class=" form-group">
+                        <input class=" form-control" type="number" placeholder="S/." formControlName="desocupar"/>
                     </div>
                 </div>
             </div>
@@ -54,7 +60,7 @@
     </div>
     <div class="card-footer mt-0">
         <div class="row p-3">
-            <button type="button" class="btn btn-primary  btn-lg btn-block" [disabled]="condicionForm.invalid"
+            <button type="button" class="btn btn-danger btn-round  btn-lg btn-block" [disabled]="condicionForm.invalid"
                 (click)="crud()">{{input_condicion_pago!=null?'Actualizar':'Registrar'}}</button>
         </div>
     </div>

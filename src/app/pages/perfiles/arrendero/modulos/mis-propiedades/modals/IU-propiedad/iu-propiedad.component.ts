@@ -52,7 +52,7 @@ export class IUPropiedadComponent implements OnInit {
     singleSelection: true,
     text: 'Seleccionar ...',
     enableSearchFilter: false,
-    classes: 'selectpicker btn-info',
+    classes: 'selectpicker btn-danger',
     lazyLoading: true,
     maxHeight: 150,
     autoPosition: false,

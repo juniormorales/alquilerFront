@@ -49,7 +49,6 @@ export class PagosPorVencerComponent implements OnInit {
   listarRentasPendientes(){
     this.rentaService.listarRentasPendientes(this.inquilino).subscribe((resp:any)=>{
       this.lsRentas = resp.aaData;
-      console.log(this.lsRentas)
       this.llenarTabla();
     })
   }

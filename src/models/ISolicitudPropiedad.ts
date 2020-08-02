@@ -9,6 +9,7 @@ export interface ISolicitudPropiedad {
     tiempoArrendamiento?: number;
     nroHuespedPropuesto?: number;
     descripcionRechazo?: string;
+    garantiaPropuesta?: number;
     arrendatario?: IArrendatario;
     propiedad?: IPropiedad;
     arrendero?: IArrendero;

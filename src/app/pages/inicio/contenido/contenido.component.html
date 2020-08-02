@@ -5,49 +5,39 @@
       <div class="container">
         <div class="title-brand">
           <h1 class="presentation-title animate__animated animate__fadeInLeftBig animate__fast">RentaMe</h1>
-          <div class="fog-low">
-            <img src="assets/img/fog-low.png" alt="">
-          </div>
-          <div class="fog-low right">
-            <img src="assets/img/fog-low.png" alt="">
-          </div>
+          <p
+            class="h2 presentation-subtitle text-center animate__animated animate__fadeInUp animate__slower animate__delay-1s">
+            Sistema de alquileres 
+            para arrenderos 
+            y arrendatarios</p>
         </div>
-
-        <h2
-          class="presentation-subtitle text-center animate__animated animate__fadeInUp animate__slower animate__delay-1s">
-          Sistema de alquileres para arrenderos y arrendatarios</h2>
-      </div>
-    </div>
-   <!-- <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); "></div>-->
-  </div>
-</div>
-<!--
-  <div class="full-page">
-  <div class=" content">
-    <div class="row ml-4 mr-4">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">
-            <h1 class="card-title">
-              <p class="text-center">Busca y Solicita Alquileres de viviendas</p>
-            </h1>
-          </div>
-          <div class="card-body">
-            <div class="col-10 offset-1">
-              <owl-carousel-o [options]="customOptions" #owlCat>
-                <ng-container *ngFor="let image of imagesData">
-                  <ng-template carouselSlide>
-                    <div class="pl-4">
-                      <div class="slide">
-                        <img [src]="image.src" [alt]="image.alt" [title]="image.title">
-                      </div>
-                      <div class="slider pt-3">
-                        <p class="text-center">{{image.text}}</p>
-                      </div>
-                    </div>
-                  </ng-template>
-                </ng-container>
-              </owl-carousel-o>
+        <div
+          class="row justify-content-between pt-5  animate__animated animate__fadeInUp animate__slower animate__delay-2s">
+          <div class="col-md-12">
+            <div class="card card-white">
+              <div class="card-header">
+                <h6 class="card-title">
+                  <p class="h6 presentation-subtitle text-center text-dark">Solicita o Registra alquileres de viviendas</p>
+                </h6>
+              </div>
+              <div class="card-body">
+                <div class="col-12">
+                  <owl-carousel-o [options]="customOptions" #owlCat>
+                    <ng-container *ngFor="let image of imagesData; let i=index">
+                      <ng-template carouselSlide>
+                        <div class="pl-4">
+                          <div class="slide">
+                            <img [src]="image.src" [alt]="image.alt" [title]="image.title" (click)="open(i)">
+                          </div>
+                          <div class="slider pt-3">
+                            <p class="text-center text-dark">{{image.text}}</p>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-container>
+                  </owl-carousel-o>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -55,4 +45,3 @@
     </div>
   </div>
 </div>
--->

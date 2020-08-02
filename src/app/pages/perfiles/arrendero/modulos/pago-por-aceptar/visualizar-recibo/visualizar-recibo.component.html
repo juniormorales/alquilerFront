@@ -32,6 +32,12 @@
             <div class="form-group">
                 <input class="form-control" type="number" placeholder="S/." [(ngModel)]="monto" />
             </div>
+            <label> Banco donde se efectuo el pago</label>
+            <div class="form-group">
+                <angular2-multiselect name="banco" [data]="dataBanco" [(ngModel)]="banco"
+                [settings]="settingsGeneral">
+              </angular2-multiselect>
+            </div>
         </div>
         <div class="col-12">
             <div class="row justify-content-center">
@@ -44,8 +50,8 @@
     </div>
     <div class="card-footer">
         <div class="row justify-content-center">
-            <button type="button" class="btn btn-success" [disabled]="monto==0" (click)="confirmar()">Confirmar Pago</button>
-            <button type="button" class="btn btn-danger" (click)="rechazar()">Rechazar</button>
+            <button type="button" class="btn btn-success btn-round" [disabled]="monto==0" (click)="confirmar()">Confirmar Pago</button>
+            <button type="button" class="btn btn-danger btn-round" (click)="rechazar()">Rechazar</button>
         </div>
     </div>
 </div>

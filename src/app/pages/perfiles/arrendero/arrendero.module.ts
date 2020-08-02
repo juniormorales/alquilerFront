@@ -8,7 +8,6 @@ import { MisPropiedadesComponent } from './modulos/mis-propiedades/mis-propiedad
 import { DashboardArrenderoComponent } from './modulos/dashboard-arrendero/dashboard-arrendero.component';
 import { PagoInquilinoComponent } from './modulos/pago-inquilino/pago-inquilino.component';
 import { GestionInquilinoComponent } from './modulos/gestion-inquilino/gestion-inquilino.component';
-import { RecibosComponent } from './modulos/recibos/recibos.component';
 import { ContratosComponent } from './modulos/contratos/contratos.component';
 import { SolicitudesComponent } from './modulos/solicitudes/solicitudes.component';
 import { PagoPorAceptarComponent } from './modulos/pago-por-aceptar/pago-por-aceptar.component';
@@ -40,7 +39,6 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { AlertModule } from "ngx-bootstrap/alert";
 import { RechazarSolicitudComponent } from './modulos/solicitudes/rechazar-solicitud/rechazar-solicitud.component';
 
-/////////////katriel
 import { VisualizarReciboComponent } from './modulos/pago-por-aceptar/visualizar-recibo/visualizar-recibo.component';
 import { ModalVisualizarReciboService } from './../../../services/common/modal-visualizar-recibo.service';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -50,7 +48,12 @@ import { UbicacionMapsComponent } from './modulos/mis-propiedades/modals/IU-prop
 import { FechaInicioContratoComponent } from './modulos/contratos-pendientes/modals/fecha-inicio-contrato/fecha-inicio-contrato.component';
 import { ModalContratoService } from 'src/app/services/common/modal-contrato.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { BrowserModule } from '@angular/platform-browser';
+import { BarRatingModule } from "ngx-bar-rating";
+import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  wheelPropagation: true
+};
 
 
 @NgModule({
@@ -61,7 +64,6 @@ import { BrowserModule } from '@angular/platform-browser';
     DashboardArrenderoComponent,
     PagoInquilinoComponent,
     GestionInquilinoComponent,
-    RecibosComponent,
     ContratosComponent,
     SolicitudesComponent,
     PagoPorAceptarComponent,
@@ -93,14 +95,20 @@ import { BrowserModule } from '@angular/platform-browser';
     GooglePlaceModule,
     AngularMultiSelectModule,
     TabsModule.forRoot(),
-    BsDatepickerModule.forRoot(),    
+    BsDatepickerModule.forRoot(),
+    BarRatingModule,
+    PerfectScrollbarModule,
   ],
   providers:[
     ModalPropiedadService,
     ModalCondicionPagoService,
     ModalVerDetalleSolService,
     ModalContratoService,
-    ModalVisualizarReciboService //////////////katriel
+    ModalVisualizarReciboService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

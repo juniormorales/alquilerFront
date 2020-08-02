@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { IInquilino } from 'src/models/IInquilino';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContratoService {
-
+export class CalificacionService {
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService
   ) { }
 
-
-  public crearContrato(inquilino: IInquilino){
+  
+  listarCalificacionPorArrendatario(idArrendatario: number){
     this.spinner.show();
-    return this.http.post( environment.urlApiRest + 'contrato/habilitarContrato',inquilino).pipe(
+    return this.http.get( environment.urlApiRest + 'calificacion/listarCalificacionPorArrendatario/'+idArrendatario).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;
@@ -28,29 +26,6 @@ export class ContratoService {
       catchError((err:HttpErrorResponse)=> this.errorHandler(err))
     );
   }
-
-  public listarContratosPorArrendero(idArrendero: number){
-    this.spinner.show();
-    return this.http.get( environment.urlApiRest + 'contrato/listarContratosArrendero/'+idArrendero).pipe(
-      map( obj => {
-        this.spinner.hide();
-        return obj;
-      }),
-      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
-    );
-  }
-
-  public descargarContrato(id){
-    this.spinner.show();
-    return this.http.get(environment.urlApiRest + "contrato/descargarContrato/"+id, {responseType: "arraybuffer"}).pipe(
-      map(obj => {
-        this.spinner.hide();
-        return obj;
-      }),
-      catchError((err: HttpErrorResponse) => this.errorHandler(err))
-    );  
-  }
-
 
   private errorHandler(err: HttpErrorResponse) {
     this.spinner.hide();
@@ -61,5 +36,5 @@ export class ContratoService {
     }
     return Observable.throw(err);
   }
-}
 
+}

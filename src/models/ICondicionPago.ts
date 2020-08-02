@@ -1,4 +1,3 @@
-import { IArrendatario } from './IArrendatario';
 import { IArrendero } from './IArrendero';
 
 export interface ICondicionPago {
@@ -12,6 +11,7 @@ export interface ICondicionPago {
     diaMesCobro?: number;
     responsabilidadReparar?: boolean;
     tasaRecargo?: number;
+    penalidadNoDesocupar?:number;
     arrendero?: IArrendero;
 
 }
