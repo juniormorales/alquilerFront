@@ -29,6 +29,17 @@ export class RentaService {
     );
   }
 
+  listarRentasDeudas(inquilino: IInquilino){
+    this.spinner.show();
+    return this.http.post( environment.urlApiRest + 'renta/listardeudasRentaPorInquilino',inquilino).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
   private errorHandler(err: HttpErrorResponse) {
     this.spinner.hide();
     if (err.status == 0) {

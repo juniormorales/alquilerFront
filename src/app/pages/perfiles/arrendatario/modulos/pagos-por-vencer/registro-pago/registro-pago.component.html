@@ -11,16 +11,16 @@
     <div class="row justify-content-center">
       <div class="col-12 mb-4">
         <dl class="row justify-content-center">
-          <dt class="col-sm-8 text-warning">Importe Total (Incluido retraso si hay)</dt>
-          <dd class="col-sm-4">         
-             <div *ngIf="input_renta.estado==2; else importaTotalNoAtrasado">
+          <dt class="col-sm-8" [ngClass]="{'text-white':input_renta.estado!=2, 'text-danger':input_renta.estado==2}">Importe Total (Incluido retraso si hay)</dt>
+          <dd class="col-sm-4">
+            <div *ngIf="input_renta.estado==2; else importaTotalNoAtrasado">
               <p>S./{{ input_renta.cantidad + input_renta.importeAtrasado}}</p>
-             </div>
-             <ng-template #importaTotalNoAtrasado>
+            </div>
+            <ng-template #importaTotalNoAtrasado>
               <p>S./{{ input_renta.cantidad}}</p>
-             </ng-template>
+            </ng-template>
           </dd>
-          <dt class="col-sm-8 text-warning">Importe restante (Incluido retraso si hay)</dt>
+          <dt class="col-sm-8" [ngClass]="{'text-white':input_renta.estado!=2, 'text-danger':input_renta.estado==2}">Importe restante (Incluido retraso si hay)</dt>
           <dd class="col-sm-4">
             <div *ngIf="input_renta.estado==2; else noAtrasado">
               <p>S./{{ input_renta.cantidad + input_renta.importeAtrasado  - input_renta.montoAcumuladoCancelado }}</p>
@@ -29,15 +29,12 @@
               <p>S./{{ input_renta.cantidad - input_renta.montoAcumuladoCancelado }}</p>
             </ng-template>
           </dd>
-          <div *ngIf="input_renta.estado==2">
-            <dt class="col-sm-8 text-warning">Tasa de Recargo por atraso</dt>
-            <dd class="col-sm-4">
-              <p>S./{{input_renta.importeAtrasado}}</p>
-            </dd>
-          </div>
+          <dt class="col-sm-8 text-danger" *ngIf="input_renta.estado==2">Tasa de Recargo por atraso</dt>
+          <dd class="col-sm-4" *ngIf="input_renta.estado==2">
+            <p>S./{{input_renta.importeAtrasado}}</p>
+          </dd>
         </dl>
       </div>
-
       <div class="fileinput text-center">
         <input type="file" (change)="handleImageChange($event)" #fileInput accept="image/x-png,image/jpg,image/jpeg" />
         <div class="thumbnail" [ngClass]="{ 'img-circle': avatar }">
@@ -47,16 +44,12 @@
           <button *ngIf="file === null && avatar" class="btn-round btn btn-danger" (click)="handleClick()">
             Agregar Foto
           </button>
-          <button *ngIf="file === null && !avatar" class="btn-round btn btn-info" (click)="handleClick()">
+          <button *ngIf="file === null && !avatar" class="btn-round btn btn-danger" (click)="handleClick()">
             Seleccionar Imagen voucher
           </button>
           <span *ngIf="file !== null">
-            <button class="btn-round btn btn-info" (click)="handleClick()">
+            <button class="btn-round btn btn-danger" (click)="handleClick()">
               Cambiar
-            </button>
-            <br *ngIf="avatar" />
-            <button class="btn-round btn btn-danger" (click)="handleRemove()">
-              <i class="fa fa-times"></i> Remover
             </button>
           </span>
         </div>
