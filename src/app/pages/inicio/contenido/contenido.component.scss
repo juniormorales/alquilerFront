@@ -291,16 +291,28 @@ blockquote small {
   margin: 0;
   color: #ffffff;
   // background: #fbf8ec;
+/*
   background: -moz-linear-gradient(to bottom, #0c0c0c 35%, #4e6773 100%);
   background: -webkit-linear-gradient(to bottom, #0c0c0c 35%, #4e6773 100%);
   background: -ms-linear-gradient(to bottom, #0c0c0c 35%, #4e6773 100%);
   background: -o-linear-gradient(to bottom, #0c0c0c 35%, #4e6773 100%);
   background: linear-gradient(to bottom, #0c0c0c 35%, #4e6773 100%);
+*/
+	margin-top: 50px;
+	margin-bottom: 0px;
+    	background: -moz-linear-gradient(to bottom, #e3e3e3 35%, #560e18 100%);
+    	background: -webkit-linear-gradient(to bottom, #e3e3e3 35%, #560e18 100%);
+    	background: -ms-linear-gradient(to bottom, #e3e3e3 35%, #560e18 100%);
+    	background: -o-linear-gradient(to bottom, #e3e3e3 35%, #560e18 100%);
+    	background: linear-gradient(to bottom, #e3e3e3 35%, #560e18 100%);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .presentation-subtitle {
+	
+	margin-top: 0px;
+	margin-bottom: 2px;
   font-size: 1.7em;
   color: #ffffff;
 }
