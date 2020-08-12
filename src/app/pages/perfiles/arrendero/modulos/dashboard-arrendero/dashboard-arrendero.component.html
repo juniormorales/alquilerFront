@@ -1,3 +1,142 @@
 <div class="content animate__animated animate__fadeIn animate__fast">
-    <p>dashboard-arrendero works!</p>
+    <div class=" row">
+        <div class=" col-12">
+            <div class=" card card-chart">
+                <div class=" card-header">
+                    <div class="row">
+                        <div class=" col-sm-10 text-left">
+                            <h5 class=" card-category">Por año</h5>
+                            <h2 class=" card-title">Ganancias de alquiler</h2>
+                        </div>
+                        <div class=" col-sm-2 float-right">
+                            <label>Año</label>
+                            <angular2-multiselect [data]="listaAnios" [(ngModel)]="selectAnio"
+                                [settings]="settingsGananciasAnio" (onSelect)="onAnioSelect($event)">
+                            </angular2-multiselect>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card-body">
+                    <div class=" chart-area"><canvas id="chartGananciaAnual"> </canvas></div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-lg-3 col-md-6">
+            <div class=" card card-stats">
+                <div class=" card-body">
+                    <div class=" row">
+                        <div class=" col-5">
+                            <div class=" info-icon icon-success pt-1">
+                                <i class="mdi mdi-account-check"> </i>
+                            </div>
+                        </div>
+                        <div class=" col-7">
+                            <div class=" numbers">
+                                <p class=" card-category">Inquilinos al Día</p>
+                                <h1 class=" card-title pt-2">2</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card-footer">
+                    <hr />
+
+                    <div class=" stats">
+                        <i class=" tim-icons icon-refresh-01"> </i> Cantidad Actualizada
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-lg-3 col-md-6">
+            <div class=" card card-stats">
+                <div class=" card-body">
+                    <div class=" row">
+                        <div class=" col-5">
+                            <div class=" info-icon icon-danger pt-1">
+                                <i class="mdi  mdi-account-alert"> </i>
+                            </div>
+                        </div>
+                        <div class=" col-7">
+                            <div class=" numbers">
+                                <p class=" card-category">Inquilinos Deudores</p>
+                                <h1 class=" card-title pt-2">0</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card-footer">
+                    <hr />
+
+                    <div class=" stats">
+                        <i class=" tim-icons icon-refresh-01"> </i> Cantidad Actualizada
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-lg-3 col-md-6">
+            <div class=" card card-stats">
+                <div class=" card-body">
+                    <div class=" row">
+                        <div class=" col-5">
+                            <div class=" info-icon text-center icon-info">
+                                <i class=" tim-icons icon-send"> </i>
+                            </div>
+                        </div>
+                        <div class=" col-7">
+                            <div class=" numbers">
+                                <p class=" card-category">Solicitudes Recibidas</p>
+                                <h1 class=" card-title pt-2">3</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card-footer">
+                    <hr />
+
+                    <div class=" stats">
+                        <i class=" tim-icons icon-trophy"> </i> Cantidad total recibida
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-lg-3 col-md-6">
+            <div class=" card card-stats">
+                <div class=" card-body">
+                    <div class=" row">
+                        <div class=" col-5">
+                            <div class=" info-icon text-center icon-warning">
+                                <i class=" tim-icons icon-money-coins"> </i>
+                            </div>
+                        </div>
+                        <div class=" col-7">
+                            <div class=" numbers">
+                                <p class=" card-category">Pagos por Confirmar</p>
+                                <h1 class=" card-title pt-2">1</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card-footer">
+                    <hr />
+
+                    <div class=" stats">
+                        <i class=" tim-icons icon-watch-time"> </i> En las últimas horas
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-12">
+            <div class=" card card-chart">
+                <div class=" card-header">
+                    <h5 class=" card-category">Solicitudes de propiedades</h5>
+                    <h3 class=" card-title">
+                        <i class=" tim-icons icon-delivery-fast text-info"> </i>Mas Solicitado: {{ propiedadMasSolicitada }}
+                    </h3>
+                </div>
+                <div class=" card-body">
+                    <div class=" chart-area"><canvas id="chartCantPropSol"> </canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -50,6 +50,7 @@ import { ModalContratoService } from 'src/app/services/common/modal-contrato.ser
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BarRatingModule } from "ngx-bar-rating";
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { ProgressbarModule } from "ngx-bootstrap/progressbar";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -77,7 +78,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RechazarSolicitudComponent,
     VisualizarReciboComponent,
     UbicacionMapsComponent,
-    FechaInicioContratoComponent,/////////////katriel
+    FechaInicioContratoComponent
   ],
   imports: [
     CommonModule,
@@ -98,6 +99,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDatepickerModule.forRoot(),
     BarRatingModule,
     PerfectScrollbarModule,
+    ProgressbarModule.forRoot(),
   ],
   providers:[
     ModalPropiedadService,

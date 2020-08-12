@@ -15,13 +15,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 import { ConfigureComponent } from './configure/configure.component';
+import { TruncatePipe } from '../pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
     SidebarComponent,
     NavbarComponent,
     HeaderComponent,
-    ConfigureComponent
+    ConfigureComponent,
+    TruncatePipe
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { ConfigureComponent } from './configure/configure.component';
     SidebarComponent,
     NavbarComponent,
     HeaderComponent,
-    ConfigureComponent
+    ConfigureComponent,
+    TruncatePipe
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

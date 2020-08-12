@@ -23,6 +23,12 @@ export class ContenidoComponent implements OnInit {
       
     },
     {
+      src: 'assets/img/arrendero_dashboard.jpg',
+      alt: 'image',
+      title: 'Arrendero',
+      text: 'Visualiza mediante graficos tus ganancias y otros parametros de interes.'
+    },
+    {
       src: 'assets/img/arrendero_registrar_propiedades.jpg',
       alt: 'image',
       title: 'Arrendero',
