@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from "chart.js";
 import { TruncatePipe } from 'src/app/pipes/truncate.pipe';
+import { DashboardService } from 'src/app/services/apis/dashboard.service';
 
 @Component({
   selector: 'app-dashboard-arrendero',
@@ -23,53 +24,12 @@ export class DashboardArrenderoComponent implements OnInit {
     lazyLoading: true,
     maxHeight: 150
   }
-  public gananciasAnuales: any[] = [
-    {
-      anio: '2020',
-      ganancias: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100]
-    },
-    {
-      anio: '2021',
-      ganancias: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120]
-    },
-    {
-      anio: '2022',
-      ganancias: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
-    },
-    {
-      anio: '2023',
-      ganancias: [10, 20, 0, 80, 180, 55, 36, 170, 250, 136, 98, 200]
-    },
-  ];
+  public gananciasAnuales: any[] = [];
+
   public gradientChartOptionsConfigurationWithTooltipRed: any
 
   //Dash propiedades mas solicitadas
-  public solicitudesPropiedades: any[] = [
-    {
-      propiedad: 'Propiedad 1 Con un nombre o alias largo',
-      nrosol: 25
-    },
-    {
-      propiedad: 'Propiedad 2 Con un nombre o alias largo',
-      nrosol: 52
-    },
-    {
-      propiedad: 'Propiedad 3 Con un nombre o alias largo',
-      nrosol: 14
-    },
-    {
-      propiedad: 'Propiedad 4 Con un nombre o alias largo',
-      nrosol: 47
-    },
-    {
-      propiedad: 'Propiedad 5 Con un nombre o alias largo',
-      nrosol: 15
-    },
-    {
-      propiedad: 'Propiedad 6 Con un nombre o alias largo',
-      nrosol: 2
-    }
-  ];
+  public solicitudesPropiedades: any[] = [];
   public propiedadMasSolicitada: string;
   public labelProp: any[] = [];
   public dataNroSol: any[] = [];
@@ -97,14 +57,65 @@ export class DashboardArrenderoComponent implements OnInit {
   public chartPropiedadMasSol;
   public pipeTruncate = new TruncatePipe();
 
-  constructor() { }
+  private idArrendero: Number;
+  public cantidadInquilinosAlDia: Number;
+  public cantidadInquilinosDeudores: Number;
+  public cantidadPagosPorConfirmar: Number;
+  public cantidadSolicitudesPendientes: Number;
+
+  constructor(
+    private dashboardService: DashboardService
+  ) { }
 
   ngOnInit() {
+    this.idArrendero = Number.parseInt(sessionStorage.getItem("id"));
+    this.listarGananciasAnuales();
+    this.listarCantidadSolPropiedad();
+    this.listarCantidadInquilinosAlDia();
+    this.listarCantidadinquilinosDeudoreS();
+    this.listarPagosPorConfirmar();
+    this.listarCantidadSolicitudesPendientes();
+  }
 
-    this.configurarGraficoLineaRojo();
-    this.configurarGraficoBarraHorizontal();
-    this.createChartGananciasAnio();
-    this.createChartPropiedadesMasSol();
+  private listarGananciasAnuales() {
+    this.dashboardService.listarGananciasAnuales(this.idArrendero, this.listaAnios).subscribe((resp: any) => {
+      this.gananciasAnuales = resp.data;
+      this.configurarGraficoLineaRojo();
+      this.createChartGananciasAnio();
+
+    })
+  }
+
+  private listarCantidadSolPropiedad() {
+    this.dashboardService.listarCantidadSolPorPropiedad(this.idArrendero).subscribe((resp: any) => {
+      this.solicitudesPropiedades = resp.data;
+      this.configurarGraficoBarraHorizontal();
+      this.createChartPropiedadesMasSol();
+    })
+  }
+
+  private listarCantidadInquilinosAlDia(){
+    this.dashboardService.listarCantidadInquilinosAlDia(this.idArrendero).subscribe((resp:any)=>{
+      this.cantidadInquilinosAlDia = resp.data;
+    })
+  }
+
+  private listarCantidadinquilinosDeudoreS(){
+    this.dashboardService.listarCantidadInquilinosDeudores(this.idArrendero).subscribe((resp:any)=>{
+      this.cantidadInquilinosDeudores = resp.data;
+    })
+  }
+
+  private listarCantidadSolicitudesPendientes(){
+    this.dashboardService.listarCantidadSolicitudesPendientes(this.idArrendero).subscribe((resp:any)=>{
+      this.cantidadSolicitudesPendientes = resp.data;
+    })
+  }
+
+  private listarPagosPorConfirmar(){
+    this.dashboardService.listarCantidadPagosPorconfirmar(this.idArrendero).subscribe((resp:any)=>{
+      this.cantidadPagosPorConfirmar = resp.data;
+    })
   }
 
   public onAnioSelect(event) {
@@ -167,8 +178,8 @@ export class DashboardArrenderoComponent implements OnInit {
       }
     };
   }
-  
-  private configurarGraficoBarraHorizontal(){
+
+  private configurarGraficoBarraHorizontal() {
     this.gradientBarChartConfiguration = {
       maintainAspectRatio: false,
       legend: {
@@ -239,7 +250,7 @@ export class DashboardArrenderoComponent implements OnInit {
         labels: this.meses,
         datasets: [
           {
-            label: "Ganancia: S/.",
+            label: "Ingresos: S/.",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#ec250d",
