@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ICalificacion } from 'src/models/ICalificacion';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,17 @@ export class CalificacionService {
   listarCalificacionPorArrendatario(idArrendatario: number){
     this.spinner.show();
     return this.http.get( environment.urlApiRest + 'calificacion/listarCalificacionPorArrendatario/'+idArrendatario).pipe(
+      map( obj => {
+        this.spinner.hide();
+        return obj;
+      }),
+      catchError((err:HttpErrorResponse)=> this.errorHandler(err))
+    );
+  }
+
+  registrarCalificacion(calificaion: ICalificacion){
+    this.spinner.show();
+    return this.http.post( environment.urlApiRest + 'calificacion/registrarCalificacion',calificaion).pipe(
       map( obj => {
         this.spinner.hide();
         return obj;

@@ -64,7 +64,6 @@ export class ContratosPendientesComponent implements OnInit {
 
 
   emitirContrato(inquilino: IInquilino) {
-    console.log(inquilino)
     this.modalContrato.modalSetFechaInicioContrato(inquilino).subscribe(resp=>{},err=>{},()=>{
       this.listarInquilinosSinContrato();
     });

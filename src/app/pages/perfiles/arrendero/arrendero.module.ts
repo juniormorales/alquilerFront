@@ -51,6 +51,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BarRatingModule } from "ngx-bar-rating";
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
+import { CalificarInquilinoComponent } from './modulos/gestion-inquilino/modals/calificar-inquilino/calificar-inquilino.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -78,7 +79,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RechazarSolicitudComponent,
     VisualizarReciboComponent,
     UbicacionMapsComponent,
-    FechaInicioContratoComponent
+    FechaInicioContratoComponent,
+    CalificarInquilinoComponent
   ],
   imports: [
     CommonModule,

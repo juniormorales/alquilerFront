@@ -1,0 +1,29 @@
+<div class="card mb-0">
+    <div class="card-header">
+        <button aria-hidden="true" class=" close btn-outline-danger btn-lg btn-danger" (click)="cerrarModal()"
+            type="button">
+            <i class=" tim-icons icon-simple-remove"></i>
+        </button>
+        <h6 class="card-title text-center">Califica la estadia de tu inquilino</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+           <div class="col-12">
+            <bar-rating [(rate)]="calificacion" [max]="5" [readOnly]="false"></bar-rating>
+            </div>
+            <div class="col-12">
+                <label>Comentario: </label>
+                <div class=" form-group">
+                    <textarea class="form-control"
+                        [(ngModel)]="comentario" autocomplete="nope" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer mt-0">
+        <div class="row p-3">
+            <button type="button" class="btn btn-danger btn-round btn-lg btn-block" (click)="calificar()"
+                [disabled]="calificacion==0">Calificar</button>
+        </div>
+    </div>
+</div>
