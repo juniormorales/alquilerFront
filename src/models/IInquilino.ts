@@ -11,5 +11,5 @@ export interface IInquilino {
     arrendatario?: IArrendatario;
     propiedad?: IPropiedad;
     arrendero?: IArrendero;
-    fecha_inicio?: Date;
+    fechaInicio?: Date;
 }

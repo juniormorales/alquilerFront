@@ -25,7 +25,7 @@ export class CalificarInquilinoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.idArrendero = Number.parseInt(localStorage.getItem("id"));
+    this.idArrendero = Number.parseInt(sessionStorage.getItem("id"));
   }
 
   //Metodos modal

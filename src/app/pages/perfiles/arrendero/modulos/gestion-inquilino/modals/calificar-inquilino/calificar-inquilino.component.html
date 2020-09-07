@@ -7,16 +7,13 @@
         <h6 class="card-title text-center">Califica la estadia de tu inquilino</h6>
     </div>
     <div class="card-body">
-        <div class="row">
-           <div class="col-12">
+        <div class="pt-0 row justify-content-center">
             <bar-rating [(rate)]="calificacion" [max]="5" [readOnly]="false"></bar-rating>
-            </div>
-            <div class="col-12">
-                <label>Comentario: </label>
-                <div class=" form-group">
-                    <textarea class="form-control"
-                        [(ngModel)]="comentario" autocomplete="nope" rows="3"></textarea>
-                </div>
+        </div>
+        <div class="col-12">
+            <label>Comentario: </label>
+            <div class=" form-group">
+                <textarea class="form-control" [(ngModel)]="comentario" autocomplete="nope" rows="3"></textarea>
             </div>
         </div>
     </div>

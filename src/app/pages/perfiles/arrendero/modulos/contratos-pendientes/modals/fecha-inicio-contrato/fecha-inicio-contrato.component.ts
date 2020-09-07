@@ -21,7 +21,7 @@ export class FechaInicioContratoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.input_inquilino.fecha_inicio = new Date();
+    this.input_inquilino.fechaInicio = new Date();
   }
 
   //Metodos modal
@@ -31,7 +31,6 @@ export class FechaInicioContratoComponent implements OnInit {
   }
 
   crearContrato() {
-    console.log(this.input_inquilino)
     Swal.fire({
       title: 'Crear Contrato',
       showClass: {

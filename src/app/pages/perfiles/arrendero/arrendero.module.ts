@@ -52,6 +52,7 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { ProgressbarModule } from "ngx-bootstrap/progressbar";
 import { CalificarInquilinoComponent } from './modulos/gestion-inquilino/modals/calificar-inquilino/calificar-inquilino.component';
+import { ModalCalificacionService } from 'src/app/services/common/modal-calificacion.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -109,6 +110,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ModalVerDetalleSolService,
     ModalContratoService,
     ModalVisualizarReciboService,
+    ModalCalificacionService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
